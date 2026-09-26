@@ -1,0 +1,4569 @@
+{
+  "generatedAt": "2026-09-26T19:39:48.137Z",
+  "cases": [
+    {
+      "id": "AAPL:board.independent_nominee_count",
+      "ticker": "AAPL",
+      "factId": "board.independent_nominee_count",
+      "label": "Independent nominees",
+      "expected": 7,
+      "evidence": {
+        "page": 18,
+        "quote": "Board members, other than Mr. Cook, are independent under applicable rules of The Nasdaq Stock Market LLC (“Nasdaq”).",
+        "chunkId": "AAPL:p18:0"
+      },
+      "traps": [
+        "two-passages"
+      ],
+      "note": "7 = 'the Board's eight nominees' (p. 65) minus Mr. Cook ('all Board members, other than Mr. Cook, are independent', p. 18).",
+      "observed": [
+        {
+          "runId": "run_20260926170729_vm2t",
+          "run": "dev smoke (unverified key)",
+          "model": "google/gemini-3.8-flash",
+          "mode": "full pipeline",
+          "got": null,
+          "stage": "retrieval",
+          "correct": false
+        },
+        {
+          "runId": "run_20260926170729_vm2t",
+          "run": "dev smoke (unverified key)",
+          "model": "openai/gpt-6-luna",
+          "mode": "full pipeline",
+          "got": null,
+          "stage": "retrieval",
+          "correct": false
+        },
+        {
+          "runId": "run_20260926171519_jb04",
+          "run": "dev: parser v3 (heading context)",
+          "model": "google/gemini-3.8-flash",
+          "mode": "full pipeline",
+          "got": null,
+          "stage": "extraction",
+          "correct": false
+        },
+        {
+          "runId": "run_20260926171519_jb04",
+          "run": "dev: parser v3 (heading context)",
+          "model": "openai/gpt-6-luna",
+          "mode": "full pipeline",
+          "got": 7,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-opus-5.5",
+          "mode": "full pipeline",
+          "got": null,
+          "stage": "extraction",
+          "correct": false
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-opus-5.5",
+          "mode": "reading only",
+          "got": null,
+          "stage": "extraction",
+          "correct": false
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-sonnet-5",
+          "mode": "full pipeline",
+          "got": null,
+          "stage": "extraction",
+          "correct": false
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-sonnet-5",
+          "mode": "reading only",
+          "got": null,
+          "stage": "extraction",
+          "correct": false
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "deepseek/deepseek-v4.1-flash",
+          "mode": "full pipeline",
+          "got": null,
+          "stage": "extraction",
+          "correct": false
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "deepseek/deepseek-v4.1-flash",
+          "mode": "reading only",
+          "got": null,
+          "stage": "extraction",
+          "correct": false
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "google/gemini-3.8-flash",
+          "mode": "full pipeline",
+          "got": null,
+          "stage": "extraction",
+          "correct": false
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "google/gemini-3.8-flash",
+          "mode": "reading only",
+          "got": null,
+          "stage": "extraction",
+          "correct": false
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-luna",
+          "mode": "full pipeline",
+          "got": null,
+          "stage": "extraction",
+          "correct": false
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-luna",
+          "mode": "reading only",
+          "got": null,
+          "stage": "extraction",
+          "correct": false
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-sol",
+          "mode": "full pipeline",
+          "got": null,
+          "stage": "extraction",
+          "correct": false
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-sol",
+          "mode": "reading only",
+          "got": null,
+          "stage": "extraction",
+          "correct": false
+        }
+      ],
+      "failures": 15
+    },
+    {
+      "id": "AAPL:governance.unequal_voting_sunset",
+      "ticker": "AAPL",
+      "factId": "governance.unequal_voting_sunset",
+      "label": "Time-based sunset on unequal voting",
+      "expected": false,
+      "evidence": {
+        "page": 17,
+        "quote": "One share equals one vote | We have a single class of shares with equal voting rights.",
+        "chunkId": "AAPL:p17:0"
+      },
+      "traps": [
+        "absence"
+      ],
+      "note": "Single class of stock: nothing to sunset.",
+      "observed": [
+        {
+          "runId": "run_20260926170729_vm2t",
+          "run": "dev smoke (unverified key)",
+          "model": "google/gemini-3.8-flash",
+          "mode": "full pipeline",
+          "got": null,
+          "stage": "retrieval",
+          "correct": false
+        },
+        {
+          "runId": "run_20260926170729_vm2t",
+          "run": "dev smoke (unverified key)",
+          "model": "openai/gpt-6-luna",
+          "mode": "full pipeline",
+          "got": null,
+          "stage": "retrieval",
+          "correct": false
+        },
+        {
+          "runId": "run_20260926171519_jb04",
+          "run": "dev: parser v3 (heading context)",
+          "model": "google/gemini-3.8-flash",
+          "mode": "full pipeline",
+          "got": null,
+          "stage": "retrieval",
+          "correct": false
+        },
+        {
+          "runId": "run_20260926171519_jb04",
+          "run": "dev: parser v3 (heading context)",
+          "model": "openai/gpt-6-luna",
+          "mode": "full pipeline",
+          "got": null,
+          "stage": "retrieval",
+          "correct": false
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-opus-5.5",
+          "mode": "full pipeline",
+          "got": null,
+          "stage": "retrieval",
+          "correct": false
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-opus-5.5",
+          "mode": "reading only",
+          "got": false,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-sonnet-5",
+          "mode": "full pipeline",
+          "got": null,
+          "stage": "retrieval",
+          "correct": false
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-sonnet-5",
+          "mode": "reading only",
+          "got": false,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "deepseek/deepseek-v4.1-flash",
+          "mode": "full pipeline",
+          "got": null,
+          "stage": "retrieval",
+          "correct": false
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "deepseek/deepseek-v4.1-flash",
+          "mode": "reading only",
+          "got": false,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "google/gemini-3.8-flash",
+          "mode": "full pipeline",
+          "got": null,
+          "stage": "retrieval",
+          "correct": false
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "google/gemini-3.8-flash",
+          "mode": "reading only",
+          "got": false,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-luna",
+          "mode": "full pipeline",
+          "got": null,
+          "stage": "retrieval",
+          "correct": false
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-luna",
+          "mode": "reading only",
+          "got": false,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-sol",
+          "mode": "full pipeline",
+          "got": null,
+          "stage": "retrieval",
+          "correct": false
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-sol",
+          "mode": "reading only",
+          "got": false,
+          "stage": "ok",
+          "correct": true
+        }
+      ],
+      "failures": 10
+    },
+    {
+      "id": "JPM:audit.all_other_fees_current",
+      "ticker": "JPM",
+      "factId": "audit.all_other_fees_current",
+      "label": "All other fees (latest FY)",
+      "expected": 0,
+      "evidence": {
+        "page": 93,
+        "quote": "Total | $ 135.0 | $ 119.0",
+        "chunkId": "JPM:p93:2"
+      },
+      "traps": [
+        "absence"
+      ],
+      "note": "No 'All other fees' row: the rows (91.0 + 38.1 + 5.9) sum to the total (135.0), so the answer is $0.",
+      "observed": [
+        {
+          "runId": "run_20260926170729_vm2t",
+          "run": "dev smoke (unverified key)",
+          "model": "google/gemini-3.8-flash",
+          "mode": "full pipeline",
+          "got": null,
+          "stage": "retrieval",
+          "correct": false
+        },
+        {
+          "runId": "run_20260926170729_vm2t",
+          "run": "dev smoke (unverified key)",
+          "model": "openai/gpt-6-luna",
+          "mode": "full pipeline",
+          "got": null,
+          "stage": "retrieval",
+          "correct": false
+        },
+        {
+          "runId": "run_20260926171519_jb04",
+          "run": "dev: parser v3 (heading context)",
+          "model": "google/gemini-3.8-flash",
+          "mode": "full pipeline",
+          "got": null,
+          "stage": "extraction",
+          "correct": false
+        },
+        {
+          "runId": "run_20260926171519_jb04",
+          "run": "dev: parser v3 (heading context)",
+          "model": "openai/gpt-6-luna",
+          "mode": "full pipeline",
+          "got": 0,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-opus-5.5",
+          "mode": "full pipeline",
+          "got": null,
+          "stage": "retrieval",
+          "correct": false
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-opus-5.5",
+          "mode": "reading only",
+          "got": 0,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-sonnet-5",
+          "mode": "full pipeline",
+          "got": null,
+          "stage": "retrieval",
+          "correct": false
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-sonnet-5",
+          "mode": "reading only",
+          "got": 0,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "deepseek/deepseek-v4.1-flash",
+          "mode": "full pipeline",
+          "got": null,
+          "stage": "retrieval",
+          "correct": false
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "deepseek/deepseek-v4.1-flash",
+          "mode": "reading only",
+          "got": 0,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "google/gemini-3.8-flash",
+          "mode": "full pipeline",
+          "got": null,
+          "stage": "retrieval",
+          "correct": false
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "google/gemini-3.8-flash",
+          "mode": "reading only",
+          "got": 0,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-luna",
+          "mode": "full pipeline",
+          "got": null,
+          "stage": "retrieval",
+          "correct": false
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-luna",
+          "mode": "reading only",
+          "got": 0,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-sol",
+          "mode": "full pipeline",
+          "got": null,
+          "stage": "retrieval",
+          "correct": false
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-sol",
+          "mode": "reading only",
+          "got": 0,
+          "stage": "ok",
+          "correct": true
+        }
+      ],
+      "failures": 9
+    },
+    {
+      "id": "JPM:governance.unequal_voting_sunset",
+      "ticker": "JPM",
+      "factId": "governance.unequal_voting_sunset",
+      "label": "Time-based sunset on unequal voting",
+      "expected": false,
+      "evidence": {
+        "page": 109,
+        "quote": "At the close of business on the Record Date, there were 2,682,219,629 shares of common stock outstanding, each of which entitles the holder to one\nvote for each matter to be voted on at our annual meeting.",
+        "chunkId": "JPM:p109:1"
+      },
+      "traps": [
+        "retrieval"
+      ],
+      "note": "Failed in at least one graded run; see observed.",
+      "observed": [
+        {
+          "runId": "run_20260926170729_vm2t",
+          "run": "dev smoke (unverified key)",
+          "model": "google/gemini-3.8-flash",
+          "mode": "full pipeline",
+          "got": null,
+          "stage": "retrieval",
+          "correct": false
+        },
+        {
+          "runId": "run_20260926170729_vm2t",
+          "run": "dev smoke (unverified key)",
+          "model": "openai/gpt-6-luna",
+          "mode": "full pipeline",
+          "got": null,
+          "stage": "retrieval",
+          "correct": false
+        },
+        {
+          "runId": "run_20260926171519_jb04",
+          "run": "dev: parser v3 (heading context)",
+          "model": "google/gemini-3.8-flash",
+          "mode": "full pipeline",
+          "got": null,
+          "stage": "retrieval",
+          "correct": false
+        },
+        {
+          "runId": "run_20260926171519_jb04",
+          "run": "dev: parser v3 (heading context)",
+          "model": "openai/gpt-6-luna",
+          "mode": "full pipeline",
+          "got": null,
+          "stage": "retrieval",
+          "correct": false
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-opus-5.5",
+          "mode": "full pipeline",
+          "got": false,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-opus-5.5",
+          "mode": "reading only",
+          "got": false,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-sonnet-5",
+          "mode": "full pipeline",
+          "got": null,
+          "stage": "retrieval",
+          "correct": false
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-sonnet-5",
+          "mode": "reading only",
+          "got": false,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "deepseek/deepseek-v4.1-flash",
+          "mode": "full pipeline",
+          "got": null,
+          "stage": "retrieval",
+          "correct": false
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "deepseek/deepseek-v4.1-flash",
+          "mode": "reading only",
+          "got": false,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "google/gemini-3.8-flash",
+          "mode": "full pipeline",
+          "got": null,
+          "stage": "retrieval",
+          "correct": false
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "google/gemini-3.8-flash",
+          "mode": "reading only",
+          "got": false,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-luna",
+          "mode": "full pipeline",
+          "got": null,
+          "stage": "retrieval",
+          "correct": false
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-luna",
+          "mode": "reading only",
+          "got": false,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-sol",
+          "mode": "full pipeline",
+          "got": false,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-sol",
+          "mode": "reading only",
+          "got": false,
+          "stage": "ok",
+          "correct": true
+        }
+      ],
+      "failures": 8
+    },
+    {
+      "id": "JPM:audit.audit_related_fees_current",
+      "ticker": "JPM",
+      "factId": "audit.audit_related_fees_current",
+      "label": "Audit-related fees (latest FY)",
+      "expected": 38100000,
+      "evidence": {
+        "page": 93,
+        "quote": "Audit-related | 38.1 | 36.0",
+        "chunkId": "JPM:p93:2"
+      },
+      "traps": [
+        "retrieval"
+      ],
+      "note": "Keyword search ranks JPM's fee descriptions above the fee table; the table says 'Audit-related', not 'Audit-related fees'.",
+      "observed": [
+        {
+          "runId": "run_20260926170729_vm2t",
+          "run": "dev smoke (unverified key)",
+          "model": "google/gemini-3.8-flash",
+          "mode": "full pipeline",
+          "got": 38100000,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926170729_vm2t",
+          "run": "dev smoke (unverified key)",
+          "model": "openai/gpt-6-luna",
+          "mode": "full pipeline",
+          "got": 38100000,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926171519_jb04",
+          "run": "dev: parser v3 (heading context)",
+          "model": "google/gemini-3.8-flash",
+          "mode": "full pipeline",
+          "got": 38100000,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926171519_jb04",
+          "run": "dev: parser v3 (heading context)",
+          "model": "openai/gpt-6-luna",
+          "mode": "full pipeline",
+          "got": 38100000,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-opus-5.5",
+          "mode": "full pipeline",
+          "got": null,
+          "stage": "retrieval",
+          "correct": false
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-opus-5.5",
+          "mode": "reading only",
+          "got": 38100000,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-sonnet-5",
+          "mode": "full pipeline",
+          "got": null,
+          "stage": "retrieval",
+          "correct": false
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-sonnet-5",
+          "mode": "reading only",
+          "got": 38100000,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "deepseek/deepseek-v4.1-flash",
+          "mode": "full pipeline",
+          "got": null,
+          "stage": "retrieval",
+          "correct": false
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "deepseek/deepseek-v4.1-flash",
+          "mode": "reading only",
+          "got": 38100000,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "google/gemini-3.8-flash",
+          "mode": "full pipeline",
+          "got": null,
+          "stage": "retrieval",
+          "correct": false
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "google/gemini-3.8-flash",
+          "mode": "reading only",
+          "got": 38100000,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-luna",
+          "mode": "full pipeline",
+          "got": null,
+          "stage": "retrieval",
+          "correct": false
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-luna",
+          "mode": "reading only",
+          "got": 38100000,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-sol",
+          "mode": "full pipeline",
+          "got": null,
+          "stage": "retrieval",
+          "correct": false
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-sol",
+          "mode": "reading only",
+          "got": 38100000,
+          "stage": "ok",
+          "correct": true
+        }
+      ],
+      "failures": 6
+    },
+    {
+      "id": "JPM:pay.ceo_total_comp_prior",
+      "ticker": "JPM",
+      "factId": "pay.ceo_total_comp_prior",
+      "label": "CEO total pay (prior FY)",
+      "expected": 37683462,
+      "evidence": {
+        "page": 76,
+        "quote": "1,500,000 | 5,000,000 | 29,500,000 | 50,826 | 1,632,636 | 37,683,462",
+        "chunkId": "JPM:p76:1"
+      },
+      "traps": [
+        "wrong-table"
+      ],
+      "note": "Same two tables for the prior year: $39,000,000 (performance-year view) vs $37,683,462 (SEC SCT).",
+      "observed": [
+        {
+          "runId": "run_20260926170729_vm2t",
+          "run": "dev smoke (unverified key)",
+          "model": "google/gemini-3.8-flash",
+          "mode": "full pipeline",
+          "got": null,
+          "stage": "retrieval",
+          "correct": false
+        },
+        {
+          "runId": "run_20260926170729_vm2t",
+          "run": "dev smoke (unverified key)",
+          "model": "openai/gpt-6-luna",
+          "mode": "full pipeline",
+          "got": null,
+          "stage": "retrieval",
+          "correct": false
+        },
+        {
+          "runId": "run_20260926171519_jb04",
+          "run": "dev: parser v3 (heading context)",
+          "model": "google/gemini-3.8-flash",
+          "mode": "full pipeline",
+          "got": null,
+          "stage": "retrieval",
+          "correct": false
+        },
+        {
+          "runId": "run_20260926171519_jb04",
+          "run": "dev: parser v3 (heading context)",
+          "model": "openai/gpt-6-luna",
+          "mode": "full pipeline",
+          "got": null,
+          "stage": "retrieval",
+          "correct": false
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-opus-5.5",
+          "mode": "full pipeline",
+          "got": 37683462,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-opus-5.5",
+          "mode": "reading only",
+          "got": 37683462,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-sonnet-5",
+          "mode": "full pipeline",
+          "got": 37683462,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-sonnet-5",
+          "mode": "reading only",
+          "got": 37683462,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "deepseek/deepseek-v4.1-flash",
+          "mode": "full pipeline",
+          "got": 37683462,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "deepseek/deepseek-v4.1-flash",
+          "mode": "reading only",
+          "got": 37683462,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "google/gemini-3.8-flash",
+          "mode": "full pipeline",
+          "got": 37683462,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "google/gemini-3.8-flash",
+          "mode": "reading only",
+          "got": 37683462,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-luna",
+          "mode": "full pipeline",
+          "got": 37683462,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-luna",
+          "mode": "reading only",
+          "got": 37683462,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-sol",
+          "mode": "full pipeline",
+          "got": 37683462,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-sol",
+          "mode": "reading only",
+          "got": 37683462,
+          "stage": "ok",
+          "correct": true
+        }
+      ],
+      "failures": 4
+    },
+    {
+      "id": "JPM:pay.company_tsr_current",
+      "ticker": "JPM",
+      "factId": "pay.company_tsr_current",
+      "label": "Company TSR ($100 index)",
+      "expected": 289.18,
+      "evidence": {
+        "page": 85,
+        "quote": "2025 | $40,632,724 | $246,827,058 | $25,569,609 | $74,899,476 | $289.18 | $203.21 | $57.0 | 20%",
+        "chunkId": "JPM:p85:2"
+      },
+      "traps": [
+        "retrieval"
+      ],
+      "note": "Failed in at least one graded run; see observed.",
+      "observed": [
+        {
+          "runId": "run_20260926170729_vm2t",
+          "run": "dev smoke (unverified key)",
+          "model": "google/gemini-3.8-flash",
+          "mode": "full pipeline",
+          "got": null,
+          "stage": "retrieval",
+          "correct": false
+        },
+        {
+          "runId": "run_20260926170729_vm2t",
+          "run": "dev smoke (unverified key)",
+          "model": "openai/gpt-6-luna",
+          "mode": "full pipeline",
+          "got": null,
+          "stage": "retrieval",
+          "correct": false
+        },
+        {
+          "runId": "run_20260926171519_jb04",
+          "run": "dev: parser v3 (heading context)",
+          "model": "google/gemini-3.8-flash",
+          "mode": "full pipeline",
+          "got": null,
+          "stage": "retrieval",
+          "correct": false
+        },
+        {
+          "runId": "run_20260926171519_jb04",
+          "run": "dev: parser v3 (heading context)",
+          "model": "openai/gpt-6-luna",
+          "mode": "full pipeline",
+          "got": null,
+          "stage": "retrieval",
+          "correct": false
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-opus-5.5",
+          "mode": "full pipeline",
+          "got": 289.18,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-opus-5.5",
+          "mode": "reading only",
+          "got": 289.18,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-sonnet-5",
+          "mode": "full pipeline",
+          "got": 289.18,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-sonnet-5",
+          "mode": "reading only",
+          "got": 289.18,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "deepseek/deepseek-v4.1-flash",
+          "mode": "full pipeline",
+          "got": 289.18,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "deepseek/deepseek-v4.1-flash",
+          "mode": "reading only",
+          "got": 289.18,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "google/gemini-3.8-flash",
+          "mode": "full pipeline",
+          "got": 289.18,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "google/gemini-3.8-flash",
+          "mode": "reading only",
+          "got": 289.18,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-luna",
+          "mode": "full pipeline",
+          "got": 289.18,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-luna",
+          "mode": "reading only",
+          "got": 289.18,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-sol",
+          "mode": "full pipeline",
+          "got": 289.18,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-sol",
+          "mode": "reading only",
+          "got": 289.18,
+          "stage": "ok",
+          "correct": true
+        }
+      ],
+      "failures": 4
+    },
+    {
+      "id": "JPM:pay.peer_tsr_current",
+      "ticker": "JPM",
+      "factId": "pay.peer_tsr_current",
+      "label": "Peer TSR ($100 index)",
+      "expected": 203.21,
+      "evidence": {
+        "page": 85,
+        "quote": "2025 | $40,632,724 | $246,827,058 | $25,569,609 | $74,899,476 | $289.18 | $203.21 | $57.0 | 20%",
+        "chunkId": "JPM:p85:2"
+      },
+      "traps": [
+        "retrieval"
+      ],
+      "note": "Failed in at least one graded run; see observed.",
+      "observed": [
+        {
+          "runId": "run_20260926170729_vm2t",
+          "run": "dev smoke (unverified key)",
+          "model": "google/gemini-3.8-flash",
+          "mode": "full pipeline",
+          "got": null,
+          "stage": "retrieval",
+          "correct": false
+        },
+        {
+          "runId": "run_20260926170729_vm2t",
+          "run": "dev smoke (unverified key)",
+          "model": "openai/gpt-6-luna",
+          "mode": "full pipeline",
+          "got": null,
+          "stage": "retrieval",
+          "correct": false
+        },
+        {
+          "runId": "run_20260926171519_jb04",
+          "run": "dev: parser v3 (heading context)",
+          "model": "google/gemini-3.8-flash",
+          "mode": "full pipeline",
+          "got": null,
+          "stage": "retrieval",
+          "correct": false
+        },
+        {
+          "runId": "run_20260926171519_jb04",
+          "run": "dev: parser v3 (heading context)",
+          "model": "openai/gpt-6-luna",
+          "mode": "full pipeline",
+          "got": null,
+          "stage": "retrieval",
+          "correct": false
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-opus-5.5",
+          "mode": "full pipeline",
+          "got": 203.21,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-opus-5.5",
+          "mode": "reading only",
+          "got": 203.21,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-sonnet-5",
+          "mode": "full pipeline",
+          "got": 203.21,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-sonnet-5",
+          "mode": "reading only",
+          "got": 203.21,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "deepseek/deepseek-v4.1-flash",
+          "mode": "full pipeline",
+          "got": 203.21,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "deepseek/deepseek-v4.1-flash",
+          "mode": "reading only",
+          "got": 203.21,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "google/gemini-3.8-flash",
+          "mode": "full pipeline",
+          "got": 203.21,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "google/gemini-3.8-flash",
+          "mode": "reading only",
+          "got": 203.21,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-luna",
+          "mode": "full pipeline",
+          "got": 203.21,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-luna",
+          "mode": "reading only",
+          "got": 203.21,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-sol",
+          "mode": "full pipeline",
+          "got": 203.21,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-sol",
+          "mode": "reading only",
+          "got": 203.21,
+          "stage": "ok",
+          "correct": true
+        }
+      ],
+      "failures": 4
+    },
+    {
+      "id": "META:pay.peer_tsr_current",
+      "ticker": "META",
+      "factId": "pay.peer_tsr_current",
+      "label": "Peer TSR ($100 index)",
+      "expected": 445.33,
+      "evidence": {
+        "page": 56,
+        "quote": "2025 | 25,125,904 | 25,125,904 | 22,057,420 | 38,529,346 | 243.32 | 445.33 | 60,458 | 200,966",
+        "chunkId": "META:p56:2"
+      },
+      "traps": [
+        "wrong-column"
+      ],
+      "note": "Company TSR (243.32) sits next to peer-group TSR (445.33) in the pay-versus-performance table.",
+      "observed": [
+        {
+          "runId": "run_20260926170729_vm2t",
+          "run": "dev smoke (unverified key)",
+          "model": "google/gemini-3.8-flash",
+          "mode": "full pipeline",
+          "got": null,
+          "stage": "retrieval",
+          "correct": false
+        },
+        {
+          "runId": "run_20260926170729_vm2t",
+          "run": "dev smoke (unverified key)",
+          "model": "openai/gpt-6-luna",
+          "mode": "full pipeline",
+          "got": null,
+          "stage": "retrieval",
+          "correct": false
+        },
+        {
+          "runId": "run_20260926171519_jb04",
+          "run": "dev: parser v3 (heading context)",
+          "model": "google/gemini-3.8-flash",
+          "mode": "full pipeline",
+          "got": 445.33,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926171519_jb04",
+          "run": "dev: parser v3 (heading context)",
+          "model": "openai/gpt-6-luna",
+          "mode": "full pipeline",
+          "got": 243.32,
+          "stage": "extraction",
+          "correct": false
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-opus-5.5",
+          "mode": "full pipeline",
+          "got": 445.33,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-opus-5.5",
+          "mode": "reading only",
+          "got": 445.33,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-sonnet-5",
+          "mode": "full pipeline",
+          "got": 445.33,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-sonnet-5",
+          "mode": "reading only",
+          "got": 445.33,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "deepseek/deepseek-v4.1-flash",
+          "mode": "full pipeline",
+          "got": 445.33,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "deepseek/deepseek-v4.1-flash",
+          "mode": "reading only",
+          "got": 445.33,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "google/gemini-3.8-flash",
+          "mode": "full pipeline",
+          "got": 445.33,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "google/gemini-3.8-flash",
+          "mode": "reading only",
+          "got": 445.33,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-luna",
+          "mode": "full pipeline",
+          "got": 445.33,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-luna",
+          "mode": "reading only",
+          "got": 243.32,
+          "stage": "extraction",
+          "correct": false
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-sol",
+          "mode": "full pipeline",
+          "got": 445.33,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-sol",
+          "mode": "reading only",
+          "got": 445.33,
+          "stage": "ok",
+          "correct": true
+        }
+      ],
+      "failures": 4
+    },
+    {
+      "id": "AAPL:board.has_lead_independent_director",
+      "ticker": "AAPL",
+      "factId": "board.has_lead_independent_director",
+      "label": "Lead independent director",
+      "expected": false,
+      "evidence": {
+        "page": 17,
+        "quote": "Separation of Chair and | Our CEO is focused on managing Apple and our independent Chair drives accountability at the",
+        "chunkId": "AAPL:p17:0"
+      },
+      "traps": [
+        "definition"
+      ],
+      "note": "Independent Chair (Levinson), no lead director role: false under the definition.",
+      "observed": [
+        {
+          "runId": "run_20260926170729_vm2t",
+          "run": "dev smoke (unverified key)",
+          "model": "google/gemini-3.8-flash",
+          "mode": "full pipeline",
+          "got": null,
+          "stage": "retrieval",
+          "correct": false
+        },
+        {
+          "runId": "run_20260926170729_vm2t",
+          "run": "dev smoke (unverified key)",
+          "model": "openai/gpt-6-luna",
+          "mode": "full pipeline",
+          "got": true,
+          "stage": "retrieval",
+          "correct": false
+        },
+        {
+          "runId": "run_20260926171519_jb04",
+          "run": "dev: parser v3 (heading context)",
+          "model": "google/gemini-3.8-flash",
+          "mode": "full pipeline",
+          "got": null,
+          "stage": "retrieval",
+          "correct": false
+        },
+        {
+          "runId": "run_20260926171519_jb04",
+          "run": "dev: parser v3 (heading context)",
+          "model": "openai/gpt-6-luna",
+          "mode": "full pipeline",
+          "got": false,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-opus-5.5",
+          "mode": "full pipeline",
+          "got": false,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-opus-5.5",
+          "mode": "reading only",
+          "got": false,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-sonnet-5",
+          "mode": "full pipeline",
+          "got": false,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-sonnet-5",
+          "mode": "reading only",
+          "got": false,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "deepseek/deepseek-v4.1-flash",
+          "mode": "full pipeline",
+          "got": false,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "deepseek/deepseek-v4.1-flash",
+          "mode": "reading only",
+          "got": false,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "google/gemini-3.8-flash",
+          "mode": "full pipeline",
+          "got": false,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "google/gemini-3.8-flash",
+          "mode": "reading only",
+          "got": false,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-luna",
+          "mode": "full pipeline",
+          "got": false,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-luna",
+          "mode": "reading only",
+          "got": false,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-sol",
+          "mode": "full pipeline",
+          "got": false,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-sol",
+          "mode": "reading only",
+          "got": false,
+          "stage": "ok",
+          "correct": true
+        }
+      ],
+      "failures": 3
+    },
+    {
+      "id": "JPM:board.independent_nominee_count",
+      "ticker": "JPM",
+      "factId": "board.independent_nominee_count",
+      "label": "Independent nominees",
+      "expected": 10,
+      "evidence": {
+        "page": 12,
+        "quote": "The Board of Directors has nominated the 11 individuals listed below. All are independent other than our CEO.",
+        "chunkId": "JPM:p12:2"
+      },
+      "traps": [
+        "two-passages"
+      ],
+      "note": "10 = 11 nominees, 'all independent other than our CEO' (one sentence, p. 12; formal determination on p. 27).",
+      "observed": [
+        {
+          "runId": "run_20260926170729_vm2t",
+          "run": "dev smoke (unverified key)",
+          "model": "google/gemini-3.8-flash",
+          "mode": "full pipeline",
+          "got": null,
+          "stage": "retrieval",
+          "correct": false
+        },
+        {
+          "runId": "run_20260926170729_vm2t",
+          "run": "dev smoke (unverified key)",
+          "model": "openai/gpt-6-luna",
+          "mode": "full pipeline",
+          "got": null,
+          "stage": "retrieval",
+          "correct": false
+        },
+        {
+          "runId": "run_20260926171519_jb04",
+          "run": "dev: parser v3 (heading context)",
+          "model": "google/gemini-3.8-flash",
+          "mode": "full pipeline",
+          "got": null,
+          "stage": "format",
+          "correct": false
+        },
+        {
+          "runId": "run_20260926171519_jb04",
+          "run": "dev: parser v3 (heading context)",
+          "model": "openai/gpt-6-luna",
+          "mode": "full pipeline",
+          "got": 10,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-opus-5.5",
+          "mode": "full pipeline",
+          "got": 10,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-opus-5.5",
+          "mode": "reading only",
+          "got": 10,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-sonnet-5",
+          "mode": "full pipeline",
+          "got": 10,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-sonnet-5",
+          "mode": "reading only",
+          "got": 10,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "deepseek/deepseek-v4.1-flash",
+          "mode": "full pipeline",
+          "got": 10,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "deepseek/deepseek-v4.1-flash",
+          "mode": "reading only",
+          "got": 10,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "google/gemini-3.8-flash",
+          "mode": "full pipeline",
+          "got": 10,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "google/gemini-3.8-flash",
+          "mode": "reading only",
+          "got": 10,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-luna",
+          "mode": "full pipeline",
+          "got": 10,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-luna",
+          "mode": "reading only",
+          "got": 10,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-sol",
+          "mode": "full pipeline",
+          "got": 10,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-sol",
+          "mode": "reading only",
+          "got": 10,
+          "stage": "ok",
+          "correct": true
+        }
+      ],
+      "failures": 3
+    },
+    {
+      "id": "AAPL:governance.unequal_voting_rights",
+      "ticker": "AAPL",
+      "factId": "governance.unequal_voting_rights",
+      "label": "Unequal voting rights",
+      "expected": false,
+      "evidence": {
+        "page": 17,
+        "quote": "One share equals one vote | We have a single class of shares with equal voting rights.",
+        "chunkId": "AAPL:p17:0"
+      },
+      "traps": [
+        "retrieval"
+      ],
+      "note": "Failed in at least one graded run; see observed.",
+      "observed": [
+        {
+          "runId": "run_20260926170729_vm2t",
+          "run": "dev smoke (unverified key)",
+          "model": "google/gemini-3.8-flash",
+          "mode": "full pipeline",
+          "got": false,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926170729_vm2t",
+          "run": "dev smoke (unverified key)",
+          "model": "openai/gpt-6-luna",
+          "mode": "full pipeline",
+          "got": false,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926171519_jb04",
+          "run": "dev: parser v3 (heading context)",
+          "model": "google/gemini-3.8-flash",
+          "mode": "full pipeline",
+          "got": false,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926171519_jb04",
+          "run": "dev: parser v3 (heading context)",
+          "model": "openai/gpt-6-luna",
+          "mode": "full pipeline",
+          "got": false,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-opus-5.5",
+          "mode": "full pipeline",
+          "got": false,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-opus-5.5",
+          "mode": "reading only",
+          "got": false,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-sonnet-5",
+          "mode": "full pipeline",
+          "got": false,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-sonnet-5",
+          "mode": "reading only",
+          "got": false,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "deepseek/deepseek-v4.1-flash",
+          "mode": "full pipeline",
+          "got": false,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "deepseek/deepseek-v4.1-flash",
+          "mode": "reading only",
+          "got": false,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "google/gemini-3.8-flash",
+          "mode": "full pipeline",
+          "got": null,
+          "stage": "retrieval",
+          "correct": false
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "google/gemini-3.8-flash",
+          "mode": "reading only",
+          "got": false,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-luna",
+          "mode": "full pipeline",
+          "got": null,
+          "stage": "retrieval",
+          "correct": false
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-luna",
+          "mode": "reading only",
+          "got": false,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-sol",
+          "mode": "full pipeline",
+          "got": false,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-sol",
+          "mode": "reading only",
+          "got": false,
+          "stage": "ok",
+          "correct": true
+        }
+      ],
+      "failures": 2
+    },
+    {
+      "id": "AAPL:pay.ceo_total_comp_current",
+      "ticker": "AAPL",
+      "factId": "pay.ceo_total_comp_current",
+      "label": "CEO total pay (latest FY)",
+      "expected": 74294811,
+      "evidence": {
+        "page": 61,
+        "quote": "2025 | 74,294,811 | 108,423,733 | 23,812,358 | 34,125,743 | 233.88 | 279.51 | 112,010 | 416,161",
+        "chunkId": "AAPL:p61:1"
+      },
+      "traps": [
+        "retrieval"
+      ],
+      "note": "Failed in at least one graded run; see observed.",
+      "observed": [
+        {
+          "runId": "run_20260926170729_vm2t",
+          "run": "dev smoke (unverified key)",
+          "model": "google/gemini-3.8-flash",
+          "mode": "full pipeline",
+          "got": 74294811,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926170729_vm2t",
+          "run": "dev smoke (unverified key)",
+          "model": "openai/gpt-6-luna",
+          "mode": "full pipeline",
+          "got": 74294811,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926171519_jb04",
+          "run": "dev: parser v3 (heading context)",
+          "model": "google/gemini-3.8-flash",
+          "mode": "full pipeline",
+          "got": null,
+          "stage": "retrieval",
+          "correct": false
+        },
+        {
+          "runId": "run_20260926171519_jb04",
+          "run": "dev: parser v3 (heading context)",
+          "model": "openai/gpt-6-luna",
+          "mode": "full pipeline",
+          "got": null,
+          "stage": "retrieval",
+          "correct": false
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-opus-5.5",
+          "mode": "full pipeline",
+          "got": 74294811,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-opus-5.5",
+          "mode": "reading only",
+          "got": 74294811,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-sonnet-5",
+          "mode": "full pipeline",
+          "got": 74294811,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-sonnet-5",
+          "mode": "reading only",
+          "got": 74294811,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "deepseek/deepseek-v4.1-flash",
+          "mode": "full pipeline",
+          "got": 74294811,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "deepseek/deepseek-v4.1-flash",
+          "mode": "reading only",
+          "got": 74294811,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "google/gemini-3.8-flash",
+          "mode": "full pipeline",
+          "got": 74294811,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "google/gemini-3.8-flash",
+          "mode": "reading only",
+          "got": 74294811,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-luna",
+          "mode": "full pipeline",
+          "got": 74294811,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-luna",
+          "mode": "reading only",
+          "got": 74294811,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-sol",
+          "mode": "full pipeline",
+          "got": 74294811,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-sol",
+          "mode": "reading only",
+          "got": 74294811,
+          "stage": "ok",
+          "correct": true
+        }
+      ],
+      "failures": 2
+    },
+    {
+      "id": "AAPL:pay.ceo_total_comp_prior",
+      "ticker": "AAPL",
+      "factId": "pay.ceo_total_comp_prior",
+      "label": "CEO total pay (prior FY)",
+      "expected": 74609802,
+      "evidence": {
+        "page": 61,
+        "quote": "2024 | 74,609,802 | 168,980,568 | 27,178,896 | 58,633,525 | 207.59 | 206.32 | 93,736 | 391,035",
+        "chunkId": "AAPL:p61:1"
+      },
+      "traps": [
+        "retrieval"
+      ],
+      "note": "Failed in at least one graded run; see observed.",
+      "observed": [
+        {
+          "runId": "run_20260926170729_vm2t",
+          "run": "dev smoke (unverified key)",
+          "model": "google/gemini-3.8-flash",
+          "mode": "full pipeline",
+          "got": null,
+          "stage": "extraction",
+          "correct": false
+        },
+        {
+          "runId": "run_20260926170729_vm2t",
+          "run": "dev smoke (unverified key)",
+          "model": "openai/gpt-6-luna",
+          "mode": "full pipeline",
+          "got": null,
+          "stage": "extraction",
+          "correct": false
+        },
+        {
+          "runId": "run_20260926171519_jb04",
+          "run": "dev: parser v3 (heading context)",
+          "model": "google/gemini-3.8-flash",
+          "mode": "full pipeline",
+          "got": 74609802,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926171519_jb04",
+          "run": "dev: parser v3 (heading context)",
+          "model": "openai/gpt-6-luna",
+          "mode": "full pipeline",
+          "got": 74609802,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-opus-5.5",
+          "mode": "full pipeline",
+          "got": 74609802,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-opus-5.5",
+          "mode": "reading only",
+          "got": 74609802,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-sonnet-5",
+          "mode": "full pipeline",
+          "got": 74609802,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-sonnet-5",
+          "mode": "reading only",
+          "got": 74609802,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "deepseek/deepseek-v4.1-flash",
+          "mode": "full pipeline",
+          "got": 74609802,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "deepseek/deepseek-v4.1-flash",
+          "mode": "reading only",
+          "got": 74609802,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "google/gemini-3.8-flash",
+          "mode": "full pipeline",
+          "got": 74609802,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "google/gemini-3.8-flash",
+          "mode": "reading only",
+          "got": 74609802,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-luna",
+          "mode": "full pipeline",
+          "got": 74609802,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-luna",
+          "mode": "reading only",
+          "got": 74609802,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-sol",
+          "mode": "full pipeline",
+          "got": 74609802,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-sol",
+          "mode": "reading only",
+          "got": 74609802,
+          "stage": "ok",
+          "correct": true
+        }
+      ],
+      "failures": 2
+    },
+    {
+      "id": "AAPL:pay.company_tsr_current",
+      "ticker": "AAPL",
+      "factId": "pay.company_tsr_current",
+      "label": "Company TSR ($100 index)",
+      "expected": 233.88,
+      "evidence": {
+        "page": 61,
+        "quote": "2025 | 74,294,811 | 108,423,733 | 23,812,358 | 34,125,743 | 233.88 | 279.51 | 112,010 | 416,161",
+        "chunkId": "AAPL:p61:1"
+      },
+      "traps": [
+        "retrieval"
+      ],
+      "note": "Failed in at least one graded run; see observed.",
+      "observed": [
+        {
+          "runId": "run_20260926170729_vm2t",
+          "run": "dev smoke (unverified key)",
+          "model": "google/gemini-3.8-flash",
+          "mode": "full pipeline",
+          "got": null,
+          "stage": "retrieval",
+          "correct": false
+        },
+        {
+          "runId": "run_20260926170729_vm2t",
+          "run": "dev smoke (unverified key)",
+          "model": "openai/gpt-6-luna",
+          "mode": "full pipeline",
+          "got": null,
+          "stage": "retrieval",
+          "correct": false
+        },
+        {
+          "runId": "run_20260926171519_jb04",
+          "run": "dev: parser v3 (heading context)",
+          "model": "google/gemini-3.8-flash",
+          "mode": "full pipeline",
+          "got": 233.88,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926171519_jb04",
+          "run": "dev: parser v3 (heading context)",
+          "model": "openai/gpt-6-luna",
+          "mode": "full pipeline",
+          "got": 233.88,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-opus-5.5",
+          "mode": "full pipeline",
+          "got": 233.88,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-opus-5.5",
+          "mode": "reading only",
+          "got": 233.88,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-sonnet-5",
+          "mode": "full pipeline",
+          "got": 233.88,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-sonnet-5",
+          "mode": "reading only",
+          "got": 233.88,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "deepseek/deepseek-v4.1-flash",
+          "mode": "full pipeline",
+          "got": 233.88,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "deepseek/deepseek-v4.1-flash",
+          "mode": "reading only",
+          "got": 233.88,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "google/gemini-3.8-flash",
+          "mode": "full pipeline",
+          "got": 233.88,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "google/gemini-3.8-flash",
+          "mode": "reading only",
+          "got": 233.88,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-luna",
+          "mode": "full pipeline",
+          "got": 233.88,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-luna",
+          "mode": "reading only",
+          "got": 233.88,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-sol",
+          "mode": "full pipeline",
+          "got": 233.88,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-sol",
+          "mode": "reading only",
+          "got": 233.88,
+          "stage": "ok",
+          "correct": true
+        }
+      ],
+      "failures": 2
+    },
+    {
+      "id": "AAPL:pay.peer_tsr_current",
+      "ticker": "AAPL",
+      "factId": "pay.peer_tsr_current",
+      "label": "Peer TSR ($100 index)",
+      "expected": 279.51,
+      "evidence": {
+        "page": 61,
+        "quote": "2025 | 74,294,811 | 108,423,733 | 23,812,358 | 34,125,743 | 233.88 | 279.51 | 112,010 | 416,161",
+        "chunkId": "AAPL:p61:1"
+      },
+      "traps": [
+        "retrieval"
+      ],
+      "note": "Failed in at least one graded run; see observed.",
+      "observed": [
+        {
+          "runId": "run_20260926170729_vm2t",
+          "run": "dev smoke (unverified key)",
+          "model": "google/gemini-3.8-flash",
+          "mode": "full pipeline",
+          "got": null,
+          "stage": "retrieval",
+          "correct": false
+        },
+        {
+          "runId": "run_20260926170729_vm2t",
+          "run": "dev smoke (unverified key)",
+          "model": "openai/gpt-6-luna",
+          "mode": "full pipeline",
+          "got": 266.58,
+          "stage": "retrieval",
+          "correct": false
+        },
+        {
+          "runId": "run_20260926171519_jb04",
+          "run": "dev: parser v3 (heading context)",
+          "model": "google/gemini-3.8-flash",
+          "mode": "full pipeline",
+          "got": 279.51,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926171519_jb04",
+          "run": "dev: parser v3 (heading context)",
+          "model": "openai/gpt-6-luna",
+          "mode": "full pipeline",
+          "got": 279.51,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-opus-5.5",
+          "mode": "full pipeline",
+          "got": 279.51,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-opus-5.5",
+          "mode": "reading only",
+          "got": 279.51,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-sonnet-5",
+          "mode": "full pipeline",
+          "got": 279.51,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-sonnet-5",
+          "mode": "reading only",
+          "got": 279.51,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "deepseek/deepseek-v4.1-flash",
+          "mode": "full pipeline",
+          "got": 279.51,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "deepseek/deepseek-v4.1-flash",
+          "mode": "reading only",
+          "got": 279.51,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "google/gemini-3.8-flash",
+          "mode": "full pipeline",
+          "got": 279.51,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "google/gemini-3.8-flash",
+          "mode": "reading only",
+          "got": 279.51,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-luna",
+          "mode": "full pipeline",
+          "got": 279.51,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-luna",
+          "mode": "reading only",
+          "got": 279.51,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-sol",
+          "mode": "full pipeline",
+          "got": 279.51,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-sol",
+          "mode": "reading only",
+          "got": 279.51,
+          "stage": "ok",
+          "correct": true
+        }
+      ],
+      "failures": 2
+    },
+    {
+      "id": "GOOGL:board.has_lead_independent_director",
+      "ticker": "GOOGL",
+      "factId": "board.has_lead_independent_director",
+      "label": "Lead independent director",
+      "expected": false,
+      "evidence": {
+        "page": 25,
+        "quote": "In January 2018, John L. Hennessy, the then Lead Independent Director, was appointed to serve as Alphabet’s Chair of the Board.",
+        "chunkId": "GOOGL:p25:2"
+      },
+      "traps": [
+        "definition"
+      ],
+      "note": "Independent Chair (Hennessy), no lead director role: false under the definition.",
+      "observed": [
+        {
+          "runId": "run_20260926170729_vm2t",
+          "run": "dev smoke (unverified key)",
+          "model": "google/gemini-3.8-flash",
+          "mode": "full pipeline",
+          "got": false,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926170729_vm2t",
+          "run": "dev smoke (unverified key)",
+          "model": "openai/gpt-6-luna",
+          "mode": "full pipeline",
+          "got": true,
+          "stage": "retrieval",
+          "correct": false
+        },
+        {
+          "runId": "run_20260926171519_jb04",
+          "run": "dev: parser v3 (heading context)",
+          "model": "google/gemini-3.8-flash",
+          "mode": "full pipeline",
+          "got": null,
+          "stage": "retrieval",
+          "correct": false
+        },
+        {
+          "runId": "run_20260926171519_jb04",
+          "run": "dev: parser v3 (heading context)",
+          "model": "openai/gpt-6-luna",
+          "mode": "full pipeline",
+          "got": false,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-opus-5.5",
+          "mode": "full pipeline",
+          "got": false,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-opus-5.5",
+          "mode": "reading only",
+          "got": false,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-sonnet-5",
+          "mode": "full pipeline",
+          "got": false,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-sonnet-5",
+          "mode": "reading only",
+          "got": false,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "deepseek/deepseek-v4.1-flash",
+          "mode": "full pipeline",
+          "got": false,
+          "stage": "citation",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "deepseek/deepseek-v4.1-flash",
+          "mode": "reading only",
+          "got": false,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "google/gemini-3.8-flash",
+          "mode": "full pipeline",
+          "got": false,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "google/gemini-3.8-flash",
+          "mode": "reading only",
+          "got": false,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-luna",
+          "mode": "full pipeline",
+          "got": false,
+          "stage": "citation",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-luna",
+          "mode": "reading only",
+          "got": false,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-sol",
+          "mode": "full pipeline",
+          "got": false,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-sol",
+          "mode": "reading only",
+          "got": false,
+          "stage": "ok",
+          "correct": true
+        }
+      ],
+      "failures": 2
+    },
+    {
+      "id": "JPM:pay.ceo_total_comp_current",
+      "ticker": "JPM",
+      "factId": "pay.ceo_total_comp_current",
+      "label": "CEO total pay (latest FY)",
+      "expected": 40632724,
+      "evidence": {
+        "page": 76,
+        "quote": "Chairman and CEO | $1,500,000 | $5,000,000 | $32,500,000 | $44,872 | $1,587,852 6 | $40,632,724",
+        "chunkId": "JPM:p76:1"
+      },
+      "traps": [
+        "wrong-table"
+      ],
+      "note": "JPM's own 'annual compensation' table shows $43,000,000; the SEC Summary Compensation Table (p. 76) says $40,632,724.",
+      "observed": [
+        {
+          "runId": "run_20260926170729_vm2t",
+          "run": "dev smoke (unverified key)",
+          "model": "google/gemini-3.8-flash",
+          "mode": "full pipeline",
+          "got": null,
+          "stage": "retrieval",
+          "correct": false
+        },
+        {
+          "runId": "run_20260926170729_vm2t",
+          "run": "dev smoke (unverified key)",
+          "model": "openai/gpt-6-luna",
+          "mode": "full pipeline",
+          "got": null,
+          "stage": "retrieval",
+          "correct": false
+        },
+        {
+          "runId": "run_20260926171519_jb04",
+          "run": "dev: parser v3 (heading context)",
+          "model": "google/gemini-3.8-flash",
+          "mode": "full pipeline",
+          "got": 40632724,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926171519_jb04",
+          "run": "dev: parser v3 (heading context)",
+          "model": "openai/gpt-6-luna",
+          "mode": "full pipeline",
+          "got": 40632724,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-opus-5.5",
+          "mode": "full pipeline",
+          "got": 40632724,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-opus-5.5",
+          "mode": "reading only",
+          "got": 40632724,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-sonnet-5",
+          "mode": "full pipeline",
+          "got": 40632724,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-sonnet-5",
+          "mode": "reading only",
+          "got": 40632724,
+          "stage": "citation",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "deepseek/deepseek-v4.1-flash",
+          "mode": "full pipeline",
+          "got": 40632724,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "deepseek/deepseek-v4.1-flash",
+          "mode": "reading only",
+          "got": 40632724,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "google/gemini-3.8-flash",
+          "mode": "full pipeline",
+          "got": 40632724,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "google/gemini-3.8-flash",
+          "mode": "reading only",
+          "got": 40632724,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-luna",
+          "mode": "full pipeline",
+          "got": 40632724,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-luna",
+          "mode": "reading only",
+          "got": 40632724,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-sol",
+          "mode": "full pipeline",
+          "got": 40632724,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-sol",
+          "mode": "reading only",
+          "got": 40632724,
+          "stage": "ok",
+          "correct": true
+        }
+      ],
+      "failures": 2
+    },
+    {
+      "id": "META:board.independent_nominee_count",
+      "ticker": "META",
+      "factId": "board.independent_nominee_count",
+      "label": "Independent nominees",
+      "expected": 11,
+      "evidence": {
+        "page": 26,
+        "quote": "Name | Director Since | Primary Employment | Independent\nPeggy Alford | 2019 | Chief Financial Officer, eBay | ✓\nMarc L. Andreessen | 2008 | Co-founder and General Partner, Andreessen Horowitz | ✓\nJohn Arnold | 2024 | Co-founder and Co-chair, Arnold Ventures | ✓\nPatrick Collison | 2025 | Co-founder and Chief Executive Officer, Stripe | ✓\nJohn Elkann | 2024 | Chief Executive Officer, Exor | ✓\nAndrew W. Houston | 2020 | Co-founder and Chief Executive Officer, Dropbox | ✓\nNancy Killefer | 2020 | Senior Partner Emeritus, McKinsey & Company | ✓\nRobert M. Kimmitt | 2020 | Senior International Counsel, WilmerHale | ✓\nCharles Songhurst | 2024 | Technology Investor | ✓\nDana White | 2024 | President and Chief Executive Officer, Ultimate Fighting Championship | ✓\nTony Xu | 2022 | Co-founder and Chief Executive Officer, DoorDash | ✓\nMark Zuckerberg | 2004 | Founder, Chairman, and Chief Executive Officer, Meta",
+        "chunkId": "META:p26:1"
+      },
+      "traps": [
+        "glyph"
+      ],
+      "note": "Independence is marked with Wingdings checkmarks that extract as U+F0FC; invisible to models until mapped to ✓.",
+      "observed": [
+        {
+          "runId": "run_20260926170729_vm2t",
+          "run": "dev smoke (unverified key)",
+          "model": "google/gemini-3.8-flash",
+          "mode": "full pipeline",
+          "got": null,
+          "stage": "api",
+          "correct": false
+        },
+        {
+          "runId": "run_20260926170729_vm2t",
+          "run": "dev smoke (unverified key)",
+          "model": "openai/gpt-6-luna",
+          "mode": "full pipeline",
+          "got": 11,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926171519_jb04",
+          "run": "dev: parser v3 (heading context)",
+          "model": "google/gemini-3.8-flash",
+          "mode": "full pipeline",
+          "got": null,
+          "stage": "retrieval",
+          "correct": false
+        },
+        {
+          "runId": "run_20260926171519_jb04",
+          "run": "dev: parser v3 (heading context)",
+          "model": "openai/gpt-6-luna",
+          "mode": "full pipeline",
+          "got": 11,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-opus-5.5",
+          "mode": "full pipeline",
+          "got": 11,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-opus-5.5",
+          "mode": "reading only",
+          "got": 11,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-sonnet-5",
+          "mode": "full pipeline",
+          "got": 11,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-sonnet-5",
+          "mode": "reading only",
+          "got": 11,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "deepseek/deepseek-v4.1-flash",
+          "mode": "full pipeline",
+          "got": 11,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "deepseek/deepseek-v4.1-flash",
+          "mode": "reading only",
+          "got": 11,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "google/gemini-3.8-flash",
+          "mode": "full pipeline",
+          "got": 11,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "google/gemini-3.8-flash",
+          "mode": "reading only",
+          "got": 11,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-luna",
+          "mode": "full pipeline",
+          "got": 11,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-luna",
+          "mode": "reading only",
+          "got": 11,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-sol",
+          "mode": "full pipeline",
+          "got": 11,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-sol",
+          "mode": "reading only",
+          "got": 11,
+          "stage": "ok",
+          "correct": true
+        }
+      ],
+      "failures": 2
+    },
+    {
+      "id": "META:pay.company_tsr_current",
+      "ticker": "META",
+      "factId": "pay.company_tsr_current",
+      "label": "Company TSR ($100 index)",
+      "expected": 243.32,
+      "evidence": {
+        "page": 56,
+        "quote": "2025 | 25,125,904 | 25,125,904 | 22,057,420 | 38,529,346 | 243.32 | 445.33 | 60,458 | 200,966",
+        "chunkId": "META:p56:2"
+      },
+      "traps": [
+        "retrieval"
+      ],
+      "note": "Failed in at least one graded run; see observed.",
+      "observed": [
+        {
+          "runId": "run_20260926170729_vm2t",
+          "run": "dev smoke (unverified key)",
+          "model": "google/gemini-3.8-flash",
+          "mode": "full pipeline",
+          "got": null,
+          "stage": "retrieval",
+          "correct": false
+        },
+        {
+          "runId": "run_20260926170729_vm2t",
+          "run": "dev smoke (unverified key)",
+          "model": "openai/gpt-6-luna",
+          "mode": "full pipeline",
+          "got": null,
+          "stage": "retrieval",
+          "correct": false
+        },
+        {
+          "runId": "run_20260926171519_jb04",
+          "run": "dev: parser v3 (heading context)",
+          "model": "google/gemini-3.8-flash",
+          "mode": "full pipeline",
+          "got": 243.32,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926171519_jb04",
+          "run": "dev: parser v3 (heading context)",
+          "model": "openai/gpt-6-luna",
+          "mode": "full pipeline",
+          "got": 243.32,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-opus-5.5",
+          "mode": "full pipeline",
+          "got": 243.32,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-opus-5.5",
+          "mode": "reading only",
+          "got": 243.32,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-sonnet-5",
+          "mode": "full pipeline",
+          "got": 243.32,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-sonnet-5",
+          "mode": "reading only",
+          "got": 243.32,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "deepseek/deepseek-v4.1-flash",
+          "mode": "full pipeline",
+          "got": 243.32,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "deepseek/deepseek-v4.1-flash",
+          "mode": "reading only",
+          "got": 243.32,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "google/gemini-3.8-flash",
+          "mode": "full pipeline",
+          "got": 243.32,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "google/gemini-3.8-flash",
+          "mode": "reading only",
+          "got": 243.32,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-luna",
+          "mode": "full pipeline",
+          "got": 243.32,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-luna",
+          "mode": "reading only",
+          "got": 243.32,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-sol",
+          "mode": "full pipeline",
+          "got": 243.32,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-sol",
+          "mode": "reading only",
+          "got": 243.32,
+          "stage": "ok",
+          "correct": true
+        }
+      ],
+      "failures": 2
+    },
+    {
+      "id": "MSFT:pay.ceo_total_comp_prior",
+      "ticker": "MSFT",
+      "factId": "pay.ceo_total_comp_prior",
+      "label": "CEO total pay (prior FY)",
+      "expected": 79106183,
+      "evidence": {
+        "page": 57,
+        "quote": "Chairman and Chief | 2024 2,500,000 | 0 71,236,392 | 5,200,000 | 169,791 | 79,106,183",
+        "chunkId": "MSFT:p57:1"
+      },
+      "traps": [
+        "retrieval"
+      ],
+      "note": "Failed in at least one graded run; see observed.",
+      "observed": [
+        {
+          "runId": "run_20260926170729_vm2t",
+          "run": "dev smoke (unverified key)",
+          "model": "google/gemini-3.8-flash",
+          "mode": "full pipeline",
+          "got": null,
+          "stage": "retrieval",
+          "correct": false
+        },
+        {
+          "runId": "run_20260926170729_vm2t",
+          "run": "dev smoke (unverified key)",
+          "model": "openai/gpt-6-luna",
+          "mode": "full pipeline",
+          "got": null,
+          "stage": "retrieval",
+          "correct": false
+        },
+        {
+          "runId": "run_20260926171519_jb04",
+          "run": "dev: parser v3 (heading context)",
+          "model": "google/gemini-3.8-flash",
+          "mode": "full pipeline",
+          "got": 79106183,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926171519_jb04",
+          "run": "dev: parser v3 (heading context)",
+          "model": "openai/gpt-6-luna",
+          "mode": "full pipeline",
+          "got": 79106183,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-opus-5.5",
+          "mode": "full pipeline",
+          "got": 79106183,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-opus-5.5",
+          "mode": "reading only",
+          "got": 79106183,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-sonnet-5",
+          "mode": "full pipeline",
+          "got": 79106183,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-sonnet-5",
+          "mode": "reading only",
+          "got": 79106183,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "deepseek/deepseek-v4.1-flash",
+          "mode": "full pipeline",
+          "got": 79106183,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "deepseek/deepseek-v4.1-flash",
+          "mode": "reading only",
+          "got": 79106183,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "google/gemini-3.8-flash",
+          "mode": "full pipeline",
+          "got": 79106183,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "google/gemini-3.8-flash",
+          "mode": "reading only",
+          "got": 79106183,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-luna",
+          "mode": "full pipeline",
+          "got": 79106183,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-luna",
+          "mode": "reading only",
+          "got": 79106183,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-sol",
+          "mode": "full pipeline",
+          "got": 79106183,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-sol",
+          "mode": "reading only",
+          "got": 79106183,
+          "stage": "ok",
+          "correct": true
+        }
+      ],
+      "failures": 2
+    },
+    {
+      "id": "MSFT:pay.company_tsr_current",
+      "ticker": "MSFT",
+      "factId": "pay.company_tsr_current",
+      "label": "Company TSR ($100 index)",
+      "expected": 255,
+      "evidence": {
+        "page": 63,
+        "quote": "2025 | 96,496,790 | 131,138,799 | 24,456,053 | 31,268,315 | 255 | 276 | 101,832 | 289.18",
+        "chunkId": "MSFT:p63:1"
+      },
+      "traps": [
+        "retrieval"
+      ],
+      "note": "The pay-versus-performance table's title lands in a different chunk from its rows (fixed by parser v3 heading context).",
+      "observed": [
+        {
+          "runId": "run_20260926170729_vm2t",
+          "run": "dev smoke (unverified key)",
+          "model": "google/gemini-3.8-flash",
+          "mode": "full pipeline",
+          "got": null,
+          "stage": "retrieval",
+          "correct": false
+        },
+        {
+          "runId": "run_20260926170729_vm2t",
+          "run": "dev smoke (unverified key)",
+          "model": "openai/gpt-6-luna",
+          "mode": "full pipeline",
+          "got": null,
+          "stage": "retrieval",
+          "correct": false
+        },
+        {
+          "runId": "run_20260926171519_jb04",
+          "run": "dev: parser v3 (heading context)",
+          "model": "google/gemini-3.8-flash",
+          "mode": "full pipeline",
+          "got": 255,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926171519_jb04",
+          "run": "dev: parser v3 (heading context)",
+          "model": "openai/gpt-6-luna",
+          "mode": "full pipeline",
+          "got": 255,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-opus-5.5",
+          "mode": "full pipeline",
+          "got": 255,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-opus-5.5",
+          "mode": "reading only",
+          "got": 255,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-sonnet-5",
+          "mode": "full pipeline",
+          "got": 255,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-sonnet-5",
+          "mode": "reading only",
+          "got": 255,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "deepseek/deepseek-v4.1-flash",
+          "mode": "full pipeline",
+          "got": 255,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "deepseek/deepseek-v4.1-flash",
+          "mode": "reading only",
+          "got": 255,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "google/gemini-3.8-flash",
+          "mode": "full pipeline",
+          "got": 255,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "google/gemini-3.8-flash",
+          "mode": "reading only",
+          "got": 255,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-luna",
+          "mode": "full pipeline",
+          "got": 255,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-luna",
+          "mode": "reading only",
+          "got": 255,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-sol",
+          "mode": "full pipeline",
+          "got": 255,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-sol",
+          "mode": "reading only",
+          "got": 255,
+          "stage": "ok",
+          "correct": true
+        }
+      ],
+      "failures": 2
+    },
+    {
+      "id": "MSFT:pay.peer_tsr_current",
+      "ticker": "MSFT",
+      "factId": "pay.peer_tsr_current",
+      "label": "Peer TSR ($100 index)",
+      "expected": 276,
+      "evidence": {
+        "page": 63,
+        "quote": "2025 | 96,496,790 | 131,138,799 | 24,456,053 | 31,268,315 | 255 | 276 | 101,832 | 289.18",
+        "chunkId": "MSFT:p63:1"
+      },
+      "traps": [
+        "retrieval"
+      ],
+      "note": "Failed in at least one graded run; see observed.",
+      "observed": [
+        {
+          "runId": "run_20260926170729_vm2t",
+          "run": "dev smoke (unverified key)",
+          "model": "google/gemini-3.8-flash",
+          "mode": "full pipeline",
+          "got": null,
+          "stage": "retrieval",
+          "correct": false
+        },
+        {
+          "runId": "run_20260926170729_vm2t",
+          "run": "dev smoke (unverified key)",
+          "model": "openai/gpt-6-luna",
+          "mode": "full pipeline",
+          "got": null,
+          "stage": "retrieval",
+          "correct": false
+        },
+        {
+          "runId": "run_20260926171519_jb04",
+          "run": "dev: parser v3 (heading context)",
+          "model": "google/gemini-3.8-flash",
+          "mode": "full pipeline",
+          "got": 276,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926171519_jb04",
+          "run": "dev: parser v3 (heading context)",
+          "model": "openai/gpt-6-luna",
+          "mode": "full pipeline",
+          "got": 276,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-opus-5.5",
+          "mode": "full pipeline",
+          "got": 276,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-opus-5.5",
+          "mode": "reading only",
+          "got": 276,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-sonnet-5",
+          "mode": "full pipeline",
+          "got": 276,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-sonnet-5",
+          "mode": "reading only",
+          "got": 276,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "deepseek/deepseek-v4.1-flash",
+          "mode": "full pipeline",
+          "got": 276,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "deepseek/deepseek-v4.1-flash",
+          "mode": "reading only",
+          "got": 276,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "google/gemini-3.8-flash",
+          "mode": "full pipeline",
+          "got": 276,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "google/gemini-3.8-flash",
+          "mode": "reading only",
+          "got": 276,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-luna",
+          "mode": "full pipeline",
+          "got": 276,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-luna",
+          "mode": "reading only",
+          "got": 276,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-sol",
+          "mode": "full pipeline",
+          "got": 276,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-sol",
+          "mode": "reading only",
+          "got": 276,
+          "stage": "ok",
+          "correct": true
+        }
+      ],
+      "failures": 2
+    },
+    {
+      "id": "GOOGL:governance.unequal_voting_sunset",
+      "ticker": "GOOGL",
+      "factId": "governance.unequal_voting_sunset",
+      "label": "Time-based sunset on unequal voting",
+      "expected": false,
+      "evidence": {
+        "page": 37,
+        "quote": "The Class B common stock is convertible at any time by the holder into shares of Class A common stock on a share-for-share basis upon written notice to the transfer agent.",
+        "chunkId": "GOOGL:p37:1"
+      },
+      "traps": [
+        "absence"
+      ],
+      "note": "Class B has 10 votes; conversion only at the holder's option (p. 37). The only 'sunset' text is a shareholder asking for one.",
+      "observed": [
+        {
+          "runId": "run_20260926170729_vm2t",
+          "run": "dev smoke (unverified key)",
+          "model": "google/gemini-3.8-flash",
+          "mode": "full pipeline",
+          "got": false,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926170729_vm2t",
+          "run": "dev smoke (unverified key)",
+          "model": "openai/gpt-6-luna",
+          "mode": "full pipeline",
+          "got": false,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926171519_jb04",
+          "run": "dev: parser v3 (heading context)",
+          "model": "google/gemini-3.8-flash",
+          "mode": "full pipeline",
+          "got": null,
+          "stage": "format",
+          "correct": false
+        },
+        {
+          "runId": "run_20260926171519_jb04",
+          "run": "dev: parser v3 (heading context)",
+          "model": "openai/gpt-6-luna",
+          "mode": "full pipeline",
+          "got": false,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-opus-5.5",
+          "mode": "full pipeline",
+          "got": false,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-opus-5.5",
+          "mode": "reading only",
+          "got": false,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-sonnet-5",
+          "mode": "full pipeline",
+          "got": false,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-sonnet-5",
+          "mode": "reading only",
+          "got": false,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "deepseek/deepseek-v4.1-flash",
+          "mode": "full pipeline",
+          "got": false,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "deepseek/deepseek-v4.1-flash",
+          "mode": "reading only",
+          "got": false,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "google/gemini-3.8-flash",
+          "mode": "full pipeline",
+          "got": false,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "google/gemini-3.8-flash",
+          "mode": "reading only",
+          "got": false,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-luna",
+          "mode": "full pipeline",
+          "got": false,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-luna",
+          "mode": "reading only",
+          "got": false,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-sol",
+          "mode": "full pipeline",
+          "got": false,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-sol",
+          "mode": "reading only",
+          "got": false,
+          "stage": "ok",
+          "correct": true
+        }
+      ],
+      "failures": 1
+    },
+    {
+      "id": "GOOGL:pay.peer_tsr_current",
+      "ticker": "GOOGL",
+      "factId": "pay.peer_tsr_current",
+      "label": "Peer TSR ($100 index)",
+      "expected": 138.27,
+      "evidence": {
+        "page": 57,
+        "quote": "2025 | 10,906,079 | 213,903,156 | 32,934,710 | 100,887,548 | 360.95 | 138.27 | 132,170 | 95",
+        "chunkId": "GOOGL:p57:3"
+      },
+      "traps": [
+        "retrieval"
+      ],
+      "note": "Failed in at least one graded run; see observed.",
+      "observed": [
+        {
+          "runId": "run_20260926170729_vm2t",
+          "run": "dev smoke (unverified key)",
+          "model": "google/gemini-3.8-flash",
+          "mode": "full pipeline",
+          "got": 138.27,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926170729_vm2t",
+          "run": "dev smoke (unverified key)",
+          "model": "openai/gpt-6-luna",
+          "mode": "full pipeline",
+          "got": 138.27,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926171519_jb04",
+          "run": "dev: parser v3 (heading context)",
+          "model": "google/gemini-3.8-flash",
+          "mode": "full pipeline",
+          "got": null,
+          "stage": "format",
+          "correct": false
+        },
+        {
+          "runId": "run_20260926171519_jb04",
+          "run": "dev: parser v3 (heading context)",
+          "model": "openai/gpt-6-luna",
+          "mode": "full pipeline",
+          "got": 138.27,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-opus-5.5",
+          "mode": "full pipeline",
+          "got": 138.27,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-opus-5.5",
+          "mode": "reading only",
+          "got": 138.27,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-sonnet-5",
+          "mode": "full pipeline",
+          "got": 138.27,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-sonnet-5",
+          "mode": "reading only",
+          "got": 138.27,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "deepseek/deepseek-v4.1-flash",
+          "mode": "full pipeline",
+          "got": 138.27,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "deepseek/deepseek-v4.1-flash",
+          "mode": "reading only",
+          "got": 138.27,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "google/gemini-3.8-flash",
+          "mode": "full pipeline",
+          "got": 138.27,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "google/gemini-3.8-flash",
+          "mode": "reading only",
+          "got": 138.27,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-luna",
+          "mode": "full pipeline",
+          "got": 138.27,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-luna",
+          "mode": "reading only",
+          "got": 138.27,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-sol",
+          "mode": "full pipeline",
+          "got": 138.27,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-sol",
+          "mode": "reading only",
+          "got": 138.27,
+          "stage": "ok",
+          "correct": true
+        }
+      ],
+      "failures": 1
+    },
+    {
+      "id": "JPM:audit.tax_fees_current",
+      "ticker": "JPM",
+      "factId": "audit.tax_fees_current",
+      "label": "Tax fees (latest FY)",
+      "expected": 5900000,
+      "evidence": {
+        "page": 93,
+        "quote": "Tax | 5.9 | 4.5",
+        "chunkId": "JPM:p93:2"
+      },
+      "traps": [
+        "retrieval"
+      ],
+      "note": "Failed in at least one graded run; see observed.",
+      "observed": [
+        {
+          "runId": "run_20260926170729_vm2t",
+          "run": "dev smoke (unverified key)",
+          "model": "google/gemini-3.8-flash",
+          "mode": "full pipeline",
+          "got": null,
+          "stage": "retrieval",
+          "correct": false
+        },
+        {
+          "runId": "run_20260926170729_vm2t",
+          "run": "dev smoke (unverified key)",
+          "model": "openai/gpt-6-luna",
+          "mode": "full pipeline",
+          "got": 5900000,
+          "stage": "citation",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926171519_jb04",
+          "run": "dev: parser v3 (heading context)",
+          "model": "google/gemini-3.8-flash",
+          "mode": "full pipeline",
+          "got": 5900000,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926171519_jb04",
+          "run": "dev: parser v3 (heading context)",
+          "model": "openai/gpt-6-luna",
+          "mode": "full pipeline",
+          "got": 5900000,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-opus-5.5",
+          "mode": "full pipeline",
+          "got": 5900000,
+          "stage": "citation",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-opus-5.5",
+          "mode": "reading only",
+          "got": 5900000,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-sonnet-5",
+          "mode": "full pipeline",
+          "got": 5900000,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-sonnet-5",
+          "mode": "reading only",
+          "got": 5900000,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "deepseek/deepseek-v4.1-flash",
+          "mode": "full pipeline",
+          "got": 5900000,
+          "stage": "citation",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "deepseek/deepseek-v4.1-flash",
+          "mode": "reading only",
+          "got": 5900000,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "google/gemini-3.8-flash",
+          "mode": "full pipeline",
+          "got": 5900000,
+          "stage": "citation",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "google/gemini-3.8-flash",
+          "mode": "reading only",
+          "got": 5900000,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-luna",
+          "mode": "full pipeline",
+          "got": 5900000,
+          "stage": "citation",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-luna",
+          "mode": "reading only",
+          "got": 5900000,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-sol",
+          "mode": "full pipeline",
+          "got": 5900000,
+          "stage": "citation",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-sol",
+          "mode": "reading only",
+          "got": 5900000,
+          "stage": "ok",
+          "correct": true
+        }
+      ],
+      "failures": 1
+    },
+    {
+      "id": "META:board.nominee_count",
+      "ticker": "META",
+      "factId": "board.nominee_count",
+      "label": "Director nominees",
+      "expected": 12,
+      "evidence": {
+        "page": 26,
+        "quote": "The following twelve individuals are nominated\nfor election to the board of directors at the Annual Meeting, all of whom are currently serving on our board of directors:",
+        "chunkId": "META:p26:1"
+      },
+      "traps": [
+        "retrieval"
+      ],
+      "note": "Failed in at least one graded run; see observed.",
+      "observed": [
+        {
+          "runId": "run_20260926170729_vm2t",
+          "run": "dev smoke (unverified key)",
+          "model": "google/gemini-3.8-flash",
+          "mode": "full pipeline",
+          "got": 12,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926170729_vm2t",
+          "run": "dev smoke (unverified key)",
+          "model": "openai/gpt-6-luna",
+          "mode": "full pipeline",
+          "got": 12,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926171519_jb04",
+          "run": "dev: parser v3 (heading context)",
+          "model": "google/gemini-3.8-flash",
+          "mode": "full pipeline",
+          "got": null,
+          "stage": "format",
+          "correct": false
+        },
+        {
+          "runId": "run_20260926171519_jb04",
+          "run": "dev: parser v3 (heading context)",
+          "model": "openai/gpt-6-luna",
+          "mode": "full pipeline",
+          "got": 12,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-opus-5.5",
+          "mode": "full pipeline",
+          "got": 12,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-opus-5.5",
+          "mode": "reading only",
+          "got": 12,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-sonnet-5",
+          "mode": "full pipeline",
+          "got": 12,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-sonnet-5",
+          "mode": "reading only",
+          "got": 12,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "deepseek/deepseek-v4.1-flash",
+          "mode": "full pipeline",
+          "got": 12,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "deepseek/deepseek-v4.1-flash",
+          "mode": "reading only",
+          "got": 12,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "google/gemini-3.8-flash",
+          "mode": "full pipeline",
+          "got": 12,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "google/gemini-3.8-flash",
+          "mode": "reading only",
+          "got": 12,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-luna",
+          "mode": "full pipeline",
+          "got": 12,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-luna",
+          "mode": "reading only",
+          "got": 12,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-sol",
+          "mode": "full pipeline",
+          "got": 12,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-sol",
+          "mode": "reading only",
+          "got": 12,
+          "stage": "ok",
+          "correct": true
+        }
+      ],
+      "failures": 1
+    },
+    {
+      "id": "META:governance.unequal_voting_sunset",
+      "ticker": "META",
+      "factId": "governance.unequal_voting_sunset",
+      "label": "Time-based sunset on unequal voting",
+      "expected": false,
+      "evidence": {
+        "page": 76,
+        "quote": "we disclose that our Class B common stock has ten votes per share and our Class A common stock has one vote per share.",
+        "chunkId": "META:p76:2"
+      },
+      "traps": [
+        "absence"
+      ],
+      "note": "Dual class with no sunset; the board opposes the proposal to end it (p. 76).",
+      "observed": [
+        {
+          "runId": "run_20260926170729_vm2t",
+          "run": "dev smoke (unverified key)",
+          "model": "google/gemini-3.8-flash",
+          "mode": "full pipeline",
+          "got": false,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926170729_vm2t",
+          "run": "dev smoke (unverified key)",
+          "model": "openai/gpt-6-luna",
+          "mode": "full pipeline",
+          "got": false,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926171519_jb04",
+          "run": "dev: parser v3 (heading context)",
+          "model": "google/gemini-3.8-flash",
+          "mode": "full pipeline",
+          "got": null,
+          "stage": "format",
+          "correct": false
+        },
+        {
+          "runId": "run_20260926171519_jb04",
+          "run": "dev: parser v3 (heading context)",
+          "model": "openai/gpt-6-luna",
+          "mode": "full pipeline",
+          "got": false,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-opus-5.5",
+          "mode": "full pipeline",
+          "got": false,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-opus-5.5",
+          "mode": "reading only",
+          "got": false,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-sonnet-5",
+          "mode": "full pipeline",
+          "got": false,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "anthropic/claude-sonnet-5",
+          "mode": "reading only",
+          "got": false,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "deepseek/deepseek-v4.1-flash",
+          "mode": "full pipeline",
+          "got": false,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "deepseek/deepseek-v4.1-flash",
+          "mode": "reading only",
+          "got": false,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "google/gemini-3.8-flash",
+          "mode": "full pipeline",
+          "got": false,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "google/gemini-3.8-flash",
+          "mode": "reading only",
+          "got": false,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-luna",
+          "mode": "full pipeline",
+          "got": false,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-luna",
+          "mode": "reading only",
+          "got": false,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-sol",
+          "mode": "full pipeline",
+          "got": false,
+          "stage": "ok",
+          "correct": true
+        },
+        {
+          "runId": "run_20260926183801_qo2q",
+          "run": "demo: 6 models · parser v3 · hybrid retrieval · prompt v2",
+          "model": "openai/gpt-6-sol",
+          "mode": "reading only",
+          "got": false,
+          "stage": "ok",
+          "correct": true
+        }
+      ],
+      "failures": 1
+    }
+  ]
+}

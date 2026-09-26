@@ -94,7 +94,6 @@ export function AccuracyCostChart({
     if (frontier.length === 0 || p.acc > frontier[frontier.length - 1].acc) frontier.push(p);
   }
   const onFrontier = new Set(frontier.map((p) => p.key));
-  const frontierPath = frontier.map((p, i) => `${i === 0 ? "M" : "L"}${p.cx.toFixed(1)},${p.cy.toFixed(1)}`).join(" ");
 
   // Greedy label placement: right, left, then diagonals; avoid dots and earlier labels.
   type Box = { x0: number; y0: number; x1: number; y1: number };
@@ -168,9 +167,6 @@ export function AccuracyCostChart({
             <text transform={`translate(11 ${M.top + ih / 2}) rotate(-90)`} textAnchor="middle" className="fill-neutral-500 text-[10px]">
               Accuracy
             </text>
-            {frontier.length > 1 ? (
-              <path d={frontierPath} fill="none" stroke={ACCENT} strokeOpacity={0.35} strokeWidth={2} strokeLinejoin="round" />
-            ) : null}
             {pts.map((p) => {
               const l = labels.get(p.key);
               if (!l) return null;
@@ -274,14 +270,6 @@ export function AccuracyCostChart({
         ) : (
           <span>{modeLabel(mode)}: one dot per model</span>
         )}
-        {frontier.length > 1 ? (
-          <span className="inline-flex items-center gap-1.5">
-            <svg width="16" height="10" aria-hidden>
-              <line x1="1" x2="15" y1="5" y2="5" stroke={ACCENT} strokeOpacity={0.35} strokeWidth="2" />
-            </svg>
-            Cost/quality frontier{mode === "both" ? ` (${modeLabel(frontierMode).toLowerCase()})` : ""}
-          </span>
-        ) : null}
         <span>Hover or tab to a dot for details.</span>
         {skipped > 0 ? <span>{skipped} model(s) without cost or grades not shown.</span> : null}
         {hidden > 0 ? <span>{hidden} label(s) hidden where dots crowd.</span> : null}

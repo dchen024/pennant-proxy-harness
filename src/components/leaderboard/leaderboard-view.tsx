@@ -137,7 +137,7 @@ export function LeaderboardView({
               <span className="font-normal text-muted-foreground">· {mode === "both" ? "both modes" : modeLabel(mode).toLowerCase()}</span>
             </h2>
             <p className="text-[11px] text-muted-foreground">
-              Up and to the left is better. The line joins models no cheaper model beats.
+              Up and to the left is better. Bold labels mark models that no cheaper model beats.
             </p>
           </div>
           <div className="px-3 py-3">

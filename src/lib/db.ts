@@ -1,6 +1,6 @@
 import { MongoClient, type Db } from "mongodb";
 import { TEXT_INDEX, VECTOR_INDEX } from "./config";
-import type { Chunk, FactResult, FilingDoc, GoldFact, Policy, RetrievalCache, RunDoc } from "./types";
+import type { Chunk, ConfigDoc, FactResult, FilingDoc, GoldFact, Policy, ProposalDoc, RetrievalCache, RunDoc } from "./types";
 
 declare global {
   var __mongoClient: Promise<MongoClient> | undefined;
@@ -29,6 +29,8 @@ export async function collections() {
     results: db.collection<FactResult>("results"),
     retrievals: db.collection<RetrievalCache>("retrievals"),
     policies: db.collection<Policy & { _id: string; compiledBy?: string; createdAt: string }>("policies"),
+    configs: db.collection<ConfigDoc>("configs"),
+    proposals: db.collection<ProposalDoc>("proposals"),
   };
 }
 

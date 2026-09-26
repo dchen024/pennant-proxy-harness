@@ -20,7 +20,11 @@
     "policy:compile": "tsx scripts/compile-policy.ts",
     "db:index": "tsx scripts/ensure-index.ts",
     "regrade": "tsx scripts/regrade.ts",
-    "eval:retrieval": "tsx scripts/retrieval-eval.ts"
+    "eval:retrieval": "tsx scripts/retrieval-eval.ts",
+    "casebook": "tsx scripts/casebook.ts",
+    "learn:retrieval": "tsx scripts/learn-retrieval.ts",
+    "judge": "tsx scripts/judge.ts",
+    "improve": "tsx scripts/improve.ts"
   },
   "dependencies": {
     "class-variance-authority": "^0.7.1",

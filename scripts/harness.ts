@@ -2,6 +2,7 @@ import "./_env";
 import { resolveModels } from "@/lib/config";
 import { closeDb } from "@/lib/db";
 import { rerunModes, runToCompletion } from "@/lib/harness/run";
+import { activeConfig } from "@/lib/improve/loop";
 import type { FactId, Mode } from "@/lib/types";
 
 // Usage: pnpm harness [--profile dev|demo] [--models a,b] [--modes e2e,oracle] [--tickers AAPL,MSFT]
@@ -18,6 +19,10 @@ async function main() {
     if (done % 10 === 0 || done === total) process.stdout.write(`\r${done}/${total} facts`);
   };
   const rerun = arg("rerun");
+  // --config <id> runs with an approved config; --config active uses the latest kept one.
+  const configArg = arg("config");
+  const configId = configArg === "active" ? (await activeConfig())?._id : configArg;
+  if (configArg === "active") console.log(`using active config: ${configId ?? "(base)"}`);
   const run = rerun ? await rerunModes(rerun, modes, progress) : await runToCompletion(
     {
       models: resolveModels({ profile: arg("profile"), models: arg("models") }),
@@ -28,6 +33,7 @@ async function main() {
       label: arg("label"),
       parserVersion: arg("parser"),
       retrieval: arg("retrieval") as "vector" | "hybrid" | undefined,
+      configId,
     },
     progress,
   );

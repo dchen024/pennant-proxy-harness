@@ -1,3 +1,4 @@
+import { createHash } from "node:crypto";
 import { PARSER_VERSION, RETRIEVAL_K, RETRIEVAL_STRATEGY, TEXT_INDEX, VECTOR_INDEX, type RetrievalStrategy } from "../config";
 import { collections } from "../db";
 import { FACT_BY_ID } from "../facts";
@@ -76,12 +77,14 @@ export async function retrieve(
   k = RETRIEVAL_K,
   parserVersion = PARSER_VERSION,
   strategy: RetrievalStrategy = RETRIEVAL_STRATEGY,
+  queryOverride?: string,
 ): Promise<Chunk[]> {
   const c = await collections();
-  const id = `${ticker}:${factId}:${k}:${parserVersion}${strategy === "hybrid" ? ":hybrid" : ""}`;
+  const query = queryOverride ?? FACT_BY_ID[factId].query;
+  const qTag = queryOverride ? `:q${createHash("sha1").update(queryOverride).digest("hex").slice(0, 8)}` : "";
+  const id = `${ticker}:${factId}:${k}:${parserVersion}${strategy === "hybrid" ? ":hybrid" : ""}${qTag}`;
   let ids = (await c.retrievals.findOne({ _id: id }))?.chunkIds;
   if (!ids) {
-    const query = FACT_BY_ID[factId].query;
     const hits = strategy === "hybrid" ? await hybridSearch(ticker, query, k, parserVersion) : await vectorSearch(ticker, query, k, parserVersion);
     ids = hits.map((h) => h._id);
     await c.retrievals.updateOne(

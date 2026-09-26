@@ -255,3 +255,53 @@ export interface PolicyEvaluation {
   decisions: ItemDecision[];
   rules: RuleEvaluation[];
 }
+
+// ---------------------------------------------------------------------------
+// Improvement loop: proposals (from the improvement agent) and the configs they produce.
+// ---------------------------------------------------------------------------
+
+/** A versioned change set on top of the base prompt/definitions/queries. */
+export interface ConfigDoc {
+  _id: string; // "cfg_1", "cfg_2", ...
+  parent: string | null;
+  systemAppend: string[]; // extra extraction rules appended to the system prompt
+  factDescriptions: Partial<Record<FactId, string>>;
+  factQueries: Partial<Record<FactId, string>>;
+  fromProposals: string[];
+  createdAt: string;
+}
+
+export type ProposalKind = "prompt_rule" | "fact_definition" | "retrieval_query";
+
+export interface ProposalDoc {
+  _id: string;
+  kind: ProposalKind;
+  target: string; // "system" or a FactId
+  before: string | null;
+  after: string;
+  rationale: string;
+  fixes: string[]; // case ids like "AAPL:board.independent_nominee_count"
+  risk: string;
+  status: "pending" | "approved" | "kept" | "reverted" | "rejected";
+  sourceRunId: string;
+  agentModel: string;
+  configId?: string;
+  validationRunId?: string;
+  /** The run this change is measured against: its parent config's validation run, or the source run. */
+  baselineRunId?: string;
+  report?: ValidationReport;
+  decidedAt?: string;
+  createdAt: string;
+}
+
+export interface ValidationReport {
+  baselineRunId: string;
+  validationRunId: string;
+  perModel: { model: string; before: number; after: number; graded: number; votesBefore: number; votesAfter: number; votesTotal: number }[];
+  gained: string[]; // "model ticker:fact" now right
+  lost: string[]; // "model ticker:fact" now wrong
+  /** Flips on facts this change can't affect: run-to-run model noise, excluded from the verdict. */
+  noise?: string[];
+  verdict: "keep" | "revert";
+  reason: string;
+}

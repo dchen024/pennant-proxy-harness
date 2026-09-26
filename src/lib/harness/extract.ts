@@ -71,12 +71,25 @@ ${excerpts}${note}`;
 
 export type ExtractionCall = JsonCallResult<Extraction>;
 
+export interface ExtractionOverrides {
+  /** Extra rules appended to the system prompt (from approved proposals). */
+  systemAppend?: string[];
+  /** A clarified fact definition (from an approved proposal). */
+  description?: string;
+}
+
+export function systemPrompt(overrides?: ExtractionOverrides) {
+  const extra = overrides?.systemAppend?.length ? `\n\nAdditional rules:\n${overrides.systemAppend.map((r) => `- ${r}`).join("\n")}` : "";
+  return EXTRACTION_SYSTEM + extra;
+}
+
 export const extractFact = traceable(
-  async (args: { model: string; company: string; ticker: string; factId: FactId; chunks: Chunk[] }): Promise<ExtractionCall> => {
-    const fact = FACT_BY_ID[args.factId];
+  async (args: { model: string; company: string; ticker: string; factId: FactId; chunks: Chunk[]; overrides?: ExtractionOverrides }): Promise<ExtractionCall> => {
+    const base = FACT_BY_ID[args.factId];
+    const fact = args.overrides?.description ? { ...base, description: args.overrides.description } : base;
     const res = await chatJSON({
       model: args.model,
-      system: EXTRACTION_SYSTEM,
+      system: systemPrompt(args.overrides),
       user: buildUserPrompt(args.company, args.ticker, fact, args.chunks),
       schema: schemaFor(fact),
       jsonSchema: jsonSchemaFor(fact),

@@ -6,6 +6,10 @@ import { ArrowLeftIcon } from "lucide-react";
 import type { FilingView } from "@/components/evidence";
 import { ModeBadge, ModeInfo, modeLabel } from "@/components/mode-badge";
 import { ResultSheet, type GoldView, type ResultRow } from "@/components/result-sheet";
+import { computeRunVotes } from "@/components/votes/compute";
+import { VoteSheet } from "@/components/votes/vote-sheet";
+import { VotesMatrix, VoteSummary, type VoteSelection } from "@/components/votes/votes-view";
+import { VoteBadge } from "@/components/policy-view";
 import { StatusDot } from "@/components/run-picker";
 import { STAGE_META, StageLegend } from "@/components/stage";
 import { colKey } from "@/components/stats";
@@ -38,6 +42,8 @@ export function RunView({
   const [modeFilter, setModeFilter] = useState<"all" | Mode>("all");
   const [tickerFilter, setTickerFilter] = useState<string>("all");
   const [errorsOnly, setErrorsOnly] = useState(false);
+  const [tab, setTab] = useState<"grid" | "votes">("grid");
+  const [voteSel, setVoteSel] = useState<VoteSelection | null>(null);
 
   // Poll while the run is in progress.
   useEffect(() => {
@@ -106,6 +112,13 @@ export function RunView({
       return r && r.stage && r.stage !== "ok";
     });
 
+  // Votes: evaluated by the policy engine on each model's facts and on the verified answer key.
+  const votes = useMemo(
+    () => computeRunVotes(results, run.models, run.modes, run.tickers),
+    [results, run.models, run.modes, run.tickers],
+  );
+  const companies = useMemo(() => new Map(filings.map((f) => [f.ticker, f.company])), [filings]);
+
   const selected = selectedId ? (byId.get(selectedId) ?? null) : null;
   const pct = run.progress.total ? (run.progress.done / run.progress.total) * 100 : 0;
 
@@ -138,16 +151,46 @@ export function RunView({
       ) : null}
       {pollError ? <div className="text-[11px] text-amber-700">Live update failed ({pollError}); retrying…</div> : null}
 
+      {/* Tabs: the same run seen fact by fact, or vote by vote */}
+      <div className="flex items-center gap-1 border-b" role="tablist" aria-label="Run view">
+        {(
+          [
+            ["grid", "Results grid"],
+            ["votes", "Votes"],
+          ] as const
+        ).map(([t, label]) => (
+          <button
+            key={t}
+            type="button"
+            role="tab"
+            aria-selected={tab === t}
+            data-run-tab={t}
+            onClick={() => setTab(t)}
+            className={cn(
+              "-mb-px border-b-2 px-3 py-1.5 text-[13px] transition-colors",
+              tab === t ? "border-foreground font-medium text-foreground" : "border-transparent text-muted-foreground hover:text-foreground",
+            )}
+          >
+            {label}
+          </button>
+        ))}
+      </div>
+
       {/* Filters */}
       <div className="flex flex-wrap items-center gap-4 rounded-lg border bg-card px-3 py-2 text-[12px]">
-        <Segmented
-          value={modeFilter}
-          onChange={(v) => setModeFilter(v as "all" | Mode)}
-          options={[
-            { value: "all", label: "Both modes" },
-            ...modes.map((m) => ({ value: m, label: modeLabel(m) })),
-          ]}
-        />
+        {modes.length > 1 ? (
+          <Segmented
+            value={modeFilter}
+            onChange={(v) => setModeFilter(v as "all" | Mode)}
+            options={[
+              { value: "all", label: "Both modes" },
+              ...modes.map((m) => ({ value: m, label: modeLabel(m) })),
+            ]}
+          />
+        ) : (
+          // A single-mode run (e.g. a validation run) has nothing to switch between.
+          <span className="rounded-md border px-2.5 py-1 text-muted-foreground">{modes[0] ? `${modeLabel(modes[0])} only` : "No results"}</span>
+        )}
         <ModeInfo className="-ml-2" />
         <Segmented
           value={tickerFilter}
@@ -157,13 +200,49 @@ export function RunView({
         />
         <label className="flex cursor-pointer items-center gap-2">
           <Switch checked={errorsOnly} onCheckedChange={setErrorsOnly} />
-          Rows with errors only
+          {tab === "votes" ? "Mismatches only" : "Rows with errors only"}
         </label>
-        <StageLegend className="ml-auto" showNoGold />
+        {tab === "votes" ? (
+          <div className="ml-auto flex items-center gap-2 text-[11px] text-muted-foreground">
+            <VoteBadge vote="FOR" className="min-w-0" />
+            <VoteBadge vote="AGAINST" className="min-w-0" />
+            <VoteBadge vote="REVIEW" className="min-w-0" />
+            <span className="inline-flex items-center gap-1">
+              <span className="flex size-3.5 items-center justify-center rounded-full bg-red-600 text-[9px] font-bold text-white">≠</span>
+              differs from the answer key
+            </span>
+          </div>
+        ) : (
+          <StageLegend className="ml-auto" showNoGold />
+        )}
       </div>
 
+      {tab === "votes" ? (
+        <div className="space-y-3" data-votes-tab>
+          <div className="rounded-lg border bg-card px-4 py-3">
+            <VoteSummary columns={columns} votes={votes} />
+            <p className="mt-1.5 text-[11px] text-muted-foreground">
+              The answer-key column applies the policy to the verified facts. Click any vote to see the rules, which fired,
+              and every fact behind it.
+            </p>
+          </div>
+          <VotesMatrix
+            columns={columns}
+            tickers={tickers}
+            companies={companies}
+            votes={votes}
+            mismatchesOnly={errorsOnly}
+            selected={voteSel}
+            onOpen={setVoteSel}
+          />
+        </div>
+      ) : null}
+
       {/* Grid */}
-      <div className="w-fit max-w-full overflow-auto rounded-lg border bg-card" style={{ maxHeight: "calc(100vh - 220px)" }}>
+      <div
+        className={cn("w-fit max-w-full overflow-auto rounded-lg border bg-card", tab !== "grid" && "hidden")}
+        style={{ maxHeight: "calc(100vh - 220px)" }}
+      >
         <table className="border-separate border-spacing-0 text-[12px]">
           <thead>
             <tr>
@@ -259,6 +338,17 @@ export function RunView({
           </div>
         ) : null}
       </div>
+
+      <VoteSheet
+        sel={voteSel}
+        votes={votes}
+        company={voteSel ? companies.get(voteSel.ticker) : undefined}
+        filing={voteSel ? filingByTicker.get(voteSel.ticker) : undefined}
+        goldById={goldById}
+        open={!!voteSel}
+        onOpenChange={(o) => !o && setVoteSel(null)}
+        onOpenFact={setSelectedId}
+      />
 
       <ResultSheet
         result={selected}

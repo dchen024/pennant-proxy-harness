@@ -3,7 +3,7 @@ import { CONCURRENCY, PARSER_VERSION, PROMPT_VERSION, RETRIEVAL_K, RETRIEVAL_STR
 import { collections } from "../db";
 import { FACTS, FACT_BY_ID } from "../facts";
 import { GOLD_POLICY } from "../policy/policy";
-import { consequentialFacts, evaluatePolicy, valuesMatch } from "../policy/evaluate";
+import { evaluatePolicy, factsInExpr, valuesMatch } from "../policy/evaluate";
 import type { Chunk, FactId, FactMap, FactResult, GoldFact, Mode, ModelSummary, RunDoc, Stage } from "../types";
 import { attribute, citationChecks, evidenceIn, textContains } from "./checks";
 import { extractFact } from "./extract";
@@ -23,6 +23,8 @@ export interface RunOptions {
   parserVersion?: string;
   /** Retrieval strategy (vector-only or hybrid keyword + vector). */
   retrieval?: RetrievalStrategy;
+  /** An approved config (extra prompt rules, clarified definitions, search queries) to run with. */
+  configId?: string;
 }
 
 const now = () => new Date().toISOString();
@@ -65,7 +67,7 @@ async function createRun(opts: RunOptions): Promise<string> {
     config: {
       retrievalK: RETRIEVAL_K,
       parserVersion: opts.parserVersion ?? PARSER_VERSION,
-      promptVersion: PROMPT_VERSION,
+      promptVersion: opts.configId ?? PROMPT_VERSION,
       retrieval: opts.retrieval ?? RETRIEVAL_STRATEGY,
     },
   };
@@ -100,6 +102,8 @@ async function executeRun(runId: string, opts: RunOptions, onProgress?: (done: n
   const evidence = await loadGold(tickers, "all");
   const { docChunks, chunkById } = await loadChunks(tickers, parserVersion);
   const companies = new Map((await c.filings.find({ _id: { $in: tickers } }).toArray()).map((f) => [f._id, f.company]));
+  const cfg = opts.configId ? await c.configs.findOne({ _id: opts.configId }) : null;
+  if (opts.configId && !cfg) throw new Error(`config ${opts.configId} not found`);
 
   const total = opts.models.length * opts.modes.length * tickers.length * factIds.length;
   let done = 0;
@@ -115,8 +119,12 @@ async function executeRun(runId: string, opts: RunOptions, onProgress?: (done: n
               const e = evidence.get(`${ticker}:${factId}`);
               const goldChunk = e ? resolveGoldChunk(e, chunkById, docChunks.get(ticker)!) : undefined;
               // Oracle mode hands the model the gold evidence directly: isolates reading from retrieval.
-              const context = mode === "oracle" && goldChunk ? [goldChunk] : await retrieve(ticker, factId, RETRIEVAL_K, parserVersion, opts.retrieval ?? RETRIEVAL_STRATEGY);
-              const call = await extractFact({ model, company: companies.get(ticker) ?? ticker, ticker, factId, chunks: context });
+              const context =
+                mode === "oracle" && goldChunk
+                  ? [goldChunk]
+                  : await retrieve(ticker, factId, RETRIEVAL_K, parserVersion, opts.retrieval ?? RETRIEVAL_STRATEGY, cfg?.factQueries[factId]);
+              const overrides = cfg ? { systemAppend: cfg.systemAppend, description: cfg.factDescriptions[factId] } : undefined;
+              const call = await extractFact({ model, company: companies.get(ticker) ?? ticker, ticker, factId, chunks: context, overrides });
 
               const result: FactResult = {
                 _id: `${runId}:${model}:${mode}:${ticker}:${factId}`,
@@ -202,11 +210,16 @@ export async function gradeRun(runId: string, gradeWith: GradeWith = "verified")
         const predicted: FactMap = Object.fromEntries(rs.map((r) => [r.factId, r.extraction?.value ?? null]));
         const goldMap: FactMap = Object.fromEntries(rs.filter((r) => r.hasGold).map((r) => [r.factId, r.gold]));
         const reference: FactMap = { ...predicted, ...goldMap }; // facts without gold can't disagree
-        const consequential = new Set(consequentialFacts(GOLD_POLICY, predicted, reference));
-        for (const r of rs) r.consequential = r.hasGold ? (r.correct ? false : consequential.has(r.factId)) : null;
+        const p = evaluatePolicy(GOLD_POLICY, predicted).decisions;
+        const ref = evaluatePolicy(GOLD_POLICY, reference).decisions;
+        // A wrong fact is consequential if it feeds a vote that came out wrong. (Counting only facts
+        // that flip a vote on their own misses votes broken by two missing facts at once.)
+        const wrongItems = new Set(ref.filter((d, i) => d.vote !== p[i]?.vote).map((d) => d.item));
+        const behindWrongVote = new Set(
+          GOLD_POLICY.rules.filter((rule) => wrongItems.has(rule.item)).flatMap((rule) => factsInExpr(rule.when)),
+        );
+        for (const r of rs) r.consequential = r.hasGold ? !r.correct && behindWrongVote.has(r.factId) : null;
         if (rs.some((r) => r.hasGold)) {
-          const p = evaluatePolicy(GOLD_POLICY, predicted).decisions;
-          const ref = evaluatePolicy(GOLD_POLICY, reference).decisions;
           votesTotal += ref.length;
           votesCorrect += ref.filter((d, i) => d.vote === p[i]?.vote).length;
         }

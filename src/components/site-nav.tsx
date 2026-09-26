@@ -7,7 +7,10 @@ import { cn } from "@/lib/utils";
 const LINKS = [
   { href: "/", label: "Leaderboard", match: (p: string) => p === "/" || p.startsWith("/runs") },
   { href: "/review", label: "Review", match: (p: string) => p.startsWith("/review") },
+  { href: "/improve", label: "Improve", match: (p: string) => p.startsWith("/improve") },
+  { href: "/memory", label: "Memory", match: (p: string) => p.startsWith("/memory") },
   { href: "/policy", label: "Policy", match: (p: string) => p.startsWith("/policy") || p.startsWith("/companies") },
+  { href: "/architecture", label: "Architecture", match: (p: string) => p.startsWith("/architecture") },
 ];
 
 export function SiteNav() {
@@ -15,14 +18,14 @@ export function SiteNav() {
   return (
     <header className="sticky top-0 z-40 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
       <div className="mx-auto flex h-12 max-w-[1600px] items-center gap-6 px-5">
-        <Link href="/" className="flex items-center gap-2">
+        <Link href="/" className="flex shrink-0 items-center gap-2">
           <Logo />
           <span className="text-[13px] font-semibold tracking-tight">Proxy Harness</span>
           <span className="rounded-sm border px-1.5 py-px text-[10px] font-medium uppercase tracking-wider text-muted-foreground">
             for Pennant
           </span>
         </Link>
-        <nav className="flex items-center gap-1 text-[13px]">
+        <nav className="flex min-w-0 items-center gap-1 text-[13px] max-md:overflow-x-auto max-md:[scrollbar-width:none]">
           {LINKS.map((l) => {
             const active = l.match(pathname);
             return (
@@ -39,7 +42,7 @@ export function SiteNav() {
             );
           })}
         </nav>
-        <div className="ml-auto hidden text-[11px] text-muted-foreground md:block">
+        <div className="ml-auto hidden min-w-0 truncate text-[11px] text-muted-foreground min-[1100px]:block">
           DEF 14A · policy-driven votes · every number traced to its source
         </div>
       </div>

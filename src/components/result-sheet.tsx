@@ -102,7 +102,15 @@ export function ResultSheet({
 
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
-      <SheetContent className="w-full gap-0 overflow-y-auto data-[side=right]:sm:max-w-[720px]">
+      <SheetContent
+        className="w-full gap-0 overflow-y-auto outline-none data-[side=right]:sm:max-w-[720px]"
+        // Focus the panel itself on open: auto-focusing the first control (the mode ⓘ) would pop its
+        // tooltip and swallow the first Esc.
+        onOpenAutoFocus={(e) => {
+          e.preventDefault();
+          (e.currentTarget as HTMLElement | null)?.focus();
+        }}
+      >
         <SheetHeader className="border-b px-5 pt-4 pb-3">
           <div className="flex items-center gap-2 text-[11px] text-muted-foreground">
             <Link href={`/companies/${r.ticker}`} className="font-mono font-medium text-foreground hover:underline">
