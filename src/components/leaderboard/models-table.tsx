@@ -7,7 +7,7 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip
 import { formatCost, formatInt, formatMs, formatPct, modelName, shortModel } from "@/lib/format";
 import type { Mode, ModelSummary } from "@/lib/types";
 import { cn } from "@/lib/utils";
-import { accuracyRanks, rowKey, type SortKey, type SortState } from "./rank";
+import { accuracyRanks, escalatedVotes, rowKey, wrongVotes, type SortKey, type SortState } from "./rank";
 
 const COLS: { key: SortKey | null; label: string; hint?: string; className?: string }[] = [
   { key: null, label: "#", hint: "Rank by accuracy (correct ÷ graded) within the mode. “=” marks a tie.", className: "w-10 pr-0" },
@@ -22,7 +22,12 @@ const COLS: { key: SortKey | null; label: string; hint?: string; className?: str
   {
     key: "votes",
     label: "Votes",
-    hint: "Votes (nominating/governance chair, say-on-pay, auditor) that match the votes from the verified answers.",
+    hint: "Votes (nominating/governance chair, say-on-pay, auditor) that match the votes from the verified answers. “n escalated” counts REVIEW votes where the answer key decided: a human looks at those, so they are not silent errors.",
+  },
+  {
+    key: "wrongVotes",
+    label: "Wrong votes",
+    hint: "A FOR/AGAINST that differs from the answer key: a silent error. Escalations to REVIEW are not counted here.",
   },
   {
     key: "citations",
@@ -162,6 +167,8 @@ function Group({ group, grouped, filings }: { group: ModeGroup; grouped: boolean
         const rk = ranks.get(rowKey(r));
         const tied = (rk?.tiedWith.length ?? 0) > 0;
         const stageTotal = STAGE_ORDER.reduce((s, k) => s + (r.byStage[k] ?? 0), 0);
+        const wrong = wrongVotes(r);
+        const esc = escalatedVotes(r);
         return (
           <tr key={rowKey(r)} className="border-b last:border-b-0 hover:bg-muted/30" data-row={rowKey(r)}>
             <td
@@ -197,14 +204,31 @@ function Group({ group, grouped, filings }: { group: ModeGroup; grouped: boolean
                 {r.consequentialErrors}
               </span>
             </td>
-            <td className="px-2.5 py-2 align-middle font-mono whitespace-nowrap tabular-nums">
+            <td className="px-2.5 py-2 align-middle whitespace-nowrap" data-votes>
               {r.votesTotal > 0 ? (
                 <>
-                  {r.votesCorrect}
-                  <span className="text-muted-foreground">/{r.votesTotal}</span>
+                  <div className="font-mono tabular-nums">
+                    {r.votesCorrect}
+                    <span className="text-muted-foreground">/{r.votesTotal}</span>
+                  </div>
+                  {esc ? <div className="text-[10.5px] text-muted-foreground tabular-nums">{esc} escalated</div> : null}
                 </>
               ) : (
-                <span className="text-muted-foreground">—</span>
+                <span className="font-mono text-muted-foreground">—</span>
+              )}
+            </td>
+            <td className="px-2.5 py-2 align-middle" data-wrong-votes>
+              {wrong === null ? (
+                <span className="font-mono text-muted-foreground">—</span>
+              ) : (
+                <span
+                  className={cn(
+                    "inline-flex min-w-7 justify-center rounded px-1.5 py-px font-mono tabular-nums",
+                    wrong > 0 ? "bg-red-50 font-semibold text-red-800 ring-1 ring-red-600/20 ring-inset" : "text-emerald-700",
+                  )}
+                >
+                  {wrong}
+                </span>
               )}
             </td>
             <td className="px-2.5 py-2 align-middle font-mono tabular-nums">{formatPct(r.citationValid, 0)}</td>

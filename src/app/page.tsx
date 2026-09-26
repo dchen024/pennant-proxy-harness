@@ -58,7 +58,7 @@ export default async function LeaderboardPage(props: PageProps<"/">) {
         />
       </div>
 
-      <div className="grid grid-cols-1 gap-5 min-[1400px]:grid-cols-[minmax(0,1fr)_320px]">
+      <div className="grid grid-cols-1 gap-5 min-[1500px]:grid-cols-[minmax(0,1fr)_320px]">
         <div className="min-w-0 space-y-5">
           {!run ? (
             <EmptyState

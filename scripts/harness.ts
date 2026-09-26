@@ -45,6 +45,8 @@ async function main() {
       accuracy: s.accuracy === null ? "n/a" : `${(s.accuracy * 100).toFixed(1)}% (${s.correct}/${s.graded})`,
       consequential: s.consequentialErrors,
       votes: `${s.votesCorrect}/${s.votesTotal}`,
+      "wrong votes": s.votesWrong ?? 0,
+      escalated: s.votesEscalated ?? 0,
       citations: `${(s.citationValid * 100).toFixed(0)}%`,
       malformed: s.malformed,
       stages: Object.entries(s.byStage).map(([k, v]) => `${k}:${v}`).join(" "),

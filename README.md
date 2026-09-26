@@ -101,7 +101,7 @@ The manual loop (attribute → root-cause → fix → re-measure) moved retrieva
 | 2 | share-class wording in the sunset query | +4: Apple and JPMorgan fixed for both models, nothing broken | none |
 | 3 | derive independent-nominee counts from two statements | +1: Apple fixed for GPT-6 Luna (Gemini still misses it) | 1 flip |
 
-**Cumulative, full pipeline:** GPT-6 Luna went from **91.4% to 97.1%** (64 → 68/70) and Gemini 3.8 Flash from **91.4% to 95.7%** (64 → 67/70). Both now exceed Claude Opus 5.5's pre-change 94.3%. To compare fairly, the other models still need a run with the improved config. Votes are unchanged at 13/15: JPMorgan's auditor vote still needs "all other fees", and Gemini still misses Apple's count. Those are the targets for the next round.
+**Cumulative, full pipeline:** GPT-6 Luna went from **91.4% to 97.1%** (64 → 68/70) and Gemini 3.8 Flash from **91.4% to 95.7%** (64 → 67/70). The full six-model run with the improved config is in the results table below: every model improved. Votes are unchanged at 13/15: JPMorgan's auditor vote still needs "all other fees", and Gemini still misses Apple's count. Those are the targets for the next round.
 
 **A repeat run with all three changes** (fresh sample, same config): both models scored **95.7% (67/70)**. GPT-6 Luna scored 68/70 in validation and 67/70 here with the same config; the one-fact gap is run-to-run noise.
 
@@ -149,27 +149,27 @@ Model line-ups live in `src/lib/config.ts` (`dev` = 2 cheap models, `demo` = 6 a
 
 All numbers are graded against the **fully human-verified answer key** (70 facts: 5 filings × 14 facts). Re-grading never re-calls a model.
 
-### Six models, same retrieved context (parser v3, hybrid retrieval, prompt v2)
+### Six models, before and after the approved changes (parser v3, hybrid retrieval, prompt v2)
 
-Each model answered every fact twice. **Full pipeline**: it sees the passages our search retrieved. **Reading only**: it is handed the human-verified evidence passage, so any error is about reading, not search.
+Each model answered every fact twice. **Full pipeline**: it sees the passages our search retrieved. **Reading only**: it is handed the human-verified evidence passage, so any error is about reading, not search. **Before** is the base configuration; **after** is `cfg_3`, the three human-approved changes from the improvement loop. Both runs used the same filings, answer key and grading.
 
-| model | full pipeline | reading only | wrong facts behind a wrong vote (full pipeline) | votes matching the key | cost per 5 filings |
+| model | full pipeline: before → after | reading only (after) | wrong votes (after) | escalated to REVIEW | cost per 5 filings |
 |---|---|---|---|---|---|
-| Claude Opus 5.5 | **94.3%** | 98.6% | 4 | 13/15 | $1.26 |
-| GPT-6 Sol | **94.3%** | 98.6% | 4 | 13/15 | $0.51 |
-| Claude Sonnet 5 | 92.9% | 98.6% | 4 | 13/15 | $0.63 |
-| DeepSeek V4.1 Flash | 92.9% | 98.6% | 4 | 13/15 | **$0.065** |
-| GPT-6 Luna | 91.4% | 97.1% | 5 | 13/15 | **$0.026** |
-| Gemini 3.8 Flash | 91.4% | 98.6% | 5 | 13/15 | $0.38 |
+| Claude Opus 5.5 | 94.3% → **97.1%** | 98.6% | **0** | 2 | $1.25 |
+| GPT-6 Sol | 94.3% → **97.1%** | 98.6% | **0** | 2 | $0.51 |
+| Claude Sonnet 5 | 92.9% → **97.1%** | 98.6% | **0** | 2 | $0.62 |
+| Gemini 3.8 Flash | 91.4% → **95.7%** | 98.6% | **0** | 2 | $0.35 |
+| DeepSeek V4.1 Flash | 92.9% → **94.3%** | 98.6% | **0** | 2 | **$0.068** |
+| GPT-6 Luna | 91.4% → **94.3%** | 97.1% | **0** | 2 | **$0.008** |
 
-- **Given the right passage, every model reads it correctly.** The one reading-only error all six share is a fact that needs two passages (see below). The single genuine misread came from the cheapest model, Luna, which read Meta's company TSR as the peer TSR (the wrong-column trap). It didn't change a vote.
-- **Every other full-pipeline error is retrieval.** No model misread a passage it was given. The next gains come from search, not from a bigger model.
-- **All vote mismatches are REVIEW, never a wrong FOR/AGAINST.** Every model gets the same two votes wrong: Apple's nominating/governance chair (the independent-nominee count needs two passages) and JPMorgan's auditor ratification (its fee table wasn't retrieved). When a fact is missing, three-valued logic escalates the item to a human instead of guessing.
-- **Consequential errors are counted at the vote.** A wrong fact counts if it feeds a vote that came out wrong. An earlier single-fact counterfactual reported "0" for Luna and Gemini, because their broken votes each needed two missing facts, so neither flipped the vote alone. That metric was wrong and has been replaced.
-- **Decision-grade cost.** DeepSeek V4.1 Flash is within one fact of the best models, with the same votes, at about 1/20th of Opus's cost. GPT-6 Luna is within two facts at about 1/50th.
-- **Caveat:** 70 facts is small. One fact moves accuracy by 1.4 points, so treat gaps under about 3 points as ties (Opus and Sol are tied at 66/70).
+- **Every model improved, and no model cast a wrong vote.** Every mismatch is an escalation to REVIEW, and it's the same two for everyone. Apple's nominating/governance chair needs the independent-nominee count, which every model left as "not found". JPMorgan's auditor ratification needs "all other fees", which search still doesn't retrieve.
+- **Given the right passage, every model reads it correctly.** The one reading-only error all six share is the fact that needs two passages (below). The only genuine misread is the cheapest model, Luna, reading Meta's company TSR as the peer TSR (the wrong-column trap). It didn't change a vote.
+- **Search improvements carried over to every model.** The two approved search-query changes were learned from two cheap models' failures, and they lifted the frontier models too.
+- **Decision-grade cost.** GPT-6 Luna is within three facts of the best at under a cent per five filings. Claude Opus 5.5, Claude Sonnet 5 and GPT-6 Sol tie at 97.1%, and Sol costs 40% of Opus.
+- **Reliability is part of the cost.** DeepSeek V4.1 Flash returned 3 unparseable answers in the after run: once it wrote its reasoning instead of JSON, and twice it returned nothing.
+- **Caveat:** 70 facts is small. One fact moves accuracy by 1.4 points, and GPT-6 Luna varied by ±1 fact between identical runs, so treat gaps under about 3 points as ties.
 
-**A fact that needs two passages.** Apple's independent-nominee count is 7: "the Board's eight nominees" is on p. 65, and "all Board members, other than Mr. Cook, are independent" is on p. 18. Reading-only mode hands over one passage, so all six models correctly refuse to guess. This is the case for multi-passage evidence (see Next steps).
+**A fact that needs two passages.** Apple's independent-nominee count is 7: "the Board's eight nominees" is on p. 65, and "all Board members, other than Mr. Cook, are independent" is on p. 18. Reading-only mode hands over one passage, so all six models correctly refuse to guess. Even with approved change 3 ("derive the count"), models almost always abstain; GPT-6 Luna derived it twice across runs, once correctly (7) and once as **2**, which produced the project's only wrong vote. This is the case for multi-passage evidence (see Next steps), and why change 3 should be reverted until the derivation must cite both passages.
 
 **Reference votes from the answer key:** Alphabet and Meta get AGAINST on the nominating/governance chair (R3: unequal voting rights with no sunset), and Microsoft gets AGAINST on say-on-pay (R4: CEO pay rose from $79.1M to $96.5M while TSR of 255 trailed the peer group's 276). Everything else is FOR.
 

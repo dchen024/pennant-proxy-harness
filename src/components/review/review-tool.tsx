@@ -17,10 +17,12 @@ import {
 } from "@/components/review/page-review";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { ReadOnlyBanner } from "@/components/read-only";
 import { Progress } from "@/components/ui/progress";
 import { COMPANIES } from "@/lib/companies";
 import { FACT_BY_ID, FACTS } from "@/lib/facts";
 import { formatQuote, formatValue, shortModel } from "@/lib/format";
+import { READ_ONLY } from "@/lib/readonly";
 import type { FactValue, GoldFact, GoldProposal } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
@@ -271,6 +273,7 @@ export function ReviewTool({
       const p = current.proposals[idx];
       if (!p) return;
       setEvidenceView((s) => ({ ...s, [current._id]: idx }));
+      if (READ_ONLY) return; // browse the proposal's evidence without changing the value
       const isBool = FACT_BY_ID[current.factId]?.type === "boolean";
       setDrafts((s) => ({
         ...s,
@@ -289,7 +292,7 @@ export function ReviewTool({
   }, [def, draft]);
 
   const verify = useCallback(async () => {
-    if (!current || saving) return;
+    if (READ_ONLY || !current || saving) return;
     if ("error" in parsedDraft) {
       setError(parsedDraft.error);
       return;
@@ -335,7 +338,7 @@ export function ReviewTool({
   /** Saves a reviewer-chosen citation, optionally verifying the entered value in the same write. */
   const saveCitation = useCallback(
     async (citation: Citation, andVerify: boolean) => {
-      if (!current || citeSaving) return;
+      if (READ_ONLY || !current || citeSaving) return;
       const body: Record<string, unknown> = {
         id: current._id,
         chunkId: citation.chunkId,
@@ -420,6 +423,7 @@ export function ReviewTool({
         skip();
       } else if (key === "e") {
         e.preventDefault();
+        if (READ_ONLY) return;
         inputRef.current?.focus();
         inputRef.current?.select();
       } else if (key === "c") {
@@ -430,7 +434,7 @@ export function ReviewTool({
         }
       } else if (/^[1-9]$/.test(key)) {
         adopt(Number(key) - 1);
-      } else if ((key === "y" || key === "n") && current && FACT_BY_ID[current.factId]?.type === "boolean") {
+      } else if (!READ_ONLY && (key === "y" || key === "n") && current && FACT_BY_ID[current.factId]?.type === "boolean") {
         setDrafts((s) => ({ ...s, [current._id]: key === "y" }));
       }
     }
@@ -513,7 +517,7 @@ export function ReviewTool({
   /** Verifies every checked fact of the page group, one request each, keeping saved citations as they are. */
   const verifyChecked = useCallback(async () => {
     const grp = selectedGroup;
-    if (!grp || batch.running) return;
+    if (READ_ONLY || !grp || batch.running) return;
     const targets = grp.ids.map((id) => items.get(id)).filter((g): g is GoldFact => !!g && isChecked(g));
     if (targets.length === 0) {
       setBatch((b) => ({ ...b, message: { text: "Nothing is checked.", tone: "error" } }));
@@ -618,7 +622,7 @@ export function ReviewTool({
       const key = e.key.toLowerCase();
       if (key === "a") {
         e.preventDefault();
-        void verifyChecked();
+        if (!READ_ONLY) void verifyChecked();
       } else if (key === "j" || e.key === "ArrowDown") {
         e.preventDefault();
         moveGroup(1);
@@ -680,8 +684,13 @@ export function ReviewTool({
       ? "curated"
       : "draft");
 
-  return (
-    <div className="grid h-[calc(100vh-48px)] min-h-0 grid-cols-[280px_400px_minmax(0,1fr)]">
+  const panes = (
+    <div
+      className={cn(
+        "grid min-h-0 grid-cols-[280px_400px_minmax(0,1fr)]",
+        READ_ONLY ? "flex-1" : "h-[calc(100vh-48px)]",
+      )}
+    >
       {/* List */}
       <aside className="flex min-h-0 flex-col border-r bg-muted/20">
         <div className="space-y-2 border-b px-3 py-3">
@@ -786,7 +795,20 @@ export function ReviewTool({
             <div className="px-3 py-6 text-center text-[12px] text-muted-foreground">Nothing here.</div>
           ) : null}
         </div>
-        {mode === "page" ? (
+        {READ_ONLY ? (
+          <div className="border-t px-3 py-2 text-[10.5px] leading-relaxed text-muted-foreground">
+            {mode === "page" ? (
+              <>
+                <Kbd>j</Kbd>/<Kbd>k</Kbd> page · <Kbd>1</Kbd>–<Kbd>9</Kbd> show a fact&apos;s highlight
+              </>
+            ) : (
+              <>
+                <Kbd>j</Kbd>/<Kbd>k</Kbd> move · <Kbd>1</Kbd>
+                <Kbd>2</Kbd> show a proposal&apos;s evidence · <Kbd>c</Kbd> browse citations
+              </>
+            )}
+          </div>
+        ) : mode === "page" ? (
           <div className="border-t px-3 py-2 text-[10.5px] leading-relaxed text-muted-foreground">
             <Kbd>j</Kbd>/<Kbd>k</Kbd> page · <Kbd>a</Kbd> verify checked · <Kbd>1</Kbd>–<Kbd>9</Kbd> show a fact&apos;s
             highlight · <Kbd>↵</Kbd> leave a value box
@@ -894,9 +916,10 @@ export function ReviewTool({
                     <button
                       key={String(b)}
                       type="button"
+                      disabled={READ_ONLY}
                       onClick={() => setDrafts((s) => ({ ...s, [current._id]: b }))}
                       className={cn(
-                        "flex-1 rounded-md border px-3 py-2 text-[13px] font-medium transition-colors",
+                        "flex-1 rounded-md border px-3 py-2 text-[13px] font-medium transition-colors disabled:cursor-not-allowed",
                         draft === b ? "border-foreground bg-foreground text-background" : "bg-background hover:bg-muted",
                       )}
                     >
@@ -909,9 +932,10 @@ export function ReviewTool({
                   <Input
                     ref={inputRef}
                     inputMode="decimal"
+                    readOnly={READ_ONLY}
                     value={typeof draft === "string" ? draft : ""}
                     onChange={(e) => setDrafts((s) => ({ ...s, [current._id]: e.target.value }))}
-                    className="h-9 font-mono text-[14px] tabular-nums"
+                    className={cn("h-9 font-mono text-[14px] tabular-nums", READ_ONLY && "cursor-default bg-muted/40")}
                     placeholder={def?.unit === "usd" ? "e.g. 74609802 or 74.6m" : "number"}
                   />
                   <div className="font-mono text-[11px] text-muted-foreground tabular-nums">
@@ -928,9 +952,9 @@ export function ReviewTool({
                 <Button
                   data-review-action="verify"
                   onClick={() => void verify()}
-                  disabled={!!saving || editing}
+                  disabled={READ_ONLY || !!saving || editing}
                   className="flex-1"
-                  title={editing ? "Save or cancel the citation edit first" : undefined}
+                  title={READ_ONLY ? "Verifying is disabled in the read-only demo" : editing ? "Save or cancel the citation edit first" : undefined}
                 >
                   {saving === current._id ? <Loader2Icon className="animate-spin" /> : <CheckIcon />}
                   Verify
@@ -964,8 +988,8 @@ export function ReviewTool({
               </div>
               {current.status === "verified" ? (
                 <div>
-                  Verified {current.updatedAt ? new Date(current.updatedAt).toLocaleTimeString() : ""}. Change the value
-                  and verify again to correct it.
+                  Verified {current.updatedAt ? new Date(current.updatedAt).toLocaleTimeString() : ""}.
+                  {READ_ONLY ? "" : " Change the value and verify again to correct it."}
                 </div>
               ) : null}
             </div>
@@ -1057,7 +1081,7 @@ export function ReviewTool({
                 disabled={!filing}
               >
                 <PencilLineIcon />
-                Edit citation <Kbd>c</Kbd>
+                {READ_ONLY ? "Browse citations" : "Edit citation"} <Kbd>c</Kbd>
               </Button>
             </div>
             <EvidencePage
@@ -1071,6 +1095,14 @@ export function ReviewTool({
           </div>
         ) : null}
       </section>
+    </div>
+  );
+
+  if (!READ_ONLY) return panes;
+  return (
+    <div className="flex h-[calc(100vh-48px)] flex-col">
+      <ReadOnlyBanner className="border-b border-amber-200">Read-only demo: the answer key can&apos;t be edited here.</ReadOnlyBanner>
+      {panes}
     </div>
   );
 }

@@ -164,6 +164,10 @@ export interface ModelSummary {
   consequentialErrors: number;
   votesCorrect: number;
   votesTotal: number;
+  /** Mismatches where the model's vote is FOR/AGAINST but the answer key's differs: silent errors. */
+  votesWrong?: number;
+  /** Mismatches where the model's vote is REVIEW: escalated to a human, not a silent error. */
+  votesEscalated?: number;
   citationValid: number; // fraction of answered facts whose citation checks all pass
   malformed: number;
   byStage: Partial<Record<Stage, number>>;
@@ -291,6 +295,8 @@ export interface ProposalDoc {
   baselineRunId?: string;
   report?: ValidationReport;
   decidedAt?: string;
+  /** Why a human reverted a kept change (e.g. evidence from a later run). */
+  revertNote?: string;
   createdAt: string;
 }
 

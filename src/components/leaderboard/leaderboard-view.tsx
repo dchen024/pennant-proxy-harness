@@ -8,7 +8,20 @@ import type { Mode, ModelSummary } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import { AccuracyCostChart } from "./accuracy-cost-chart";
 import { ModelsTable, type ModeGroup } from "./models-table";
-import { DEFAULT_DIR, DEFAULT_SORT, defaultCompare, joinNames, sameAccuracy, sortRows, typicalGraded, type SortKey, type SortState } from "./rank";
+import {
+  compareWrongVotes,
+  DEFAULT_DIR,
+  DEFAULT_SORT,
+  defaultCompare,
+  escalatedVotes,
+  joinNames,
+  sameAccuracy,
+  sortRows,
+  typicalGraded,
+  wrongVotes,
+  type SortKey,
+  type SortState,
+} from "./rank";
 
 type ModeChoice = Mode | "both";
 const MODE_ORDER: Mode[] = ["e2e", "oracle"];
@@ -81,6 +94,7 @@ export function LeaderboardView({
         run={run}
         scope={multiMode ? modeLabel(tileMode).toLowerCase() : null}
         tiePts={tiePts}
+        provisional={provisional}
       />
 
       <section className="rounded-lg border bg-card">
@@ -156,20 +170,30 @@ function KpiTiles({
   run,
   scope,
   tiePts,
+  provisional,
 }: {
   pool: ModelSummary[];
   allRows: ModelSummary[];
   run: RunFacts;
   scope: string | null;
   tiePts: number;
+  provisional?: boolean;
 }) {
   const graded = [...pool.filter((r) => r.graded > 0)].sort(defaultCompare); // tie-break order
   if (graded.length === 0) return null;
   const best = graded[0];
   const bestAcc = best.accuracy ?? 0;
   const top = graded.filter((r) => sameAccuracy(r, best));
-  const minConseq = Math.min(...graded.map((r) => r.consequentialErrors));
-  const safest = graded.filter((r) => r.consequentialErrors === minConseq);
+  // Wrong votes: a FOR/AGAINST that differs from the answer key. Ties: fewer facts behind wrong votes, then cost.
+  const voted = graded.filter((r) => wrongVotes(r) !== null);
+  const minWrong = voted.length ? Math.min(...voted.map((r) => wrongVotes(r) ?? 0)) : null;
+  const safest = voted.filter((r) => wrongVotes(r) === minWrong).sort(compareWrongVotes);
+  const esc = safest.map((r) => escalatedVotes(r) ?? 0);
+  const escText = !safest.length
+    ? ""
+    : Math.min(...esc) === Math.max(...esc)
+      ? `${esc[0]} escalated to REVIEW${safest.length > 1 ? " each" : ""}`
+      : `${Math.min(...esc)}–${Math.max(...esc)} escalated to REVIEW`;
   const near = graded.filter((r) => r.costUsd > 0 && (bestAcc - (r.accuracy ?? 0)) * 100 < tiePts);
   const minCost = near.length ? Math.min(...near.map((r) => r.costUsd)) : 0;
   const cheapest = near.filter((r) => r.costUsd === minCost);
@@ -198,10 +222,13 @@ function KpiTiles({
       detail: `${best.correct}/${best.graded}${top.length > 1 ? " each · tie, listed by fewer vote-flipping errors, then cost" : ""}`,
     },
     {
-      label: "Fewest vote-flipping errors",
-      value: String(minConseq),
-      who: names(safest),
-      detail: `${accOf(safest)} accurate${safest.length > 1 && safest.length < graded.length ? " · tie, listed by accuracy, then cost" : ""}`,
+      label: "Fewest wrong votes",
+      value: minWrong === null ? "—" : String(minWrong),
+      who: minWrong === null ? (provisional ? "Votes fill in when the run finishes" : "Not recorded for this run") : names(safest),
+      detail:
+        minWrong === null
+          ? undefined
+          : `${escText} · ${accOf(safest)} accurate${safest.length > 1 && safest.length < voted.length ? " · tie, listed by fewer facts behind wrong votes, then cost" : ""}`,
     },
     {
       label: `Cheapest within ${tiePts} pts of best`,

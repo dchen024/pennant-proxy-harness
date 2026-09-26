@@ -1,3 +1,4 @@
+import { READ_ONLY, readOnlyResponse } from "@/lib/readonly";
 import { z } from "zod";
 import { errorStatus, loadImprove } from "@/app/improve/data";
 import { collections } from "@/lib/db";
@@ -9,6 +10,7 @@ const Params = z.object({ id: z.string().regex(/^[A-Za-z0-9_.:-]{1,100}$/, "Inva
 
 /** POST /api/proposals/[id]/reject -> marks a pending proposal rejected. Returns the fresh payload. */
 export async function POST(_request: Request, ctx: RouteContext<"/api/proposals/[id]/reject">) {
+  if (READ_ONLY) return readOnlyResponse();
   const parsed = Params.safeParse(await ctx.params);
   if (!parsed.success) return Response.json({ error: parsed.error.issues.map((i) => i.message).join("; ") }, { status: 400 });
   const { id } = parsed.data;

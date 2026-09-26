@@ -6,6 +6,7 @@ export type SortKey =
   | "graded"
   | "consequential"
   | "votes"
+  | "wrongVotes"
   | "citations"
   | "malformed"
   | "cost"
@@ -23,6 +24,7 @@ export const DEFAULT_DIR: Record<SortKey, SortDir> = {
   graded: "desc",
   consequential: "asc",
   votes: "desc",
+  wrongVotes: "asc",
   citations: "desc",
   malformed: "asc",
   cost: "asc",
@@ -54,6 +56,26 @@ export function defaultCompare(a: ModelSummary, b: ModelSummary): number {
   );
 }
 
+/** FOR/AGAINST votes that differ from the answer key (silent errors); null when the run didn't record it. */
+export const wrongVotes = (r: ModelSummary): number | null => (r.votesTotal > 0 && r.votesWrong !== undefined ? r.votesWrong : null);
+
+/** REVIEW votes where the answer key decided (escalated to a human); null when the run didn't record it. */
+export const escalatedVotes = (r: ModelSummary): number | null =>
+  r.votesTotal > 0 && r.votesEscalated !== undefined ? r.votesEscalated : null;
+
+/** "Fewest wrong votes" order: fewer wrong votes, then fewer facts behind wrong votes, then cheaper, then name. */
+export function compareWrongVotes(a: ModelSummary, b: ModelSummary): number {
+  const wa = wrongVotes(a);
+  const wb = wrongVotes(b);
+  if ((wa === null) !== (wb === null)) return wa === null ? 1 : -1;
+  return (
+    (wa ?? 0) - (wb ?? 0) ||
+    a.consequentialErrors - b.consequentialErrors ||
+    a.costUsd - b.costUsd ||
+    a.model.localeCompare(b.model)
+  );
+}
+
 function value(r: ModelSummary, key: SortKey): number | string | null {
   switch (key) {
     case "model":
@@ -66,6 +88,8 @@ function value(r: ModelSummary, key: SortKey): number | string | null {
       return r.consequentialErrors;
     case "votes":
       return r.votesTotal > 0 ? r.votesCorrect / r.votesTotal : null;
+    case "wrongVotes":
+      return wrongVotes(r);
     case "citations":
       return r.citationValid;
     case "malformed":

@@ -1,0 +1,9 @@
+# Never upload local secrets or scratch data to Vercel.
+.env
+.env.*
+!.env.example
+.claude
+data/filings
+data/chunks
+data/renders
+data/*.log

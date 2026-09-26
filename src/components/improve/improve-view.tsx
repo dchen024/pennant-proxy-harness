@@ -3,11 +3,13 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { ArrowRightIcon, CheckIcon, ExternalLinkIcon, Loader2Icon, RotateCcwIcon, XIcon } from "lucide-react";
+import { ReadOnlyBanner } from "@/components/read-only";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { MODEL_PROFILES } from "@/lib/config";
 import { FACT_BY_ID } from "@/lib/facts";
 import { formatDateTime, modelName, shortModel } from "@/lib/format";
+import { READ_ONLY } from "@/lib/readonly";
 import type { ConfigDoc, FactId, ProposalDoc, ProposalKind } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import type { ProposalsPayload, RetrievalPreview, RunBrief } from "./types";
@@ -51,6 +53,8 @@ export function ImproveView({ initial }: { initial: ProposalsPayload }) {
     () => initial.proposals.find((p) => p.status === "pending")?._id ?? initial.proposals[0]?._id ?? null,
   );
   const [confirm, setConfirm] = useState<{ id: string; action: "approve" | "reject" } | null>(null);
+  /** Open revert dialog: which kept proposal, and the note typed so far. */
+  const [revert, setRevert] = useState<{ id: string; note: string } | null>(null);
   const [busy, setBusy] = useState<string | null>(null);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [pollError, setPollError] = useState<string | null>(null);
@@ -84,6 +88,7 @@ export function ImproveView({ initial }: { initial: ProposalsPayload }) {
   }, [data, validating]);
 
   const act = useCallback(async (id: string, action: "approve" | "reject") => {
+    if (READ_ONLY) return;
     setBusy(id);
     setErrors((e) => ({ ...e, [id]: "" }));
     try {
@@ -92,6 +97,31 @@ export function ImproveView({ initial }: { initial: ProposalsPayload }) {
       if (!res.ok || !body.proposals) throw new Error(body.error || `${action === "approve" ? "Approve" : "Reject"} failed (${res.status})`);
       setData({ proposals: body.proposals, activeConfig: body.activeConfig ?? null, runs: body.runs ?? {} });
       setConfirm(null);
+    } catch (err) {
+      setErrors((e) => ({ ...e, [id]: err instanceof Error ? err.message : String(err) }));
+    } finally {
+      setBusy(null);
+    }
+  }, []);
+
+  /** Human revert of the active kept change; the endpoint answers with the new active config only, so reload. */
+  const doRevert = useCallback(async (id: string, note: string) => {
+    if (READ_ONLY || !note.trim()) return;
+    setBusy(id);
+    setErrors((e) => ({ ...e, [id]: "" }));
+    try {
+      const res = await fetch(`/api/proposals/${encodeURIComponent(id)}/revert`, {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ note: note.trim() }),
+      });
+      const body = (await res.json().catch(() => ({}))) as { error?: string };
+      if (!res.ok) throw new Error(body.error || `Revert failed (${res.status})`);
+      const list = await fetch("/api/proposals", { cache: "no-store" });
+      const next = (await list.json().catch(() => ({}))) as Partial<ProposalsPayload> & { error?: string };
+      if (!list.ok || !next.proposals) throw new Error(next.error || `Reverted, but reloading failed (${list.status}); refresh the page.`);
+      setData({ proposals: next.proposals, activeConfig: next.activeConfig ?? null, runs: next.runs ?? {} });
+      setRevert(null);
     } catch (err) {
       setErrors((e) => ({ ...e, [id]: err instanceof Error ? err.message : String(err) }));
     } finally {
@@ -111,6 +141,13 @@ export function ImproveView({ initial }: { initial: ProposalsPayload }) {
       if (e.metaKey || e.ctrlKey || e.altKey) return;
       const t = e.target as HTMLElement | null;
       if (t && (t.tagName === "INPUT" || t.tagName === "TEXTAREA" || t.isContentEditable)) return;
+      if (revert) {
+        if (e.key === "Escape") {
+          e.preventDefault();
+          setRevert(null);
+        }
+        return;
+      }
       if (confirm) {
         if (e.key === "Escape") {
           e.preventDefault();
@@ -128,14 +165,14 @@ export function ImproveView({ initial }: { initial: ProposalsPayload }) {
         e.preventDefault();
         const prev = proposals[Math.max(0, i - 1)];
         if (prev) select(prev._id);
-      } else if ((key === "a" || key === "r") && i >= 0 && proposals[i].status === "pending" && busy === null) {
+      } else if (!READ_ONLY && (key === "a" || key === "r") && i >= 0 && proposals[i].status === "pending" && busy === null) {
         e.preventDefault();
         setConfirm({ id: proposals[i]._id, action: key === "a" ? "approve" : "reject" });
       }
     }
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [confirm, selected, proposals, select, busy]);
+  }, [confirm, revert, selected, proposals, select, busy]);
 
   const counts = proposals.reduce<Record<string, number>>((acc, p) => ((acc[p.status] = (acc[p.status] ?? 0) + 1), acc), {});
 
@@ -150,6 +187,12 @@ export function ImproveView({ initial }: { initial: ProposalsPayload }) {
         </p>
       </div>
 
+      {READ_ONLY ? (
+        <ReadOnlyBanner className="rounded-md border border-amber-200">
+          Read-only demo: proposals can&apos;t be approved, rejected or reverted here.
+        </ReadOnlyBanner>
+      ) : null}
+
       <ActiveConfig cfg={data.activeConfig} proposals={proposals} />
 
       <div className="flex flex-wrap items-center justify-between gap-2 text-[12px] text-muted-foreground">
@@ -162,9 +205,15 @@ export function ImproveView({ initial }: { initial: ProposalsPayload }) {
                 .join(" · ")}`
             : ""}
         </span>
-        <span>
-          <Kbd>j</Kbd>/<Kbd>k</Kbd> move · <Kbd>a</Kbd> approve · <Kbd>r</Kbd> reject · <Kbd>Esc</Kbd> cancel
-        </span>
+        {READ_ONLY ? (
+          <span>
+            <Kbd>j</Kbd>/<Kbd>k</Kbd> move
+          </span>
+        ) : (
+          <span>
+            <Kbd>j</Kbd>/<Kbd>k</Kbd> move · <Kbd>a</Kbd> approve · <Kbd>r</Kbd> reject · <Kbd>Esc</Kbd> cancel
+          </span>
+        )}
       </div>
       {pollError ? <p className="text-[12px] text-amber-700">Refreshing failed ({pollError}); retrying…</p> : null}
 
@@ -190,6 +239,20 @@ export function ImproveView({ initial }: { initial: ProposalsPayload }) {
             }}
             onCancel={() => setConfirm(null)}
             onConfirm={(action) => void act(p._id, action)}
+            active={p.status === "kept" && !!p.configId && p.configId === data.activeConfig?._id}
+            activeId={data.activeConfig?._id ?? null}
+            fallback={data.activeConfig?.parent ?? "the base configuration"}
+            revert={revert?.id === p._id ? revert.note : null}
+            onRevertOpen={() => {
+              setSelected(p._id);
+              setConfirm(null);
+              setRevert({ id: p._id, note: "" });
+            }}
+            onRevertNote={(note) => setRevert({ id: p._id, note })}
+            onRevertCancel={() => setRevert(null)}
+            onRevertConfirm={() => {
+              if (revert?.id === p._id) void doRevert(p._id, revert.note);
+            }}
           />
         ))}
       </div>
@@ -242,12 +305,12 @@ function KindBadge({ kind }: { kind: ProposalKind }) {
   return <span className={cn("rounded px-1.5 py-px text-[10.5px] font-medium whitespace-nowrap ring-1 ring-inset", m.cls)}>{m.label}</span>;
 }
 
-function StatusBadge({ status }: { status: ProposalDoc["status"] }) {
+function StatusBadge({ status, human }: { status: ProposalDoc["status"]; human?: boolean }) {
   const m = STATUS_META[status];
   return (
     <span className={cn("inline-flex items-center gap-1 rounded px-1.5 py-px text-[11px] font-medium whitespace-nowrap ring-1 ring-inset", m.cls)} data-status={status}>
       {status === "approved" ? <Loader2Icon className="size-3 animate-spin" /> : null}
-      {m.label}
+      {human ? "Reverted by a human" : m.label}
     </span>
   );
 }
@@ -306,6 +369,14 @@ function ProposalCard({
   onAsk,
   onCancel,
   onConfirm,
+  active,
+  activeId,
+  fallback,
+  revert,
+  onRevertOpen,
+  onRevertNote,
+  onRevertCancel,
+  onRevertConfirm,
 }: {
   p: ProposalDoc;
   runs: Record<string, RunBrief>;
@@ -317,12 +388,29 @@ function ProposalCard({
   onAsk: (action: "approve" | "reject") => void;
   onCancel: () => void;
   onConfirm: (action: "approve" | "reject") => void;
+  /** Kept, and its config is the active one: the only change a human can revert. */
+  active: boolean;
+  activeId: string | null;
+  /** What the active configuration falls back to on revert. */
+  fallback: string;
+  /** The revert note while the dialog is open on this card, else null. */
+  revert: string | null;
+  onRevertOpen: () => void;
+  onRevertNote: (note: string) => void;
+  onRevertCancel: () => void;
+  onRevertConfirm: () => void;
 }) {
   const kind = KIND_META[p.kind];
   const confirmRef = useRef<HTMLButtonElement>(null);
   useEffect(() => {
     if (confirm) confirmRef.current?.focus();
   }, [confirm]);
+  const noteRef = useRef<HTMLTextAreaElement>(null);
+  const reverting = revert !== null;
+  useEffect(() => {
+    if (reverting) noteRef.current?.focus();
+  }, [reverting]);
+  const humanRevert = p.status === "reverted" && !!p.revertNote;
   const vrun = p.validationRunId ? runs[p.validationRunId] : undefined;
 
   return (
@@ -338,7 +426,7 @@ function ProposalCard({
         {p.target !== "system" ? <code className="font-mono text-[11px] text-muted-foreground">{p.target}</code> : null}
         <span className="ml-auto flex items-center gap-2">
           <span className="font-mono text-[10.5px] text-muted-foreground">{p._id}</span>
-          <StatusBadge status={p.status} />
+          <StatusBadge status={p.status} human={humanRevert} />
         </span>
       </header>
 
@@ -411,7 +499,86 @@ function ProposalCard({
         </div>
       </div>
 
-      {p.report && (p.status === "kept" || p.status === "reverted") ? <Report p={p} runs={runs} /> : null}
+      {humanRevert ? (
+        <div className="border-t bg-red-50/50 px-4 py-3" data-human-revert>
+          <div className="flex flex-wrap items-center gap-2 text-[12.5px] text-red-800">
+            <RotateCcwIcon className="size-4" />
+            <span className="font-semibold">Reverted by a human</span>
+            {p.decidedAt ? (
+              <span className="text-[11.5px] text-muted-foreground" suppressHydrationWarning>
+                {formatDateTime(p.decidedAt)}
+              </span>
+            ) : null}
+          </div>
+          <p className="mt-1.5 border-l-2 border-red-300 pl-3 text-[13px] leading-relaxed whitespace-pre-line" data-revert-note>
+            {p.revertNote}
+          </p>
+          <p className="mt-1.5 text-[11.5px] text-muted-foreground">
+            {p.configId ?? "Its configuration"} is no longer active; runs use {activeId ?? "the base configuration"}. The
+            validation below is from before the revert.
+          </p>
+        </div>
+      ) : null}
+
+      {p.report && (p.status === "kept" || p.status === "reverted") ? <Report p={p} runs={runs} earlier={humanRevert} /> : null}
+
+      {active ? (
+        <footer className="border-t px-4 py-2.5" onClick={(e) => e.stopPropagation()} data-revert-footer>
+          {reverting ? (
+            <div className="space-y-2 rounded-md bg-red-50/70 px-3 py-2.5 text-[12.5px]" role="alertdialog" aria-label="Confirm revert" data-revert-dialog>
+              <p>
+                <span className="font-medium">Revert {p.configId}?</span> The active configuration falls back to {fallback}; the
+                next run uses it. No run is started now.
+              </p>
+              <label htmlFor={`revert-note-${p._id}`} className="block text-[11.5px] font-medium text-muted-foreground">
+                Why? A note is required; it is kept with the proposal.
+              </label>
+              <textarea
+                id={`revert-note-${p._id}`}
+                ref={noteRef}
+                value={revert}
+                onChange={(e) => onRevertNote(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Escape") {
+                    e.preventDefault();
+                    onRevertCancel();
+                  }
+                }}
+                rows={3}
+                maxLength={2000}
+                placeholder="What went wrong with this change?"
+                className="w-full resize-y rounded-md border bg-background px-2.5 py-1.5 text-[12.5px] leading-relaxed outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                data-revert-note-input
+              />
+              <div className="flex flex-wrap items-center gap-2">
+                <Button size="sm" variant="destructive" onClick={onRevertConfirm} disabled={busy || !revert.trim()} data-revert-confirm>
+                  {busy ? <Loader2Icon className="animate-spin" /> : <RotateCcwIcon />}
+                  Revert {p.configId}
+                </Button>
+                <Button size="sm" variant="outline" onClick={onRevertCancel} disabled={busy}>
+                  Cancel <Kbd>Esc</Kbd>
+                </Button>
+              </div>
+            </div>
+          ) : (
+            <div className="flex flex-wrap items-center gap-2">
+              <Button size="sm" variant="outline" onClick={onRevertOpen} disabled={READ_ONLY || busy} data-action="revert">
+                <RotateCcwIcon /> Revert…
+              </Button>
+              <span className="text-[11px] text-muted-foreground">
+                {READ_ONLY
+                  ? "Reverting is disabled in the read-only demo."
+                  : `This is the active change. Reverting falls back to ${fallback}.`}
+              </span>
+            </div>
+          )}
+          {error ? (
+            <p className="mt-2 text-[12px] text-red-700" data-error>
+              {error}
+            </p>
+          ) : null}
+        </footer>
+      ) : null}
 
       {p.status === "pending" ? (
         <footer className="border-t px-4 py-2.5" onClick={(e) => e.stopPropagation()}>
@@ -446,13 +613,17 @@ function ProposalCard({
             </div>
           ) : (
             <div className="flex items-center gap-2">
-              <Button size="sm" onClick={() => onAsk("approve")} disabled={busy} data-action="approve">
+              <Button size="sm" onClick={() => onAsk("approve")} disabled={READ_ONLY || busy} data-action="approve">
                 <CheckIcon /> Approve… <Kbd>a</Kbd>
               </Button>
-              <Button size="sm" variant="outline" onClick={() => onAsk("reject")} disabled={busy} data-action="reject">
+              <Button size="sm" variant="outline" onClick={() => onAsk("reject")} disabled={READ_ONLY || busy} data-action="reject">
                 <XIcon /> Reject… <Kbd>r</Kbd>
               </Button>
-              <span className="text-[11px] text-muted-foreground">Approving starts a paid validation run (~$0.05).</span>
+              <span className="text-[11px] text-muted-foreground">
+                {READ_ONLY
+                  ? "Approving and rejecting are disabled in the read-only demo."
+                  : "Approving starts a paid validation run (~$0.05)."}
+              </span>
             </div>
           )}
           {error ? (
@@ -527,11 +698,16 @@ function SearchPreview({ proposalId }: { proposalId: string }) {
   );
 }
 
-function Report({ p, runs }: { p: ProposalDoc; runs: Record<string, RunBrief> }) {
+function Report({ p, runs, earlier }: { p: ProposalDoc; runs: Record<string, RunBrief>; earlier?: boolean }) {
   const r = p.report!;
   const keep = r.verdict === "keep";
   return (
-    <div className="border-t px-4 py-3" data-report>
+    <div className={cn("border-t px-4 py-3", earlier && "bg-muted/20")} data-report data-earlier={earlier || undefined}>
+      {earlier ? (
+        <div className="mb-1.5 text-[10.5px] font-medium tracking-wide text-muted-foreground uppercase">
+          Earlier validation, before the human revert
+        </div>
+      ) : null}
       <div className={cn("mb-2 flex flex-wrap items-center gap-2 text-[12.5px]", keep ? "text-emerald-800" : "text-red-800")}>
         {keep ? <CheckIcon className="size-4" /> : <RotateCcwIcon className="size-4" />}
         <span className="font-semibold">{keep ? "Kept" : "Reverted"}:</span>

@@ -9,6 +9,7 @@ import { Input } from "@/components/ui/input";
 import { formatQuote } from "@/lib/format";
 import { matchQuote, quoteLineIndices } from "@/lib/highlight";
 import type { BBox } from "@/lib/types";
+import { READ_ONLY } from "@/lib/readonly";
 import { cn } from "@/lib/utils";
 
 export interface Citation {
@@ -503,7 +504,7 @@ export function CitationEditor({
           <Button
             size="sm"
             variant="outline"
-            disabled={!sel || saving}
+            disabled={READ_ONLY || !sel || saving}
             onClick={() => sel && onSave({ chunkId: sel.chunk._id, quote, page: sel.chunk.page }, false)}
           >
             {saving ? <Loader2Icon className="animate-spin" /> : <SaveIcon />}
@@ -511,12 +512,17 @@ export function CitationEditor({
           </Button>
           <Button
             size="sm"
-            disabled={!sel || saving || !canVerify}
+            disabled={READ_ONLY || !sel || saving || !canVerify}
             onClick={() => sel && onSave({ chunkId: sel.chunk._id, quote, page: sel.chunk.page }, true)}
           >
             {saving ? <Loader2Icon className="animate-spin" /> : <CheckIcon />}
             Save &amp; verify <span className="font-mono text-[11px] opacity-80">{verifyLabel}</span>
           </Button>
+          {READ_ONLY ? (
+            <span className="text-[12px] text-muted-foreground" data-read-only-note>
+              Saving is disabled in the read-only demo.
+            </span>
+          ) : null}
           {error ? <span className="text-[12px] text-red-700">{error}</span> : null}
         </div>
       </div>

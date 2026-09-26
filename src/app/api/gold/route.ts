@@ -1,3 +1,4 @@
+import { READ_ONLY, readOnlyResponse } from "@/lib/readonly";
 import { z } from "zod";
 import { FACT_BY_ID } from "@/lib/facts";
 import { normalize } from "@/lib/highlight";
@@ -35,6 +36,7 @@ const bad = (error: string, status = 400) => Response.json({ error }, { status }
 
 /** POST /api/gold -> verify, re-open, or re-cite one answer-key fact. */
 export async function POST(request: Request) {
+  if (READ_ONLY) return readOnlyResponse();
   let json: unknown;
   try {
     json = await request.json();

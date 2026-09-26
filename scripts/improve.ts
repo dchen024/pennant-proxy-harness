@@ -1,11 +1,12 @@
 import "./_env";
 import { closeDb } from "@/lib/db";
-import { approveProposal, listProposals, proposeImprovements, refreshValidation, rejectProposal } from "@/lib/improve/loop";
+import { approveProposal, listProposals, proposeImprovements, refreshValidation, rejectProposal, revertProposal } from "@/lib/improve/loop";
 
 // pnpm improve propose [--run <runId>]   the agent proposes changes from a graded run (about $0.10)
 // pnpm improve list                      proposals and their status / validation verdicts
 // pnpm improve approve <id>              human approval: new config + validation run (about $0.05)
 // pnpm improve reject <id>
+// pnpm improve revert <id> "<why>"      human revert of the newest kept change
 async function main() {
   const [cmd, id] = process.argv.slice(2);
   const ri = process.argv.indexOf("--run");
@@ -21,6 +22,10 @@ async function main() {
     const p = await refreshValidation(id);
     console.log(`approved ${id} → ${r.configId}, validation run ${r.runId}`);
     console.log(JSON.stringify(p?.report, null, 2));
+  } else if (cmd === "revert") {
+    const note = process.argv[4] ?? "Reverted by a human reviewer.";
+    const active = await revertProposal(id, note);
+    console.log(`reverted ${id}; active config is now ${active?._id ?? "the base configuration"}`);
   } else if (cmd === "reject") {
     await rejectProposal(id);
     console.log(`rejected ${id}`);

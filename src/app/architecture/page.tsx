@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { joinNames } from "@/components/leaderboard/rank";
+import { MODEL_PROFILES } from "@/lib/config";
 import { collections, getDb } from "@/lib/db";
 import { formatPct, modelName } from "@/lib/format";
 import { getDbStatus } from "@/lib/queries";
@@ -34,17 +36,40 @@ async function loadNumbers() {
     await Promise.all(MEMORY_COLLECTIONS.map(async (name) => [name, await db.collection(name).estimatedDocumentCount()] as const)),
   ) as Record<(typeof MEMORY_COLLECTIONS)[number], number>;
   const verified = await c.gold.countDocuments({ status: "verified" });
-  // The latest multi-model comparison run (the demo run), for the best full-pipeline accuracy and the Votes link.
-  const runs = await c.runs.find({ status: "done" }, { projection: { label: 1, models: 1, summary: 1, startedAt: 1 } }).sort({ startedAt: -1 }).toArray();
-  const demo = runs.find((r) => r.models.length > 2) ?? runs[0];
+  // The most recent completed run with every demo model (MODEL_PROFILES.demo): the best full-pipeline accuracy,
+  // its label and the Votes link. A newer demo run takes over as soon as it finishes.
+  const demoModels = MODEL_PROFILES.demo ?? [];
+  const runs = await c.runs
+    .find({ status: "done" }, { projection: { label: 1, models: 1, summary: 1, startedAt: 1, finishedAt: 1 } })
+    .toArray();
+  const when = (r: { startedAt: string; finishedAt?: string }) => Date.parse(r.finishedAt ?? r.startedAt) || 0;
+  const demo =
+    runs
+      .filter(
+        (r) =>
+          demoModels.length > 0 &&
+          demoModels.every((m) => r.models.includes(m)) &&
+          (r.summary ?? []).some((s) => s.mode === "e2e" && s.graded > 0),
+      )
+      .sort((a, b) => when(b) - when(a))[0] ?? null;
   const e2e: ModelSummary[] = (demo?.summary ?? []).filter((s) => s.mode === "e2e" && s.graded > 0);
-  const bestCorrect = Math.max(...e2e.map((s) => s.correct / s.graded), -1);
-  const best = e2e.filter((s) => s.correct / s.graded === bestCorrect);
+  // Exact on correct/graded, like the leaderboard's ranking (no floating point).
+  const top = e2e.reduce<ModelSummary | null>((b, s) => (!b || s.correct * b.graded > b.correct * s.graded ? s : b), null);
+  const best = top ? e2e.filter((s) => s.correct * top.graded === top.correct * s.graded) : [];
   const kept = await c.proposals.find({ status: "kept" }).sort({ decidedAt: 1 }).toArray();
   const first = kept[0]?.report?.perModel ?? [];
   const last = kept[kept.length - 1]?.report?.perModel ?? [];
   const gains = first.map((m) => ({ model: m.model, before: m.before, after: last.find((x) => x.model === m.model)?.after ?? m.before, graded: m.graded }));
-  return { counts, verified, demoId: demo?._id ?? null, best, bestAcc: bestCorrect, kept: kept.length, gains };
+  return {
+    counts,
+    verified,
+    demoId: demo?._id ?? null,
+    demoLabel: demo ? demo.label || demo._id : null,
+    best,
+    bestAcc: top ? top.correct / top.graded : null,
+    kept: kept.length,
+    gains,
+  };
 }
 
 export default async function ArchitecturePage() {
@@ -117,7 +142,7 @@ export default async function ArchitecturePage() {
     },
   ];
 
-  const numbers = n
+  const numbers: { value: string; label: string; run?: { href: string; label: string } }[] = n
     ? [
         { value: String(n.counts.filings), label: "proxy statements (DEF 14A)" },
         { value: n.counts.chunks.toLocaleString("en-US"), label: "page-anchored passages, two parser versions" },
@@ -125,8 +150,9 @@ export default async function ArchitecturePage() {
         {
           value: n.best.length ? formatPct(n.bestAcc) : "—",
           label: n.best.length
-            ? `best full-pipeline accuracy (${n.best.map((s) => modelName(s.model)).join(" & ")})`
-            : "best full-pipeline accuracy",
+            ? `best full-pipeline accuracy (${joinNames(n.best.map((s) => modelName(s.model)))})`
+            : "best full-pipeline accuracy (no completed run with all demo models yet)",
+          run: n.demoId && n.demoLabel ? { href: `/runs/${encodeURIComponent(n.demoId)}`, label: n.demoLabel } : undefined,
         },
         {
           value: String(n.kept),
@@ -153,6 +179,14 @@ export default async function ArchitecturePage() {
             <div key={x.label} className="rounded-lg border bg-card px-4 py-3">
               <div className="font-mono text-xl font-semibold tabular-nums">{x.value}</div>
               <div className="mt-0.5 text-[11.5px] leading-snug text-muted-foreground">{x.label}</div>
+              {x.run ? (
+                <div className="mt-1 text-[11px] leading-snug text-muted-foreground" data-best-run>
+                  in{" "}
+                  <Link href={x.run.href} className="text-sky-800 hover:underline">
+                    {x.run.label}
+                  </Link>
+                </div>
+              ) : null}
             </div>
           ))}
         </div>

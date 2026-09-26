@@ -6,6 +6,7 @@ import { FACTS, FACT_BY_ID } from "../facts";
 import { systemPrompt } from "../harness/extract";
 import { runToCompletion, startRun } from "../harness/run";
 import { chatJSON } from "../openrouter";
+import { assertWritable } from "../readonly";
 import { FACT_IDS, type ConfigDoc, type FactId, type ProposalDoc, type ProposalKind, type ValidationReport } from "../types";
 
 // The improvement loop: an agent proposes changes from graded failures, a human approves or
@@ -138,6 +139,7 @@ export async function proposeImprovements(sourceRunId: string): Promise<Proposal
 
 /** Human approval: builds a new config on top of the active one and starts a validation run. */
 export async function approveProposal(id: string, opts: { wait?: boolean } = {}) {
+  assertWritable("approving a proposal");
   const c = await collections();
   const p = await c.proposals.findOne({ _id: id });
   if (!p) throw new Error(`proposal ${id} not found`);
@@ -172,7 +174,25 @@ export async function approveProposal(id: string, opts: { wait?: boolean } = {})
   return { configId: cfg._id, runId };
 }
 
+/**
+ * Human revert of a kept change, e.g. when a later run shows harm validation missed. Only the newest
+ * kept change can be reverted, so the config chain stays consistent: the active config then falls
+ * back to the previous kept one.
+ */
+export async function revertProposal(id: string, note: string) {
+  assertWritable("reverting a proposal");
+  const c = await collections();
+  const p = await c.proposals.findOne({ _id: id });
+  if (!p) throw new Error(`proposal ${id} not found`);
+  if (p.status !== "kept") throw new Error(`proposal ${id} is ${p.status}; only kept changes can be reverted`);
+  const active = await activeConfig();
+  if (active?._id !== p.configId) throw new Error(`revert the newer kept change first (active config is ${active?._id})`);
+  await c.proposals.updateOne({ _id: id }, { $set: { status: "reverted", revertNote: note, decidedAt: now() } });
+  return activeConfig();
+}
+
 export async function rejectProposal(id: string) {
+  assertWritable("rejecting a proposal");
   const c = await collections();
   await c.proposals.updateOne({ _id: id, status: "pending" }, { $set: { status: "rejected", decidedAt: now() } });
 }
@@ -194,6 +214,11 @@ export async function refreshValidation(id: string, opts: { force?: boolean } = 
   const gained = after.filter((r) => r.correct && beforeMap.get(key(r)) === false).map(key);
   const lost = after.filter((r) => !r.correct && beforeMap.get(key(r)) === true).map(key);
   const source = await c.runs.findOne({ _id: baselineRunId });
+  const wrongVotesAdded = run.models.some((model) => {
+    const s0 = source?.summary?.find((s) => s.model === model && s.mode === "e2e");
+    const s1 = run.summary?.find((s) => s.model === model && s.mode === "e2e");
+    return (s1?.votesWrong ?? 0) > (s0?.votesWrong ?? 0);
+  });
   const perModel = run.models.map((model) => {
     const s0 = source?.summary?.find((s) => s.model === model && s.mode === "e2e");
     const s1 = run.summary?.find((s) => s.model === model && s.mode === "e2e");
@@ -216,7 +241,7 @@ export async function refreshValidation(id: string, opts: { force?: boolean } = 
   const touchedLost = lost.filter(affected);
   const votesOk = perModel.every((m) => m.votesAfter >= m.votesBefore);
   // Do no harm: keep only if it fixes a targeted case, breaks nothing it touches, and loses no vote.
-  const keep = targeted.length > 0 && touchedLost.length === 0 && votesOk;
+  const keep = targeted.length > 0 && touchedLost.length === 0 && votesOk && !wrongVotesAdded;
   const report: ValidationReport = {
     baselineRunId,
     validationRunId: run._id,
@@ -227,7 +252,9 @@ export async function refreshValidation(id: string, opts: { force?: boolean } = 
     verdict: keep ? "keep" : "revert",
     reason: keep
       ? `Fixed ${targeted.length} targeted case(s); net ${net >= 0 ? "+" : ""}${net} on the facts this change touches.${noise.length ? ` ${noise.length} flip(s) on untouched facts are run-to-run noise.` : ""}`
-      : targeted.length === 0
+      : wrongVotesAdded
+        ? "Created a wrong vote (a flipped FOR/AGAINST), which is never acceptable."
+        : targeted.length === 0
         ? "Didn't fix any case it targeted."
         : touchedLost.length > 0
           ? `Fixed a targeted case but broke ${touchedLost.length} answer(s) on the facts it touches.`

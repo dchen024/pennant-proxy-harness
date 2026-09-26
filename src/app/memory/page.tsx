@@ -226,18 +226,45 @@ export default async function MemoryPage() {
         {notKept.length === 0 ? (
           <Empty>None so far: every approved change was kept, and nothing was rejected.</Empty>
         ) : (
-          <ul className="space-y-2 text-[12.5px]">
-            {notKept.map((p) => (
-              <li key={p._id} className="flex flex-wrap items-center gap-2">
-                <span className={cn("rounded px-1.5 py-px text-[10.5px] font-medium ring-1 ring-inset", KIND[p.kind].cls)}>{KIND[p.kind].label}</span>
-                <span className="font-medium">{factLabel(p.target)}</span>
-                <span className="rounded bg-muted px-1.5 py-px text-[11px]">{p.status}</span>
-                <span className="text-muted-foreground">{p.report?.reason ?? ""}</span>
-                <Link href={`/improve#${p._id}`} className="ml-auto text-[12px] hover:underline">
-                  Details →
-                </Link>
-              </li>
-            ))}
+          <ul className="space-y-3 text-[12.5px]">
+            {notKept.map((p) => {
+              // A revert note means a human reverted a change the validation had kept.
+              const human = p.status === "reverted" && !!p.revertNote;
+              return (
+                <li key={p._id} className="space-y-1.5" data-not-kept={p._id}>
+                  <div className="flex flex-wrap items-center gap-2">
+                    <span className={cn("rounded px-1.5 py-px text-[10.5px] font-medium ring-1 ring-inset", KIND[p.kind].cls)}>{KIND[p.kind].label}</span>
+                    <span className="font-medium">{factLabel(p.target)}</span>
+                    {p.configId ? <span className="font-mono text-[11px] text-muted-foreground">{p.configId}</span> : null}
+                    <span
+                      className={cn(
+                        "rounded px-1.5 py-px text-[11px]",
+                        human ? "bg-red-50 font-medium text-red-800 ring-1 ring-red-600/20 ring-inset" : "bg-muted",
+                      )}
+                    >
+                      {human ? "reverted by a human" : p.status}
+                    </span>
+                    {human && p.decidedAt ? <span className="text-[11.5px] text-muted-foreground">{formatDateTime(p.decidedAt)}</span> : null}
+                    {!human ? <span className="text-muted-foreground">{p.report?.reason ?? ""}</span> : null}
+                    <Link href={`/improve#${p._id}`} className="ml-auto text-[12px] hover:underline">
+                      Details →
+                    </Link>
+                  </div>
+                  {human ? (
+                    <>
+                      <p className="border-l-2 border-red-300 pl-3 leading-relaxed whitespace-pre-line" data-revert-note>
+                        {p.revertNote}
+                      </p>
+                      {p.report ? (
+                        <p className="pl-3 text-[11.5px] text-muted-foreground">
+                          Its validation run had kept it: {p.report.reason}
+                        </p>
+                      ) : null}
+                    </>
+                  ) : null}
+                </li>
+              );
+            })}
           </ul>
         )}
       </Card>

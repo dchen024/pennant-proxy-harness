@@ -220,10 +220,11 @@ export function RunView({
       {tab === "votes" ? (
         <div className="space-y-3" data-votes-tab>
           <div className="rounded-lg border bg-card px-4 py-3">
-            <VoteSummary columns={columns} votes={votes} />
+            <VoteSummary columns={columns} votes={votes} summary={run.summary} />
             <p className="mt-1.5 text-[11px] text-muted-foreground">
-              The answer-key column applies the policy to the verified facts. Click any vote to see the rules, which fired,
-              and every fact behind it.
+              The answer-key column applies the policy to the verified facts. Wrong: a FOR/AGAINST that differs from the
+              answer key, a silent error. Escalated: the model voted REVIEW where the key decided, so a human looks. Click
+              any vote to see the rules, which fired, and every fact behind it.
             </p>
           </div>
           <VotesMatrix

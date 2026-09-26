@@ -1,3 +1,4 @@
+import { READ_ONLY, readOnlyResponse } from "@/lib/readonly";
 import { z } from "zod";
 import { listRuns } from "@/lib/queries";
 import type { Mode } from "@/lib/types";
@@ -19,6 +20,7 @@ const StartRunBody = z.object({
 type StartRun = (opts: { models: string[]; modes: Mode[]; tickers?: string[]; label?: string }) => Promise<string>;
 
 export async function POST(request: Request) {
+  if (READ_ONLY) return readOnlyResponse();
   let json: unknown;
   try {
     json = await request.json();

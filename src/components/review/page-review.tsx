@@ -12,6 +12,7 @@ import { FACT_BY_ID, FACTS } from "@/lib/facts";
 import { formatValue, shortModel } from "@/lib/format";
 import { matchQuote } from "@/lib/highlight";
 import type { BBox, FactValue, GoldFact } from "@/lib/types";
+import { READ_ONLY } from "@/lib/readonly";
 import { cn } from "@/lib/utils";
 
 // "By page" review: every fact whose saved citation sits on the same filing page is
@@ -242,8 +243,9 @@ export function PageGroupPanel({
           {facts.length} fact{facts.length === 1 ? "" : "s"} {group.page ? `cited on page ${group.page}` : "without a citation"}
         </h2>
         <p className="mt-0.5 text-[12px] text-muted-foreground">
-          {unverified ? `${unverified} to verify.` : "All verified."} Check the value against its highlight, then verify
-          the checked facts together.
+          {READ_ONLY
+            ? `${unverified ? `${unverified} not verified yet.` : "All verified."} Click a fact to see its highlight on the page.`
+            : `${unverified ? `${unverified} to verify.` : "All verified."} Check the value against its highlight, then verify the checked facts together.`}
         </p>
       </div>
 
@@ -294,7 +296,7 @@ export function PageGroupPanel({
                 <label className="ml-auto flex shrink-0 cursor-pointer items-center gap-1.5 text-[11px] text-muted-foreground">
                   <Checkbox
                     checked={checked}
-                    disabled={running}
+                    disabled={running || READ_ONLY}
                     aria-label={`Verify ${def?.label ?? g.factId}`}
                     data-check={g._id}
                     onCheckedChange={(v) => onCheck(g._id, v === true)}
@@ -311,9 +313,10 @@ export function PageGroupPanel({
                         key={String(b)}
                         type="button"
                         data-bool={`${g._id}:${b}`}
+                        disabled={READ_ONLY}
                         onClick={() => onDraft(g._id, b)}
                         className={cn(
-                          "rounded-[5px] px-2.5 py-0.5 text-[12px] font-medium transition-colors",
+                          "rounded-[5px] px-2.5 py-0.5 text-[12px] font-medium transition-colors disabled:cursor-not-allowed",
                           draft === b ? "bg-foreground text-background" : "text-muted-foreground hover:text-foreground",
                         )}
                       >
@@ -327,6 +330,7 @@ export function PageGroupPanel({
                       value={typeof draft === "string" ? draft : ""}
                       inputMode="decimal"
                       data-value-input={g._id}
+                      readOnly={READ_ONLY}
                       onFocus={(e) => {
                         e.currentTarget.select();
                         onFocusItem(g._id);
@@ -351,7 +355,7 @@ export function PageGroupPanel({
                   data-edit={g._id}
                 >
                   <PencilLineIcon />
-                  Edit
+                  {READ_ONLY ? "Open" : "Edit"}
                 </Button>
               </div>
 
@@ -383,7 +387,7 @@ export function PageGroupPanel({
       </div>
 
       <div className="flex items-center gap-2 pt-1">
-        <Button onClick={onVerify} disabled={running || checkedCount === 0} className="flex-1" data-verify-checked>
+        <Button onClick={onVerify} disabled={READ_ONLY || running || checkedCount === 0} className="flex-1" data-verify-checked>
           {running ? <Loader2Icon className="animate-spin" /> : <CheckIcon />}
           {running ? `Verifying ${progress.done}/${progress.total}…` : `Verify checked (${checkedCount})`}
           <kbd className="ml-1 rounded border border-current/30 px-1 font-mono text-[10px] opacity-70">a</kbd>

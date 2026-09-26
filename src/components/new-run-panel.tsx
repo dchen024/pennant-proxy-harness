@@ -11,6 +11,7 @@ import { COMPANIES } from "@/lib/companies";
 import { MODEL_PROFILES } from "@/lib/config";
 import { FACTS } from "@/lib/facts";
 import { modelProvider, shortModel } from "@/lib/format";
+import { READ_ONLY } from "@/lib/readonly";
 import type { Mode } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
@@ -42,6 +43,7 @@ export function NewRunPanel({ className }: { className?: string }) {
   const toggle = <T,>(list: T[], v: T) => (list.includes(v) ? list.filter((x) => x !== v) : [...list, v]);
 
   async function submit() {
+    if (READ_ONLY) return;
     setPending(true);
     setError(null);
     try {
@@ -82,9 +84,10 @@ export function NewRunPanel({ className }: { className?: string }) {
                 <button
                   key={p}
                   type="button"
+                  disabled={READ_ONLY}
                   onClick={() => setModels(MODEL_PROFILES[p])}
                   className={cn(
-                    "rounded border px-1.5 py-0.5 text-[11px] transition-colors",
+                    "rounded border px-1.5 py-0.5 text-[11px] transition-colors disabled:cursor-not-allowed disabled:opacity-60",
                     activePreset === p
                       ? "border-foreground bg-foreground text-background"
                       : "text-muted-foreground hover:text-foreground",
@@ -99,9 +102,12 @@ export function NewRunPanel({ className }: { className?: string }) {
             {ALL_MODELS.map((m) => (
               <label
                 key={m}
-                className="flex cursor-pointer items-center gap-2 rounded px-1 py-1 text-[13px] hover:bg-muted/60"
+                className={cn(
+                  "flex items-center gap-2 rounded px-1 py-1 text-[13px]",
+                  READ_ONLY ? "cursor-not-allowed opacity-70" : "cursor-pointer hover:bg-muted/60",
+                )}
               >
-                <Checkbox checked={models.includes(m)} onCheckedChange={() => setModels((s) => toggle(s, m))} />
+                <Checkbox checked={models.includes(m)} disabled={READ_ONLY} onCheckedChange={() => setModels((s) => toggle(s, m))} />
                 <span className="font-mono text-[12px]">{shortModel(m)}</span>
                 <span className="ml-auto text-[11px] text-muted-foreground">{modelProvider(m)}</span>
               </label>
@@ -117,9 +123,12 @@ export function NewRunPanel({ className }: { className?: string }) {
             {(Object.keys(MODE_INFO) as Mode[]).map((m) => (
               <label
                 key={m}
-                className="flex cursor-pointer items-center gap-2 rounded px-1 py-1 text-[13px] hover:bg-muted/60"
+                className={cn(
+                  "flex items-center gap-2 rounded px-1 py-1 text-[13px]",
+                  READ_ONLY ? "cursor-not-allowed opacity-70" : "cursor-pointer hover:bg-muted/60",
+                )}
               >
-                <Checkbox checked={modes.includes(m)} onCheckedChange={() => setModes((s) => toggle(s, m))} />
+                <Checkbox checked={modes.includes(m)} disabled={READ_ONLY} onCheckedChange={() => setModes((s) => toggle(s, m))} />
                 <span>{MODE_INFO[m].label}</span>
                 <span className="ml-auto text-[11px] text-muted-foreground">{MODE_INFO[m].hint}</span>
               </label>
@@ -137,9 +146,10 @@ export function NewRunPanel({ className }: { className?: string }) {
                   key={c.ticker}
                   type="button"
                   title={c.company}
+                  disabled={READ_ONLY}
                   onClick={() => setTickers((s) => toggle(s, c.ticker))}
                   className={cn(
-                    "rounded border px-2 py-0.5 font-mono text-[11px] transition-colors",
+                    "rounded border px-2 py-0.5 font-mono text-[11px] transition-colors disabled:cursor-not-allowed disabled:opacity-60",
                     on ? "border-foreground/70 bg-muted text-foreground" : "text-muted-foreground/70 line-through",
                   )}
                 >
@@ -155,24 +165,31 @@ export function NewRunPanel({ className }: { className?: string }) {
           <Input
             value={label}
             onChange={(e) => setLabel(e.target.value)}
+            disabled={READ_ONLY}
             placeholder="optional, e.g. demo-baseline"
             className="h-8 text-[13px]"
           />
         </div>
 
-        <div className="flex items-center justify-between gap-2 pt-1">
-          <span className="text-[11px] text-muted-foreground tabular-nums">
-            {calls.toLocaleString()} fact extractions
-          </span>
-          <Button
-            size="sm"
-            onClick={submit}
-            disabled={pending || models.length === 0 || modes.length === 0 || tickers.length === 0}
-          >
-            {pending ? <Loader2Icon className="animate-spin" /> : <PlayIcon />}
-            Start run
-          </Button>
-        </div>
+        {READ_ONLY ? (
+          <p className="pt-1 text-[12px] leading-snug text-muted-foreground" data-read-only-note>
+            Runs are disabled in the read-only demo. Clone the repo to run it: see README.
+          </p>
+        ) : (
+          <div className="flex items-center justify-between gap-2 pt-1">
+            <span className="text-[11px] text-muted-foreground tabular-nums">
+              {calls.toLocaleString()} fact extractions
+            </span>
+            <Button
+              size="sm"
+              onClick={submit}
+              disabled={pending || models.length === 0 || modes.length === 0 || tickers.length === 0}
+            >
+              {pending ? <Loader2Icon className="animate-spin" /> : <PlayIcon />}
+              Start run
+            </Button>
+          </div>
+        )}
         {error ? (
           <p className="rounded border border-red-200 bg-red-50 px-2.5 py-2 text-[12px] text-red-900">{error}</p>
         ) : null}

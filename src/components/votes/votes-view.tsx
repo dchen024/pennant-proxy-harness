@@ -5,7 +5,7 @@ import Link from "next/link";
 import { ModeBadge, modeLabel } from "@/components/mode-badge";
 import { VOTE_ITEM_LABEL, VoteBadge } from "@/components/policy-view";
 import { modelName, shortModel } from "@/lib/format";
-import type { Mode, Vote, VoteItem } from "@/lib/types";
+import type { Mode, ModelSummary, Vote, VoteItem } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import { columnScore, decisionFor, ITEMS, type RunVotes } from "./compute";
 
@@ -24,55 +24,98 @@ export interface VoteSelection {
 
 type Mismatch = { ticker: string; item: VoteItem; vote: Vote; ref: Vote };
 
-function describeMismatches(mm: Mismatch[]): string {
-  if (mm.length === 0) return "no mismatches.";
-  const where = mm.map((m) => `${m.ticker} ${VOTE_ITEM_LABEL[m.item].toLowerCase()}`).join(" and ");
-  const escalated = mm.filter((m) => m.vote === "REVIEW" && m.ref !== "REVIEW").length;
-  const wrong = mm.filter((m) => m.vote !== "REVIEW" && m.ref !== "REVIEW").length;
-  const decided = mm.length - escalated - wrong; // the key says REVIEW, the model decided
-  if (escalated === mm.length) {
-    const lead = mm.length === 1 ? "the one mismatch is a REVIEW (escalated)" : `${mm.length === 2 ? "both" : `all ${mm.length}`} mismatches are REVIEW (escalated)`;
-    return `${lead} (${where}); ${mm.length === 1 ? "it is not" : "none is"} a wrong FOR/AGAINST.`;
-  }
-  const parts = [
-    escalated ? `${escalated} REVIEW (escalated)` : null,
-    wrong ? `${wrong} wrong FOR/AGAINST` : null,
-    decided ? `${decided} decided where the answer key says REVIEW` : null,
-  ].filter(Boolean);
-  return `${mm.length} mismatches: ${parts.join(", ")} (${where}).`;
+/**
+ * One column's vote tally. Wrong = a FOR/AGAINST that differs from the answer key (a silent error);
+ * escalated = REVIEW where the key decided (a human looks). Counts come from the graded run summary
+ * when it has them, else from the votes computed here; the places always come from the votes here.
+ */
+interface Tally {
+  match: number;
+  total: number;
+  wrong: number;
+  escalated: number;
+  wrongAt: Mismatch[];
+  escalatedAt: Mismatch[];
 }
 
-const signature = (mm: Mismatch[]) => mm.map((m) => `${m.ticker}.${m.item}.${m.vote}.${m.ref}`).join("|");
+function tally(c: VoteColumn, votes: RunVotes, summary?: ModelSummary[]): Tally {
+  const s = columnScore(votes.byColumn.get(c.key) ?? new Map());
+  const wrongAt = s.mismatches.filter((m) => m.vote !== "REVIEW");
+  const escalatedAt = s.mismatches.filter((m) => m.vote === "REVIEW");
+  const row = summary?.find((x) => x.model === c.model && x.mode === c.mode);
+  if (row && row.votesTotal > 0 && row.votesWrong !== undefined && row.votesEscalated !== undefined) {
+    return { match: row.votesCorrect, total: row.votesTotal, wrong: row.votesWrong, escalated: row.votesEscalated, wrongAt, escalatedAt };
+  }
+  return { match: s.match, total: s.total, wrong: wrongAt.length, escalated: escalatedAt.length, wrongAt, escalatedAt };
+}
 
-/** Header lines: per mode, how many votes each model gets right and what kind the misses are. */
-export function VoteSummary({ columns, votes }: { columns: VoteColumn[]; votes: RunVotes }) {
+const place = (m: Mismatch) => `${m.ticker} ${VOTE_ITEM_LABEL[m.item].toLowerCase()}`;
+/** " (AAPL say-on-pay: FOR where the key says AGAINST)" — only when the places agree with the count. */
+const wrongPlaces = (t: Tally) =>
+  t.wrongAt.length === t.wrong && t.wrong > 0
+    ? ` (${t.wrongAt.map((m) => `${place(m)}: ${m.vote} where the key says ${m.ref}`).join("; ")})`
+    : "";
+const escalatedPlaces = (t: Tally) =>
+  t.escalatedAt.length === t.escalated && t.escalated > 0 ? ` (${t.escalatedAt.map(place).join(", ")})` : "";
+
+function describeTally(t: Tally): string {
+  const n = t.wrong + t.escalated;
+  if (n === 0) return "no mismatches.";
+  if (t.wrong === 0) {
+    const lead = n === 1 ? "the one mismatch is escalated to REVIEW" : `${n === 2 ? "both" : `all ${n}`} mismatches are escalated to REVIEW`;
+    return `${lead}${escalatedPlaces(t)}; ${n === 1 ? "it is not" : "none is"} a wrong FOR/AGAINST.`;
+  }
+  const parts = [
+    `${t.wrong} wrong FOR/AGAINST${wrongPlaces(t)}`,
+    t.escalated ? `${t.escalated} escalated to REVIEW${escalatedPlaces(t)}` : null,
+  ].filter(Boolean);
+  return `${n} mismatch${n === 1 ? "" : "es"}: ${parts.join("; ")}.`;
+}
+
+const signature = (t: Tally) =>
+  [t.match, t.total, t.wrong, t.escalated, ...[...t.wrongAt, ...t.escalatedAt].map((m) => `${m.ticker}.${m.item}.${m.vote}.${m.ref}`)].join("|");
+
+/** Header lines: per mode, how many votes each model gets right, and how many misses are wrong vs escalated. */
+export function VoteSummary({ columns, votes, summary }: { columns: VoteColumn[]; votes: RunVotes; summary?: ModelSummary[] }) {
   const modes = [...new Set(columns.map((c) => c.mode))];
   return (
     <div className="space-y-1 text-[12.5px]" data-vote-summary>
       {modes.map((mode) => {
-        const cols = columns.filter((c) => c.mode === mode);
-        const scores = cols.map((c) => ({ c, s: columnScore(votes.byColumn.get(c.key) ?? new Map()) }));
-        if (scores.length === 0) return null;
-        const first = scores[0].s;
-        const same = scores.every((x) => x.s.match === first.match && x.s.total === first.total && signature(x.s.mismatches) === signature(first.mismatches));
+        const tallies = columns.filter((c) => c.mode === mode).map((c) => ({ c, t: tally(c, votes, summary) }));
+        if (tallies.length === 0) return null;
+        const first = tallies[0].t;
+        const same = tallies.every((x) => signature(x.t) === signature(first));
         return (
-          <p key={mode} className="flex flex-wrap items-baseline gap-x-1.5">
+          <p key={mode} className="flex flex-wrap items-baseline gap-x-1.5" data-vote-summary-mode={mode}>
             <ModeBadge mode={mode} className="self-center" />
             {same ? (
               <span>
                 <span className="font-medium">
-                  {scores.length > 1 ? "Every model" : modelName(scores[0].c.model)}: {first.match}/{first.total} votes match the
+                  {tallies.length > 1 ? "Every model" : modelName(tallies[0].c.model)}: {first.match}/{first.total} votes match the
                   answer key
                 </span>
-                ; {describeMismatches(first.mismatches)}
+                ; {describeTally(first)}
               </span>
             ) : (
               <span>
-                {scores
-                  .map(({ c, s }) => `${modelName(c.model)} ${s.match}/${s.total}`)
-                  .join(" · ")}
-                . Mismatches:{" "}
-                {describeMismatches(scores.flatMap((x) => x.s.mismatches))}
+                {tallies.map(({ c, t }, i) => (
+                  <Fragment key={c.key}>
+                    {i > 0 ? " · " : null}
+                    <span data-vote-tally={c.key}>
+                      <span className="font-medium">{modelName(c.model)}</span> {t.match}/{t.total}
+                      {t.wrong || t.escalated ? ": " : null}
+                      {t.wrong ? (
+                        <span className="text-red-700">
+                          <span className="font-medium">{t.wrong} wrong</span>
+                          {wrongPlaces(t)}
+                        </span>
+                      ) : null}
+                      {t.wrong && t.escalated ? ", " : null}
+                      {t.escalated ? <span className="text-muted-foreground">{t.escalated} escalated</span> : null}
+                    </span>
+                  </Fragment>
+                ))}
+                .
               </span>
             )}
           </p>

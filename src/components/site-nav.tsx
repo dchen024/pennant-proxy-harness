@@ -2,6 +2,8 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { ReadOnlyBadge } from "@/components/read-only";
+import { READ_ONLY } from "@/lib/readonly";
 import { cn } from "@/lib/utils";
 
 const LINKS = [
@@ -42,7 +44,13 @@ export function SiteNav() {
             );
           })}
         </nav>
-        <div className="ml-auto hidden min-w-0 truncate text-[11px] text-muted-foreground min-[1100px]:block">
+        {READ_ONLY ? <ReadOnlyBadge className="ml-auto" /> : null}
+        <div
+          className={cn(
+            "hidden min-w-0 truncate text-[11px] text-muted-foreground min-[1100px]:block",
+            !READ_ONLY && "ml-auto",
+          )}
+        >
           DEF 14A · policy-driven votes · every number traced to its source
         </div>
       </div>

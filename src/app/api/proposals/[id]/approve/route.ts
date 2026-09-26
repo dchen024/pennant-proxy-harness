@@ -1,3 +1,4 @@
+import { READ_ONLY, readOnlyResponse } from "@/lib/readonly";
 import { z } from "zod";
 import { errorStatus, loadImprove } from "@/app/improve/data";
 import { approveProposal } from "@/lib/improve/loop";
@@ -11,6 +12,7 @@ const Params = z.object({ id: z.string().regex(/^[A-Za-z0-9_.:-]{1,100}$/, "Inva
  * (paid, ~$0.05) validation run in the background. Returns { configId, runId, ...payload }.
  */
 export async function POST(_request: Request, ctx: RouteContext<"/api/proposals/[id]/approve">) {
+  if (READ_ONLY) return readOnlyResponse();
   const parsed = Params.safeParse(await ctx.params);
   if (!parsed.success) return Response.json({ error: parsed.error.issues.map((i) => i.message).join("; ") }, { status: 400 });
   try {

@@ -5,6 +5,7 @@ import { FACTS, FACT_BY_ID } from "../facts";
 import { GOLD_POLICY } from "../policy/policy";
 import { evaluatePolicy, factsInExpr, valuesMatch } from "../policy/evaluate";
 import type { Chunk, FactId, FactMap, FactResult, GoldFact, Mode, ModelSummary, RunDoc, Stage } from "../types";
+import { assertWritable } from "../readonly";
 import { attribute, citationChecks, evidenceIn, textContains } from "./checks";
 import { extractFact } from "./extract";
 import { retrieve } from "./retrieve";
@@ -31,6 +32,7 @@ const now = () => new Date().toISOString();
 
 /** Creates the run document and executes it in the background. Returns the run id immediately. */
 export async function startRun(opts: RunOptions): Promise<string> {
+  assertWritable("starting a run");
   const runId = await createRun(opts);
   void executeRun(runId, opts).catch(async (err) => {
     const c = await collections();
@@ -205,6 +207,8 @@ export async function gradeRun(runId: string, gradeWith: GradeWith = "verified")
       const mine = results.filter((r) => r.model === model && r.mode === mode);
       let votesCorrect = 0;
       let votesTotal = 0;
+      let votesWrong = 0;
+      let votesEscalated = 0;
       for (const ticker of run.tickers) {
         const rs = mine.filter((r) => r.ticker === ticker);
         const predicted: FactMap = Object.fromEntries(rs.map((r) => [r.factId, r.extraction?.value ?? null]));
@@ -222,9 +226,11 @@ export async function gradeRun(runId: string, gradeWith: GradeWith = "verified")
         if (rs.some((r) => r.hasGold)) {
           votesTotal += ref.length;
           votesCorrect += ref.filter((d, i) => d.vote === p[i]?.vote).length;
+          votesWrong += ref.filter((d, i) => d.vote !== p[i]?.vote && p[i]?.vote !== "REVIEW").length;
+          votesEscalated += ref.filter((d, i) => d.vote !== p[i]?.vote && p[i]?.vote === "REVIEW").length;
         }
       }
-      summary.push(summarize(model, mode, mine, votesCorrect, votesTotal));
+      summary.push({ ...summarize(model, mode, mine, votesCorrect, votesTotal), votesWrong, votesEscalated });
     }
 
   if (results.length) {
