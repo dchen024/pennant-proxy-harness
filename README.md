@@ -6,7 +6,9 @@ Built at the MongoDB "Harness Engineering & Model Wrangling" hackathon (NYC, Sep
 
 ## Demo
 
-**▶ [Watch the 1-minute demo](docs/media/proxy-harness-demo.mp4)** (MP4, 5.5 MB)
+[![Watch the 1-minute demo on YouTube](https://img.youtube.com/vi/4ckXIIlr7Rw/hqdefault.jpg)](https://youtu.be/4ckXIIlr7Rw)
+
+**▶ [Watch the 1-minute demo on YouTube](https://youtu.be/4ckXIIlr7Rw)**
 
 | Architecture | Leaderboard |
 |---|---|
