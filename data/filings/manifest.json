@@ -1,0 +1,52 @@
+{
+  "AAPL": {
+    "ticker": "AAPL",
+    "company": "Apple Inc.",
+    "cik": "320193",
+    "form": "DEF 14A",
+    "accession": "0001308179-26-000008",
+    "filingDate": "2026-01-08",
+    "sourceUrl": "https://www.sec.gov/Archives/edgar/data/320193/000130817926000008/aapl014016-def14a.htm",
+    "pdfPath": "/filings/AAPL.pdf"
+  },
+  "MSFT": {
+    "ticker": "MSFT",
+    "company": "Microsoft Corporation",
+    "cik": "789019",
+    "form": "DEF 14A",
+    "accession": "0001193125-25-245150",
+    "filingDate": "2025-10-21",
+    "sourceUrl": "https://www.sec.gov/Archives/edgar/data/789019/000119312525245150/d908201ddef14a.htm",
+    "pdfPath": "/filings/MSFT.pdf"
+  },
+  "GOOGL": {
+    "ticker": "GOOGL",
+    "company": "Alphabet Inc.",
+    "cik": "1652044",
+    "form": "DEF 14A",
+    "accession": "0001308179-26-000342",
+    "filingDate": "2026-04-24",
+    "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000130817926000342/goog-20260424.htm",
+    "pdfPath": "/filings/GOOGL.pdf"
+  },
+  "META": {
+    "ticker": "META",
+    "company": "Meta Platforms, Inc.",
+    "cik": "1326801",
+    "form": "DEF 14A",
+    "accession": "0001628280-26-025532",
+    "filingDate": "2026-04-16",
+    "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1326801/000162828026025532/meta-20260416.htm",
+    "pdfPath": "/filings/META.pdf"
+  },
+  "JPM": {
+    "ticker": "JPM",
+    "company": "JPMorgan Chase & Co.",
+    "cik": "19617",
+    "form": "DEF 14A",
+    "accession": "0000019617-26-000096",
+    "filingDate": "2026-04-06",
+    "sourceUrl": "https://www.sec.gov/Archives/edgar/data/19617/000001961726000096/jpm-20260402.htm",
+    "pdfPath": "/filings/JPM.pdf"
+  }
+}

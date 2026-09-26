@@ -39,3 +39,11 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+!.env.example
+
+# generated: pdf.js worker (copied on postinstall), parser dumps, debug renders, run logs
+public/pdf.worker.min.mjs
+data/chunks/
+data/renders/
+data/*.log

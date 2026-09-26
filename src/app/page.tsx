@@ -1,69 +1,119 @@
-import Image from "next/image";
+import { AutoRefresh } from "@/components/auto-refresh";
+import { DbBanner, EmptyState, PIPELINE_COMMANDS } from "@/components/empty-state";
+import { LeaderboardView } from "@/components/leaderboard/leaderboard-view";
+import { NewRunPanel } from "@/components/new-run-panel";
+import { RunPicker } from "@/components/run-picker";
+import { RunHeader } from "@/components/run-summary";
+import { sortSummaries, summarize } from "@/components/stats";
+import { getDbStatus, getDefaultRun, getResults, getRun, listRuns } from "@/lib/queries";
+import type { ModelSummary } from "@/lib/types";
 
-export default function Home() {
+export const dynamic = "force-dynamic";
+
+export default async function LeaderboardPage(props: PageProps<"/">) {
+  const sp = await props.searchParams;
+  const requested = typeof sp.run === "string" ? sp.run : undefined;
+
+  const status = await getDbStatus();
+  const runs = status.ok ? await listRuns() : [];
+  const run = requested
+    ? (runs.find((r) => r._id === requested) ?? (status.ok ? await getRun(requested) : null))
+    : await getDefaultRun(runs);
+
+  let rows: ModelSummary[] = [];
+  let provisional = false;
+  if (run) {
+    if (run.summary && run.summary.length > 0) {
+      rows = sortSummaries(run.summary);
+    } else {
+      rows = summarize(await getResults(run._id));
+      provisional = true;
+    }
+  }
+  const filings = run?.tickers?.length ?? 0;
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <div className="mx-auto w-full max-w-[1600px] space-y-5 px-5 py-6">
+      <DbBanner status={status} />
+      <AutoRefresh enabled={run?.status === "running"} />
+
+      <div className="flex flex-wrap items-end justify-between gap-3">
+        <div>
+          <h1 className="text-lg font-semibold tracking-tight">Leaderboard</h1>
+          <p className="text-[13px] text-muted-foreground">
+            Which model can apply the voting policy to a proxy statement: accuracy against a human-verified answer key,
+            errors that flip votes, citation integrity and cost.
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+        <RunPicker
+          runs={runs.map((r) => ({
+            _id: r._id,
+            label: r.label,
+            status: r.status,
+            startedAt: r.startedAt,
+            models: r.models,
+            modes: r.modes,
+          }))}
+          value={run?._id}
+        />
+      </div>
+
+      <div className="grid grid-cols-1 gap-5 min-[1400px]:grid-cols-[minmax(0,1fr)_320px]">
+        <div className="min-w-0 space-y-5">
+          {!run ? (
+            <EmptyState
+              title={requested ? `Run "${requested}" not found` : "No runs yet"}
+              commands={PIPELINE_COMMANDS}
+            >
+              Runs appear here once the harness has written results to MongoDB. Start one from the panel on the right, or
+              run the pipeline from the terminal:
+            </EmptyState>
+          ) : (
+            <>
+              <RunHeader run={run} />
+              <LeaderboardView
+                key={run._id}
+                rows={rows}
+                run={{ models: run.models.length, modes: run.modes, filings, factsPerFiling: run.factIds.length }}
+                provisional={provisional}
+                notes={<MethodNotes />}
+              />
+            </>
+          )}
         </div>
-      </main>
+
+        <aside className="space-y-5">
+          <NewRunPanel />
+        </aside>
+      </div>
     </div>
+  );
+}
+
+function MethodNotes() {
+  const items = [
+    ["Answer key", "Drafted by two models outside the comparison, then verified by a human with the PDF open."],
+    ["Traceability", "Every extracted value carries a chunk id and verbatim quote; code checks the quote is in the chunk and the number is in the quote."],
+    ["Attribution", "Each wrong fact is blamed on the first stage that failed: parse → retrieval → extraction → citation."],
+    ["Consequence", "A deterministic policy tree turns facts into votes. An error is consequential only if it flips a vote."],
+    [
+      "Two modes, one run",
+      "Full pipeline: the model sees the passages our search retrieved. Reading only: it is handed the human-verified evidence passage, so its errors are about reading, not search.",
+    ],
+  ];
+  return (
+    <section className="rounded-lg border bg-card">
+      <div className="border-b px-4 py-2.5">
+        <h2 className="text-[13px] font-semibold">How to read this</h2>
+      </div>
+      <dl className="space-y-2.5 px-4 py-3 text-[12px]">
+        {items.map(([k, v]) => (
+          <div key={k}>
+            <dt className="font-medium">{k}</dt>
+            <dd className="text-muted-foreground">{v}</dd>
+          </div>
+        ))}
+      </dl>
+    </section>
   );
 }

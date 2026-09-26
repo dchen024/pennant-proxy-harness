@@ -1,0 +1,1784 @@
+[
+  {
+    "_id": "AAPL:audit.all_other_fees_current",
+    "ticker": "AAPL",
+    "factId": "audit.all_other_fees_current",
+    "value": 2767000,
+    "page": 66,
+    "quote": "All Other Fees(4) | 2,767 | 2,037",
+    "chunkId": "AAPL:p66:2",
+    "status": "verified",
+    "proposals": [
+      {
+        "model": "anthropic/claude-fable-5.1",
+        "value": 2767000,
+        "chunkId": "AAPL:p66:2",
+        "quote": "All Other Fees(4) | 2,767 | 2,037"
+      },
+      {
+        "model": "openai/gpt-6-astra",
+        "value": 2767000,
+        "chunkId": "AAPL:p66:2",
+        "quote": "All Other Fees(4) | 2,767 | 2,037"
+      }
+    ],
+    "updatedAt": "2026-09-26T18:41:42.354Z"
+  },
+  {
+    "_id": "AAPL:audit.audit_fees_current",
+    "ticker": "AAPL",
+    "factId": "audit.audit_fees_current",
+    "value": 24703000,
+    "page": 66,
+    "quote": "Audit Fees(1) | 24,703 | 22,381",
+    "chunkId": "AAPL:p66:2",
+    "status": "verified",
+    "proposals": [
+      {
+        "model": "anthropic/claude-fable-5.1",
+        "value": 24703000,
+        "chunkId": "AAPL:p66:2",
+        "quote": "Audit Fees(1) | 24,703 | 22,381"
+      },
+      {
+        "model": "openai/gpt-6-astra",
+        "value": 24703000,
+        "chunkId": "AAPL:p66:2",
+        "quote": "Audit Fees(1) | 24,703 | 22,381"
+      }
+    ],
+    "updatedAt": "2026-09-26T18:40:07.285Z"
+  },
+  {
+    "_id": "AAPL:audit.audit_related_fees_current",
+    "ticker": "AAPL",
+    "factId": "audit.audit_related_fees_current",
+    "value": 2274000,
+    "page": 66,
+    "quote": "Audit-Related Fees(2) | 2,274 | 2,418",
+    "chunkId": "AAPL:p66:2",
+    "status": "verified",
+    "proposals": [
+      {
+        "model": "anthropic/claude-fable-5.1",
+        "value": 2274000,
+        "chunkId": "AAPL:p66:2",
+        "quote": "Audit-Related Fees(2) | 2,274 | 2,418"
+      },
+      {
+        "model": "openai/gpt-6-astra",
+        "value": 2274000,
+        "chunkId": "AAPL:p66:2",
+        "quote": "Audit-Related Fees(2) | 2,274 | 2,418"
+      }
+    ],
+    "updatedAt": "2026-09-26T18:41:35.472Z"
+  },
+  {
+    "_id": "AAPL:audit.tax_fees_current",
+    "ticker": "AAPL",
+    "factId": "audit.tax_fees_current",
+    "value": 4533000,
+    "page": 66,
+    "quote": "Tax Fees(3) | 4,533 | 3,435",
+    "chunkId": "AAPL:p66:2",
+    "status": "verified",
+    "proposals": [
+      {
+        "model": "anthropic/claude-fable-5.1",
+        "value": 4533000,
+        "chunkId": "AAPL:p66:2",
+        "quote": "Tax Fees(3) | 4,533 | 3,435"
+      },
+      {
+        "model": "openai/gpt-6-astra",
+        "value": 4533000,
+        "chunkId": "AAPL:p66:2",
+        "quote": "Tax Fees(3) | 4,533 | 3,435"
+      }
+    ],
+    "updatedAt": "2026-09-26T18:41:38.761Z"
+  },
+  {
+    "_id": "AAPL:board.ceo_is_chair",
+    "ticker": "AAPL",
+    "factId": "board.ceo_is_chair",
+    "value": false,
+    "page": 18,
+    "quote": "The Board believes its current leadership structure, in which the roles of Chair and CEO are separated, best serves Apple’s overall",
+    "chunkId": "AAPL:p18:1",
+    "status": "verified",
+    "proposals": [
+      {
+        "model": "anthropic/claude-fable-5.1",
+        "value": false,
+        "chunkId": "AAPL:p18:1",
+        "quote": "The Board believes its current leadership structure, in which the roles of Chair and CEO are separated, best serves Apple’s overall"
+      },
+      {
+        "model": "openai/gpt-6-astra",
+        "value": false,
+        "chunkId": "AAPL:p18:1",
+        "quote": "The Board believes its current leadership structure, in which the roles of Chair and CEO are separated, best serves Apple’s overall\ncorporate structure and the Board’s ability to carry out its roles and responsibilities on behalf of Apple’s shareholders, including its\noversight of management and corporate governance matters."
+      }
+    ],
+    "updatedAt": "2026-09-26T18:29:53.793Z",
+    "evidenceBy": "draft"
+  },
+  {
+    "_id": "AAPL:board.has_lead_independent_director",
+    "ticker": "AAPL",
+    "factId": "board.has_lead_independent_director",
+    "value": false,
+    "page": 17,
+    "quote": "Separation of Chair and | Our CEO is focused on managing Apple and our independent Chair drives accountability at the",
+    "chunkId": "AAPL:p17:0",
+    "status": "verified",
+    "proposals": [
+      {
+        "model": "anthropic/claude-fable-5.1",
+        "value": false,
+        "chunkId": "AAPL:p17:0",
+        "quote": "Separation of Chair and | Our CEO is focused on managing Apple and our independent Chair drives accountability at the"
+      },
+      {
+        "model": "openai/gpt-6-astra",
+        "value": null,
+        "chunkId": null,
+        "quote": null
+      }
+    ],
+    "updatedAt": "2026-09-26T19:06:05.048Z",
+    "evidenceBy": "draft"
+  },
+  {
+    "_id": "AAPL:board.independent_nominee_count",
+    "ticker": "AAPL",
+    "factId": "board.independent_nominee_count",
+    "value": 7,
+    "page": 18,
+    "quote": "Board members, other than Mr. Cook, are independent under applicable rules of The Nasdaq Stock Market LLC (“Nasdaq”).",
+    "chunkId": "AAPL:p18:0",
+    "status": "verified",
+    "proposals": [
+      {
+        "model": "anthropic/claude-fable-5.1",
+        "value": 7,
+        "chunkId": "AAPL:p18:0",
+        "quote": "Board members, other than Mr. Cook, are independent under applicable rules of The Nasdaq Stock Market LLC (“Nasdaq”)."
+      },
+      {
+        "model": "openai/gpt-6-astra",
+        "value": 7,
+        "chunkId": "AAPL:p18:0",
+        "quote": "The Board has determined that all\nBoard members, other than Mr. Cook, are independent under applicable rules of The Nasdaq Stock Market LLC (“Nasdaq”)."
+      }
+    ],
+    "updatedAt": "2026-09-26T19:01:06.261Z"
+  },
+  {
+    "_id": "AAPL:board.nominee_count",
+    "ticker": "AAPL",
+    "factId": "board.nominee_count",
+    "value": 8,
+    "page": 65,
+    "quote": "direction is made, for the election of the Board’s eight nominees.",
+    "chunkId": "AAPL:p65:0",
+    "status": "verified",
+    "proposals": [
+      {
+        "model": "anthropic/claude-fable-5.1",
+        "value": 8,
+        "chunkId": "AAPL:p65:0",
+        "quote": "direction is made, for the election of the Board’s eight nominees."
+      },
+      {
+        "model": "openai/gpt-6-astra",
+        "value": 8,
+        "chunkId": "AAPL:p65:0",
+        "quote": "Holders of proxies solicited by this Proxy Statement will vote the proxies received by them as directed on the proxy card or, if no\ndirection is made, for the election of the Board’s eight nominees."
+      }
+    ],
+    "updatedAt": "2026-09-26T18:02:09.209Z"
+  },
+  {
+    "_id": "AAPL:governance.unequal_voting_rights",
+    "ticker": "AAPL",
+    "factId": "governance.unequal_voting_rights",
+    "value": false,
+    "page": 17,
+    "quote": "One share equals one vote | We have a single class of shares with equal voting rights.",
+    "chunkId": "AAPL:p17:0",
+    "status": "verified",
+    "proposals": [
+      {
+        "model": "anthropic/claude-fable-5.1",
+        "value": false,
+        "chunkId": "AAPL:p17:0",
+        "quote": "One share equals one vote | We have a single class of shares with equal voting rights."
+      },
+      {
+        "model": "openai/gpt-6-astra",
+        "value": false,
+        "chunkId": "AAPL:p17:0",
+        "quote": "We have a single class of shares with equal voting rights."
+      }
+    ],
+    "updatedAt": "2026-09-26T18:37:11.601Z",
+    "evidenceBy": "draft"
+  },
+  {
+    "_id": "AAPL:governance.unequal_voting_sunset",
+    "ticker": "AAPL",
+    "factId": "governance.unequal_voting_sunset",
+    "value": false,
+    "page": 17,
+    "quote": "One share equals one vote | We have a single class of shares with equal voting rights.",
+    "chunkId": "AAPL:p17:0",
+    "status": "verified",
+    "proposals": [
+      {
+        "model": "anthropic/claude-fable-5.1",
+        "value": false,
+        "chunkId": "AAPL:p17:0",
+        "quote": "One share equals one vote | We have a single class of shares with equal voting rights."
+      },
+      {
+        "model": "openai/gpt-6-astra",
+        "value": false,
+        "chunkId": "AAPL:p17:0",
+        "quote": "We have a single class of shares with equal voting rights."
+      }
+    ],
+    "updatedAt": "2026-09-26T18:44:52.781Z",
+    "evidenceBy": "draft"
+  },
+  {
+    "_id": "AAPL:pay.ceo_total_comp_current",
+    "ticker": "AAPL",
+    "factId": "pay.ceo_total_comp_current",
+    "value": 74294811,
+    "page": 61,
+    "quote": "2025 | 74,294,811 | 108,423,733 | 23,812,358 | 34,125,743 | 233.88 | 279.51 | 112,010 | 416,161",
+    "chunkId": "AAPL:p61:1",
+    "status": "verified",
+    "proposals": [
+      {
+        "model": "anthropic/claude-fable-5.1",
+        "value": 74294811,
+        "chunkId": "AAPL:p61:1",
+        "quote": "2025 | 74,294,811 | 108,423,733 | 23,812,358 | 34,125,743 | 233.88 | 279.51 | 112,010 | 416,161"
+      },
+      {
+        "model": "openai/gpt-6-astra",
+        "value": 74294811,
+        "chunkId": "AAPL:p61:1",
+        "quote": "2025 | 74,294,811 | 108,423,733 | 23,812,358 | 34,125,743 | 233.88 | 279.51 | 112,010 | 416,161"
+      }
+    ],
+    "updatedAt": "2026-09-26T18:37:28.329Z"
+  },
+  {
+    "_id": "AAPL:pay.ceo_total_comp_prior",
+    "ticker": "AAPL",
+    "factId": "pay.ceo_total_comp_prior",
+    "value": 74609802,
+    "page": 61,
+    "quote": "2024 | 74,609,802 | 168,980,568 | 27,178,896 | 58,633,525 | 207.59 | 206.32 | 93,736 | 391,035",
+    "chunkId": "AAPL:p61:1",
+    "status": "verified",
+    "proposals": [
+      {
+        "model": "anthropic/claude-fable-5.1",
+        "value": 74609802,
+        "chunkId": "AAPL:p61:1",
+        "quote": "2024 | 74,609,802 | 168,980,568 | 27,178,896 | 58,633,525 | 207.59 | 206.32 | 93,736 | 391,035"
+      },
+      {
+        "model": "openai/gpt-6-astra",
+        "value": 74609802,
+        "chunkId": "AAPL:p61:1",
+        "quote": "2024 | 74,609,802 | 168,980,568 | 27,178,896 | 58,633,525 | 207.59 | 206.32 | 93,736 | 391,035"
+      }
+    ],
+    "updatedAt": "2026-09-26T18:37:37.845Z"
+  },
+  {
+    "_id": "AAPL:pay.company_tsr_current",
+    "ticker": "AAPL",
+    "factId": "pay.company_tsr_current",
+    "value": 233.88,
+    "page": 61,
+    "quote": "2025 | 74,294,811 | 108,423,733 | 23,812,358 | 34,125,743 | 233.88 | 279.51 | 112,010 | 416,161",
+    "chunkId": "AAPL:p61:1",
+    "status": "verified",
+    "proposals": [
+      {
+        "model": "anthropic/claude-fable-5.1",
+        "value": 233.88,
+        "chunkId": "AAPL:p61:1",
+        "quote": "2025 | 74,294,811 | 108,423,733 | 23,812,358 | 34,125,743 | 233.88 | 279.51 | 112,010 | 416,161"
+      },
+      {
+        "model": "openai/gpt-6-astra",
+        "value": 233.88,
+        "chunkId": "AAPL:p61:1",
+        "quote": "2025 | 74,294,811 | 108,423,733 | 23,812,358 | 34,125,743 | 233.88 | 279.51 | 112,010 | 416,161"
+      }
+    ],
+    "updatedAt": "2026-09-26T18:39:09.564Z",
+    "evidenceBy": "draft"
+  },
+  {
+    "_id": "AAPL:pay.peer_tsr_current",
+    "ticker": "AAPL",
+    "factId": "pay.peer_tsr_current",
+    "value": 279.51,
+    "page": 61,
+    "quote": "2025 | 74,294,811 | 108,423,733 | 23,812,358 | 34,125,743 | 233.88 | 279.51 | 112,010 | 416,161",
+    "chunkId": "AAPL:p61:1",
+    "status": "verified",
+    "proposals": [
+      {
+        "model": "anthropic/claude-fable-5.1",
+        "value": 279.51,
+        "chunkId": "AAPL:p61:1",
+        "quote": "2025 | 74,294,811 | 108,423,733 | 23,812,358 | 34,125,743 | 233.88 | 279.51 | 112,010 | 416,161"
+      },
+      {
+        "model": "openai/gpt-6-astra",
+        "value": 279.51,
+        "chunkId": "AAPL:p61:1",
+        "quote": "2025 | 74,294,811 | 108,423,733 | 23,812,358 | 34,125,743 | 233.88 | 279.51 | 112,010 | 416,161"
+      }
+    ],
+    "updatedAt": "2026-09-26T18:39:13.038Z"
+  },
+  {
+    "_id": "GOOGL:audit.all_other_fees_current",
+    "ticker": "GOOGL",
+    "factId": "audit.all_other_fees_current",
+    "value": 19400000,
+    "page": 60,
+    "quote": "All Other Fees(4) | 21,229 | 19,400",
+    "chunkId": "GOOGL:p60:1",
+    "status": "verified",
+    "proposals": [
+      {
+        "model": "anthropic/claude-fable-5.1",
+        "value": 19400000,
+        "chunkId": "GOOGL:p60:1",
+        "quote": "All Other Fees(4) | 21,229 | 19,400"
+      },
+      {
+        "model": "openai/gpt-6-astra",
+        "value": 19400000,
+        "chunkId": "GOOGL:p60:1",
+        "quote": "All Other Fees(4) | 21,229 | 19,400"
+      }
+    ],
+    "updatedAt": "2026-09-26T18:54:57.766Z"
+  },
+  {
+    "_id": "GOOGL:audit.audit_fees_current",
+    "ticker": "GOOGL",
+    "factId": "audit.audit_fees_current",
+    "value": 37900000,
+    "page": 60,
+    "quote": "Audit Fees(1) | 31,130 | 37,900",
+    "chunkId": "GOOGL:p60:1",
+    "status": "verified",
+    "proposals": [
+      {
+        "model": "anthropic/claude-fable-5.1",
+        "value": 37900000,
+        "chunkId": "GOOGL:p60:1",
+        "quote": "Audit Fees(1) | 31,130 | 37,900"
+      },
+      {
+        "model": "openai/gpt-6-astra",
+        "value": 37900000,
+        "chunkId": "GOOGL:p60:1",
+        "quote": "Audit Fees(1) | 31,130 | 37,900"
+      }
+    ],
+    "updatedAt": "2026-09-26T18:54:47.890Z"
+  },
+  {
+    "_id": "GOOGL:audit.audit_related_fees_current",
+    "ticker": "GOOGL",
+    "factId": "audit.audit_related_fees_current",
+    "value": 9506000,
+    "page": 60,
+    "quote": "Audit-Related Fees(2) | 11,767 | 9,506",
+    "chunkId": "GOOGL:p60:1",
+    "status": "verified",
+    "proposals": [
+      {
+        "model": "anthropic/claude-fable-5.1",
+        "value": 9506000,
+        "chunkId": "GOOGL:p60:1",
+        "quote": "Audit-Related Fees(2) | 11,767 | 9,506"
+      },
+      {
+        "model": "openai/gpt-6-astra",
+        "value": 9506000,
+        "chunkId": "GOOGL:p60:1",
+        "quote": "Audit-Related Fees(2) | 11,767 | 9,506"
+      }
+    ],
+    "updatedAt": "2026-09-26T18:54:52.362Z"
+  },
+  {
+    "_id": "GOOGL:audit.tax_fees_current",
+    "ticker": "GOOGL",
+    "factId": "audit.tax_fees_current",
+    "value": 1894000,
+    "page": 60,
+    "quote": "Tax Fees(3) | 1,386 | 1,894",
+    "chunkId": "GOOGL:p60:1",
+    "status": "verified",
+    "proposals": [
+      {
+        "model": "anthropic/claude-fable-5.1",
+        "value": 1894000,
+        "chunkId": "GOOGL:p60:1",
+        "quote": "Tax Fees(3) | 1,386 | 1,894"
+      },
+      {
+        "model": "openai/gpt-6-astra",
+        "value": 1894000,
+        "chunkId": "GOOGL:p60:1",
+        "quote": "Tax Fees(3) | 1,386 | 1,894"
+      }
+    ],
+    "updatedAt": "2026-09-26T18:54:55.386Z"
+  },
+  {
+    "_id": "GOOGL:board.ceo_is_chair",
+    "ticker": "GOOGL",
+    "factId": "board.ceo_is_chair",
+    "value": false,
+    "page": 25,
+    "quote": "Our Board regularly reviews its leadership structure to ensure continued effectiveness and believes that the current structure, which separates the\nChair and Chief Executive Officer roles, is appropriate at this time in light of the evolution of Alphabet’s business and operating environment.",
+    "chunkId": "GOOGL:p25:2",
+    "status": "verified",
+    "proposals": [
+      {
+        "model": "anthropic/claude-fable-5.1",
+        "value": false,
+        "chunkId": "GOOGL:p25:2",
+        "quote": "Our Board regularly reviews its leadership structure to ensure continued effectiveness and believes that the current structure, which separates the\nChair and Chief Executive Officer roles, is appropriate at this time in light of the evolution of Alphabet’s business and operating environment."
+      },
+      {
+        "model": "openai/gpt-6-astra",
+        "value": false,
+        "chunkId": "GOOGL:p3:7",
+        "quote": "Sundar Pichai | John L. Hennessy\nChief Executive Officer | Chair of the Board\nof Directors"
+      }
+    ],
+    "updatedAt": "2026-09-26T18:48:42.483Z",
+    "evidenceBy": "draft"
+  },
+  {
+    "_id": "GOOGL:board.has_lead_independent_director",
+    "ticker": "GOOGL",
+    "factId": "board.has_lead_independent_director",
+    "value": false,
+    "page": 25,
+    "quote": "In January 2018, John L. Hennessy, the then Lead Independent Director, was appointed to serve as Alphabet’s Chair of the Board.",
+    "chunkId": "GOOGL:p25:2",
+    "status": "verified",
+    "proposals": [
+      {
+        "model": "anthropic/claude-fable-5.1",
+        "value": false,
+        "chunkId": "GOOGL:p25:2",
+        "quote": "In January 2018, John L. Hennessy, the then Lead Independent Director, was appointed to serve as Alphabet’s Chair of the Board."
+      },
+      {
+        "model": "openai/gpt-6-astra",
+        "value": false,
+        "chunkId": "GOOGL:p25:2",
+        "quote": "In January 2018, John L. Hennessy, the then Lead Independent Director, was appointed to serve as Alphabet’s Chair of the Board."
+      }
+    ],
+    "updatedAt": "2026-09-26T18:53:34.614Z"
+  },
+  {
+    "_id": "GOOGL:board.independent_nominee_count",
+    "ticker": "GOOGL",
+    "factId": "board.independent_nominee_count",
+    "value": 7,
+    "page": 8,
+    "quote": "10 Nominees | 70% Independent",
+    "chunkId": "GOOGL:p8:1",
+    "status": "verified",
+    "proposals": [
+      {
+        "model": "anthropic/claude-fable-5.1",
+        "value": 7,
+        "chunkId": "GOOGL:p8:1",
+        "quote": "10 Nominees | 70% Independent"
+      },
+      {
+        "model": "openai/gpt-6-astra",
+        "value": 7,
+        "chunkId": "GOOGL:p8:1",
+        "quote": "10 Nominees | 70% Independent"
+      }
+    ],
+    "updatedAt": "2026-09-26T18:48:26.565Z",
+    "evidenceBy": "draft"
+  },
+  {
+    "_id": "GOOGL:board.nominee_count",
+    "ticker": "GOOGL",
+    "factId": "board.nominee_count",
+    "value": 10,
+    "page": 8,
+    "quote": "10 Nominees | 70% Independent",
+    "chunkId": "GOOGL:p8:1",
+    "status": "verified",
+    "proposals": [
+      {
+        "model": "anthropic/claude-fable-5.1",
+        "value": 10,
+        "chunkId": "GOOGL:p62:2",
+        "quote": "At the Annual Meeting, ten directors will be elected to our Board."
+      },
+      {
+        "model": "openai/gpt-6-astra",
+        "value": 10,
+        "chunkId": "GOOGL:p8:1",
+        "quote": "10 Nominees | 70% Independent"
+      }
+    ],
+    "updatedAt": "2026-09-26T18:48:19.755Z",
+    "evidenceBy": "draft"
+  },
+  {
+    "_id": "GOOGL:governance.unequal_voting_rights",
+    "ticker": "GOOGL",
+    "factId": "governance.unequal_voting_rights",
+    "value": true,
+    "page": 12,
+    "quote": "Each share of Class B common\nstock is entitled to ten (10) votes with respect to each director nominee and ten (10) votes with respect to each of the proposals to be voted on.",
+    "chunkId": "GOOGL:p12:3",
+    "status": "verified",
+    "proposals": [
+      {
+        "model": "anthropic/claude-fable-5.1",
+        "value": true,
+        "chunkId": "GOOGL:p12:3",
+        "quote": "Each share of Class B common\nstock is entitled to ten (10) votes with respect to each director nominee and ten (10) votes with respect to each of the proposals to be voted on."
+      },
+      {
+        "model": "openai/gpt-6-astra",
+        "value": true,
+        "chunkId": "GOOGL:p37:1",
+        "quote": "Each holder of Class B common stock is entitled to ten (10) votes per share of Class B common stock, and each holder of Class A common stock is\nentitled to one (1) vote per share of Class A common stock on all matters submitted to our shareholders for a vote."
+      }
+    ],
+    "updatedAt": "2026-09-26T18:54:12.892Z"
+  },
+  {
+    "_id": "GOOGL:governance.unequal_voting_sunset",
+    "ticker": "GOOGL",
+    "factId": "governance.unequal_voting_sunset",
+    "value": false,
+    "page": 37,
+    "quote": "The Class B common stock is convertible at any time by the holder into shares of Class A common stock on a share-for-share basis upon written notice to the transfer agent.",
+    "chunkId": "GOOGL:p37:1",
+    "status": "verified",
+    "proposals": [
+      {
+        "model": "human/curated-evidence",
+        "value": false,
+        "chunkId": "GOOGL:p37:1",
+        "quote": "The Class B common stock is convertible at any time by the holder into shares of Class A common stock on a share-for-share basis upon written notice to the transfer agent."
+      },
+      {
+        "model": "anthropic/claude-fable-5.1",
+        "value": false,
+        "chunkId": "GOOGL:p78:0",
+        "quote": "Shareholders request that our Board take all practicable steps in its control to initiate and adopt a recapitalization plan for all outstanding stock to have\none vote per share."
+      },
+      {
+        "model": "openai/gpt-6-astra",
+        "value": null,
+        "chunkId": null,
+        "quote": null
+      }
+    ],
+    "updatedAt": "2026-09-26T18:01:34.067Z"
+  },
+  {
+    "_id": "GOOGL:pay.ceo_total_comp_current",
+    "ticker": "GOOGL",
+    "factId": "pay.ceo_total_comp_current",
+    "value": 10906079,
+    "page": 51,
+    "quote": "Sundar Pichai | 2025 | 2,007,692 | — | — | — | 8,898,387 (5) | 10,906,079",
+    "chunkId": "GOOGL:p51:1",
+    "status": "verified",
+    "proposals": [
+      {
+        "model": "anthropic/claude-fable-5.1",
+        "value": 10906079,
+        "chunkId": "GOOGL:p51:1",
+        "quote": "Sundar Pichai | 2025 | 2,007,692 | — | — | — | 8,898,387 (5) | 10,906,079"
+      },
+      {
+        "model": "openai/gpt-6-astra",
+        "value": 10906079,
+        "chunkId": "GOOGL:p51:1",
+        "quote": "Sundar Pichai | 2025 | 2,007,692 | — | — | — | 8,898,387 (5) | 10,906,079"
+      }
+    ],
+    "updatedAt": "2026-09-26T18:54:23.884Z"
+  },
+  {
+    "_id": "GOOGL:pay.ceo_total_comp_prior",
+    "ticker": "GOOGL",
+    "factId": "pay.ceo_total_comp_prior",
+    "value": 10800694,
+    "page": 51,
+    "quote": "2024 | 2,015,385 | — | 405,630 | — | 8,379,679 | 10,800,694",
+    "chunkId": "GOOGL:p51:1",
+    "status": "verified",
+    "proposals": [
+      {
+        "model": "anthropic/claude-fable-5.1",
+        "value": 10800694,
+        "chunkId": "GOOGL:p51:1",
+        "quote": "2024 | 2,015,385 | — | 405,630 | — | 8,379,679 | 10,800,694"
+      },
+      {
+        "model": "openai/gpt-6-astra",
+        "value": 10800694,
+        "chunkId": "GOOGL:p51:1",
+        "quote": "2024 | 2,015,385 | — | 405,630 | — | 8,379,679 | 10,800,694"
+      }
+    ],
+    "updatedAt": "2026-09-26T18:54:27.232Z"
+  },
+  {
+    "_id": "GOOGL:pay.company_tsr_current",
+    "ticker": "GOOGL",
+    "factId": "pay.company_tsr_current",
+    "value": 360.95,
+    "page": 57,
+    "quote": "2025 | 10,906,079 | 213,903,156 | 32,934,710 | 100,887,548 | 360.95 | 138.27 | 132,170 | 95",
+    "chunkId": "GOOGL:p57:3",
+    "status": "verified",
+    "proposals": [
+      {
+        "model": "anthropic/claude-fable-5.1",
+        "value": 360.95,
+        "chunkId": "GOOGL:p57:3",
+        "quote": "2025 | 10,906,079 | 213,903,156 | 32,934,710 | 100,887,548 | 360.95 | 138.27 | 132,170 | 95"
+      },
+      {
+        "model": "openai/gpt-6-astra",
+        "value": 360.95,
+        "chunkId": "GOOGL:p57:3",
+        "quote": "2025 | 10,906,079 | 213,903,156 | 32,934,710 | 100,887,548 | 360.95 | 138.27 | 132,170 | 95"
+      }
+    ],
+    "updatedAt": "2026-09-26T18:54:36.457Z"
+  },
+  {
+    "_id": "GOOGL:pay.peer_tsr_current",
+    "ticker": "GOOGL",
+    "factId": "pay.peer_tsr_current",
+    "value": 138.27,
+    "page": 57,
+    "quote": "2025 | 10,906,079 | 213,903,156 | 32,934,710 | 100,887,548 | 360.95 | 138.27 | 132,170 | 95",
+    "chunkId": "GOOGL:p57:3",
+    "status": "verified",
+    "proposals": [
+      {
+        "model": "anthropic/claude-fable-5.1",
+        "value": 138.27,
+        "chunkId": "GOOGL:p57:3",
+        "quote": "2025 | 10,906,079 | 213,903,156 | 32,934,710 | 100,887,548 | 360.95 | 138.27 | 132,170 | 95"
+      },
+      {
+        "model": "openai/gpt-6-astra",
+        "value": 138.27,
+        "chunkId": "GOOGL:p57:3",
+        "quote": "2025 | 10,906,079 | 213,903,156 | 32,934,710 | 100,887,548 | 360.95 | 138.27 | 132,170 | 95"
+      }
+    ],
+    "updatedAt": "2026-09-26T18:54:39.097Z"
+  },
+  {
+    "_id": "JPM:audit.all_other_fees_current",
+    "ticker": "JPM",
+    "factId": "audit.all_other_fees_current",
+    "value": 0,
+    "page": 93,
+    "quote": "Total | $ 135.0 | $ 119.0",
+    "chunkId": "JPM:p93:2",
+    "status": "verified",
+    "proposals": [
+      {
+        "model": "anthropic/claude-fable-5.1",
+        "value": 0,
+        "chunkId": "JPM:p93:2",
+        "quote": "Total | $ 135.0 | $ 119.0"
+      },
+      {
+        "model": "openai/gpt-6-astra",
+        "value": null,
+        "chunkId": null,
+        "quote": null
+      }
+    ],
+    "updatedAt": "2026-09-26T17:54:20.642Z"
+  },
+  {
+    "_id": "JPM:audit.audit_fees_current",
+    "ticker": "JPM",
+    "factId": "audit.audit_fees_current",
+    "value": 91000000,
+    "page": 93,
+    "quote": "Audit | $91.0 | $78.5",
+    "chunkId": "JPM:p93:2",
+    "status": "verified",
+    "proposals": [
+      {
+        "model": "anthropic/claude-fable-5.1",
+        "value": 91000000,
+        "chunkId": "JPM:p93:2",
+        "quote": "Audit | $91.0 | $78.5"
+      },
+      {
+        "model": "openai/gpt-6-astra",
+        "value": 91000000,
+        "chunkId": "JPM:p93:2",
+        "quote": "Audit | $91.0 | $78.5"
+      }
+    ],
+    "updatedAt": "2026-09-26T18:59:50.144Z"
+  },
+  {
+    "_id": "JPM:audit.audit_related_fees_current",
+    "ticker": "JPM",
+    "factId": "audit.audit_related_fees_current",
+    "value": 38100000,
+    "page": 93,
+    "quote": "Audit-related | 38.1 | 36.0",
+    "chunkId": "JPM:p93:2",
+    "status": "verified",
+    "proposals": [
+      {
+        "model": "anthropic/claude-fable-5.1",
+        "value": 38100000,
+        "chunkId": "JPM:p93:2",
+        "quote": "Audit-related | 38.1 | 36.0"
+      },
+      {
+        "model": "openai/gpt-6-astra",
+        "value": 38100000,
+        "chunkId": "JPM:p93:2",
+        "quote": "Audit-related | 38.1 | 36.0"
+      }
+    ],
+    "updatedAt": "2026-09-26T18:59:52.134Z"
+  },
+  {
+    "_id": "JPM:audit.tax_fees_current",
+    "ticker": "JPM",
+    "factId": "audit.tax_fees_current",
+    "value": 5900000,
+    "page": 93,
+    "quote": "Tax | 5.9 | 4.5",
+    "chunkId": "JPM:p93:2",
+    "status": "verified",
+    "proposals": [
+      {
+        "model": "anthropic/claude-fable-5.1",
+        "value": 5900000,
+        "chunkId": "JPM:p93:2",
+        "quote": "Tax | 5.9 | 4.5"
+      },
+      {
+        "model": "openai/gpt-6-astra",
+        "value": 5900000,
+        "chunkId": "JPM:p93:2",
+        "quote": "Tax | 5.9 | 4.5"
+      }
+    ],
+    "updatedAt": "2026-09-26T18:59:58.679Z"
+  },
+  {
+    "_id": "JPM:board.ceo_is_chair",
+    "ticker": "JPM",
+    "factId": "board.ceo_is_chair",
+    "value": true,
+    "page": 30,
+    "quote": "our Board has determined that combining the roles of Chair and\nCEO is the most effective leadership structure for the Board at this time.",
+    "chunkId": "JPM:p30:5",
+    "status": "verified",
+    "proposals": [
+      {
+        "model": "anthropic/claude-fable-5.1",
+        "value": true,
+        "chunkId": "JPM:p30:5",
+        "quote": "our Board has determined that combining the roles of Chair and\nCEO is the most effective leadership structure for the Board at this time."
+      },
+      {
+        "model": "openai/gpt-6-astra",
+        "value": true,
+        "chunkId": "JPM:p12:3",
+        "quote": "James Dimon | 70 | Chairman and Chief Executive | 0\nDirector since 2004 | Officer of JPMorgan Chase & Co."
+      }
+    ],
+    "updatedAt": "2026-09-26T18:59:09.755Z",
+    "evidenceBy": "draft"
+  },
+  {
+    "_id": "JPM:board.has_lead_independent_director",
+    "ticker": "JPM",
+    "factId": "board.has_lead_independent_director",
+    "value": true,
+    "page": 30,
+    "quote": "determined to maintain the current leadership structure with Mr. Burke\nserving as Lead Independent Director.",
+    "chunkId": "JPM:p30:7",
+    "status": "verified",
+    "proposals": [
+      {
+        "model": "anthropic/claude-fable-5.1",
+        "value": true,
+        "chunkId": "JPM:p30:7",
+        "quote": "determined to maintain the current leadership structure with Mr. Burke\nserving as Lead Independent Director."
+      },
+      {
+        "model": "openai/gpt-6-astra",
+        "value": true,
+        "chunkId": "JPM:p5:2",
+        "quote": "Stephen B. Burke\nLead Independent Director"
+      }
+    ],
+    "updatedAt": "2026-09-26T18:59:15.991Z"
+  },
+  {
+    "_id": "JPM:board.independent_nominee_count",
+    "ticker": "JPM",
+    "factId": "board.independent_nominee_count",
+    "value": 10,
+    "page": 12,
+    "quote": "The Board of Directors has nominated the 11 individuals listed below. All are independent other than our CEO.",
+    "chunkId": "JPM:p12:2",
+    "status": "verified",
+    "proposals": [
+      {
+        "model": "anthropic/claude-fable-5.1",
+        "value": 10,
+        "chunkId": "JPM:p12:2",
+        "quote": "The Board of Directors has nominated the 11 individuals listed below. All are independent other than our CEO."
+      },
+      {
+        "model": "openai/gpt-6-astra",
+        "value": 10,
+        "chunkId": "JPM:p12:2",
+        "quote": "The Board of Directors has nominated the 11 individuals listed below. All are independent other than our CEO."
+      }
+    ],
+    "updatedAt": "2026-09-26T19:02:18.411Z"
+  },
+  {
+    "_id": "JPM:board.nominee_count",
+    "ticker": "JPM",
+    "factId": "board.nominee_count",
+    "value": 11,
+    "page": 12,
+    "quote": "The Board of Directors has nominated the 11 individuals listed below.",
+    "chunkId": "JPM:p12:2",
+    "status": "verified",
+    "proposals": [
+      {
+        "model": "anthropic/claude-fable-5.1",
+        "value": 11,
+        "chunkId": "JPM:p12:2",
+        "quote": "The Board of Directors has nominated the 11 individuals listed below. All are independent other than our CEO."
+      },
+      {
+        "model": "openai/gpt-6-astra",
+        "value": 11,
+        "chunkId": "JPM:p12:2",
+        "quote": "The Board of Directors has nominated the 11 individuals listed below."
+      }
+    ],
+    "updatedAt": "2026-09-26T18:58:36.468Z",
+    "evidenceBy": "draft"
+  },
+  {
+    "_id": "JPM:governance.unequal_voting_rights",
+    "ticker": "JPM",
+    "factId": "governance.unequal_voting_rights",
+    "value": false,
+    "page": 109,
+    "quote": "At the close of business on the Record Date, there were 2,682,219,629 shares of common stock outstanding, each of which entitles the holder to one\nvote for each matter to be voted on at our annual meeting.",
+    "chunkId": "JPM:p109:1",
+    "status": "verified",
+    "proposals": [
+      {
+        "model": "anthropic/claude-fable-5.1",
+        "value": false,
+        "chunkId": "JPM:p109:1",
+        "quote": "At the close of business on the Record Date, there were 2,682,219,629 shares of common stock outstanding, each of which entitles the holder to one\nvote for each matter to be voted on at our annual meeting."
+      },
+      {
+        "model": "openai/gpt-6-astra",
+        "value": false,
+        "chunkId": "JPM:p109:1",
+        "quote": "At the close of business on the Record Date, there were 2,682,219,629 shares of common stock outstanding, each of which entitles the holder to one\nvote for each matter to be voted on at our annual meeting."
+      }
+    ],
+    "updatedAt": "2026-09-26T18:59:23.375Z"
+  },
+  {
+    "_id": "JPM:governance.unequal_voting_sunset",
+    "ticker": "JPM",
+    "factId": "governance.unequal_voting_sunset",
+    "value": false,
+    "page": 109,
+    "quote": "At the close of business on the Record Date, there were 2,682,219,629 shares of common stock outstanding, each of which entitles the holder to one\nvote for each matter to be voted on at our annual meeting.",
+    "chunkId": "JPM:p109:1",
+    "status": "verified",
+    "proposals": [
+      {
+        "model": "anthropic/claude-fable-5.1",
+        "value": false,
+        "chunkId": "JPM:p109:1",
+        "quote": "At the close of business on the Record Date, there were 2,682,219,629 shares of common stock outstanding, each of which entitles the holder to one\nvote for each matter to be voted on at our annual meeting."
+      },
+      {
+        "model": "openai/gpt-6-astra",
+        "value": false,
+        "chunkId": "JPM:p109:1",
+        "quote": "At the close of business on the Record Date, there were 2,682,219,629 shares of common stock outstanding, each of which entitles the holder to one\nvote for each matter to be voted on at our annual meeting."
+      }
+    ],
+    "updatedAt": "2026-09-26T18:59:27.642Z"
+  },
+  {
+    "_id": "JPM:pay.ceo_total_comp_current",
+    "ticker": "JPM",
+    "factId": "pay.ceo_total_comp_current",
+    "value": 40632724,
+    "page": 76,
+    "quote": "Chairman and CEO | $1,500,000 | $5,000,000 | $32,500,000 | $44,872 | $1,587,852 6 | $40,632,724",
+    "chunkId": "JPM:p76:1",
+    "status": "verified",
+    "proposals": [
+      {
+        "model": "anthropic/claude-fable-5.1",
+        "value": 40632724,
+        "chunkId": "JPM:p76:1",
+        "quote": "Chairman and CEO | $1,500,000 | $5,000,000 | $32,500,000 | $44,872 | $1,587,852 6 | $40,632,724"
+      },
+      {
+        "model": "openai/gpt-6-astra",
+        "value": 40632724,
+        "chunkId": "JPM:p76:1",
+        "quote": "James Dimon | 2025\nChairman and CEO | $1,500,000 | $5,000,000 | $32,500,000 | $44,872 | $1,587,852 6 | $40,632,724"
+      }
+    ],
+    "updatedAt": "2026-09-26T18:59:30.032Z"
+  },
+  {
+    "_id": "JPM:pay.ceo_total_comp_prior",
+    "ticker": "JPM",
+    "factId": "pay.ceo_total_comp_prior",
+    "value": 37683462,
+    "page": 76,
+    "quote": "1,500,000 | 5,000,000 | 29,500,000 | 50,826 | 1,632,636 | 37,683,462",
+    "chunkId": "JPM:p76:1",
+    "status": "verified",
+    "proposals": [
+      {
+        "model": "anthropic/claude-fable-5.1",
+        "value": 37683462,
+        "chunkId": "JPM:p76:1",
+        "quote": "1,500,000 | 5,000,000 | 29,500,000 | 50,826 | 1,632,636 | 37,683,462"
+      },
+      {
+        "model": "openai/gpt-6-astra",
+        "value": 37683462,
+        "chunkId": "JPM:p76:1",
+        "quote": "2024\n1,500,000 | 5,000,000 | 29,500,000 | 50,826 | 1,632,636 | 37,683,462"
+      }
+    ],
+    "updatedAt": "2026-09-26T18:59:31.964Z"
+  },
+  {
+    "_id": "JPM:pay.company_tsr_current",
+    "ticker": "JPM",
+    "factId": "pay.company_tsr_current",
+    "value": 289.18,
+    "page": 85,
+    "quote": "2025 | $40,632,724 | $246,827,058 | $25,569,609 | $74,899,476 | $289.18 | $203.21 | $57.0 | 20%",
+    "chunkId": "JPM:p85:2",
+    "status": "verified",
+    "proposals": [
+      {
+        "model": "anthropic/claude-fable-5.1",
+        "value": 289.18,
+        "chunkId": "JPM:p85:2",
+        "quote": "2025 | $40,632,724 | $246,827,058 | $25,569,609 | $74,899,476 | $289.18 | $203.21 | $57.0 | 20%"
+      },
+      {
+        "model": "openai/gpt-6-astra",
+        "value": 289.18,
+        "chunkId": "JPM:p85:2",
+        "quote": "2025 | $40,632,724 | $246,827,058 | $25,569,609 | $74,899,476 | $289.18 | $203.21 | $57.0 | 20%"
+      }
+    ],
+    "updatedAt": "2026-09-26T18:59:36.492Z"
+  },
+  {
+    "_id": "JPM:pay.peer_tsr_current",
+    "ticker": "JPM",
+    "factId": "pay.peer_tsr_current",
+    "value": 203.21,
+    "page": 85,
+    "quote": "2025 | $40,632,724 | $246,827,058 | $25,569,609 | $74,899,476 | $289.18 | $203.21 | $57.0 | 20%",
+    "chunkId": "JPM:p85:2",
+    "status": "verified",
+    "proposals": [
+      {
+        "model": "anthropic/claude-fable-5.1",
+        "value": 203.21,
+        "chunkId": "JPM:p85:2",
+        "quote": "2025 | $40,632,724 | $246,827,058 | $25,569,609 | $74,899,476 | $289.18 | $203.21 | $57.0 | 20%"
+      },
+      {
+        "model": "openai/gpt-6-astra",
+        "value": 203.21,
+        "chunkId": "JPM:p85:2",
+        "quote": "2025 | $40,632,724 | $246,827,058 | $25,569,609 | $74,899,476 | $289.18 | $203.21 | $57.0 | 20%"
+      }
+    ],
+    "updatedAt": "2026-09-26T18:59:42.815Z"
+  },
+  {
+    "_id": "META:audit.all_other_fees_current",
+    "ticker": "META",
+    "factId": "audit.all_other_fees_current",
+    "value": 2000,
+    "page": 40,
+    "quote": "All other fees(4) | 2 | 2",
+    "chunkId": "META:p40:1",
+    "status": "verified",
+    "proposals": [
+      {
+        "model": "anthropic/claude-fable-5.1",
+        "value": 2000,
+        "chunkId": "META:p40:1",
+        "quote": "All other fees(4) | 2 | 2"
+      },
+      {
+        "model": "openai/gpt-6-astra",
+        "value": 2000,
+        "chunkId": "META:p40:1",
+        "quote": "All other fees(4) | 2 | 2"
+      }
+    ],
+    "updatedAt": "2026-09-26T19:01:09.147Z"
+  },
+  {
+    "_id": "META:audit.audit_fees_current",
+    "ticker": "META",
+    "factId": "audit.audit_fees_current",
+    "value": 25942000,
+    "page": 40,
+    "quote": "Audit fees(1) | $25,942 | $21,397",
+    "chunkId": "META:p40:1",
+    "status": "verified",
+    "proposals": [
+      {
+        "model": "anthropic/claude-fable-5.1",
+        "value": 25942000,
+        "chunkId": "META:p40:1",
+        "quote": "Audit fees(1) | $25,942 | $21,397"
+      },
+      {
+        "model": "openai/gpt-6-astra",
+        "value": 25942000,
+        "chunkId": "META:p40:1",
+        "quote": "Audit fees(1) | $25,942 | $21,397"
+      }
+    ],
+    "updatedAt": "2026-09-26T18:57:37.131Z"
+  },
+  {
+    "_id": "META:audit.audit_related_fees_current",
+    "ticker": "META",
+    "factId": "audit.audit_related_fees_current",
+    "value": 7040000,
+    "page": 40,
+    "quote": "Audit-related fees(2) | 7,040 | 7,243",
+    "chunkId": "META:p40:1",
+    "status": "verified",
+    "proposals": [
+      {
+        "model": "anthropic/claude-fable-5.1",
+        "value": 7040000,
+        "chunkId": "META:p40:1",
+        "quote": "Audit-related fees(2) | 7,040 | 7,243"
+      },
+      {
+        "model": "openai/gpt-6-astra",
+        "value": 7040000,
+        "chunkId": "META:p40:1",
+        "quote": "Audit-related fees(2) | 7,040 | 7,243"
+      }
+    ],
+    "updatedAt": "2026-09-26T18:57:39.461Z"
+  },
+  {
+    "_id": "META:audit.tax_fees_current",
+    "ticker": "META",
+    "factId": "audit.tax_fees_current",
+    "value": 8379000,
+    "page": 40,
+    "quote": "Tax fees(3) | 8,379 | 7,718",
+    "chunkId": "META:p40:1",
+    "status": "verified",
+    "proposals": [
+      {
+        "model": "anthropic/claude-fable-5.1",
+        "value": 8379000,
+        "chunkId": "META:p40:1",
+        "quote": "Tax fees(3) | 8,379 | 7,718"
+      },
+      {
+        "model": "openai/gpt-6-astra",
+        "value": 8379000,
+        "chunkId": "META:p40:1",
+        "quote": "Tax fees(3) | 8,379 | 7,718"
+      }
+    ],
+    "updatedAt": "2026-09-26T18:57:45.735Z"
+  },
+  {
+    "_id": "META:board.ceo_is_chair",
+    "ticker": "META",
+    "factId": "board.ceo_is_chair",
+    "value": true,
+    "page": 9,
+    "quote": "Mark Zuckerberg | 2004 | Founder, Chairman, and Chief Executive Officer, Meta",
+    "chunkId": "META:p9:1",
+    "status": "verified",
+    "proposals": [
+      {
+        "model": "anthropic/claude-fable-5.1",
+        "value": true,
+        "chunkId": "META:p26:1",
+        "quote": "Mark Zuckerberg | 2004 | Founder, Chairman, and Chief Executive Officer, Meta"
+      },
+      {
+        "model": "openai/gpt-6-astra",
+        "value": true,
+        "chunkId": "META:p9:1",
+        "quote": "Mark Zuckerberg | 2004 | Founder, Chairman, and Chief Executive Officer, Meta"
+      }
+    ],
+    "updatedAt": "2026-09-26T18:56:53.635Z",
+    "evidenceBy": "draft"
+  },
+  {
+    "_id": "META:board.has_lead_independent_director",
+    "ticker": "META",
+    "factId": "board.has_lead_independent_director",
+    "value": true,
+    "page": 15,
+    "quote": "Robert M. Kimmitt - Lead Independent Director",
+    "chunkId": "META:p15:0",
+    "status": "verified",
+    "proposals": [
+      {
+        "model": "anthropic/claude-fable-5.1",
+        "value": true,
+        "chunkId": "META:p27:5",
+        "quote": "Our Lead Independent Director is appointed annually by our independent directors, and Ambassador Kimmitt currently serves in this role."
+      },
+      {
+        "model": "openai/gpt-6-astra",
+        "value": true,
+        "chunkId": "META:p15:0",
+        "quote": "Robert M. Kimmitt - Lead Independent Director"
+      }
+    ],
+    "updatedAt": "2026-09-26T18:57:08.249Z",
+    "evidenceBy": "draft"
+  },
+  {
+    "_id": "META:board.independent_nominee_count",
+    "ticker": "META",
+    "factId": "board.independent_nominee_count",
+    "value": 11,
+    "page": 26,
+    "quote": "Name | Director Since | Primary Employment | Independent\nPeggy Alford | 2019 | Chief Financial Officer, eBay | ✓\nMarc L. Andreessen | 2008 | Co-founder and General Partner, Andreessen Horowitz | ✓\nJohn Arnold | 2024 | Co-founder and Co-chair, Arnold Ventures | ✓\nPatrick Collison | 2025 | Co-founder and Chief Executive Officer, Stripe | ✓\nJohn Elkann | 2024 | Chief Executive Officer, Exor | ✓\nAndrew W. Houston | 2020 | Co-founder and Chief Executive Officer, Dropbox | ✓\nNancy Killefer | 2020 | Senior Partner Emeritus, McKinsey & Company | ✓\nRobert M. Kimmitt | 2020 | Senior International Counsel, WilmerHale | ✓\nCharles Songhurst | 2024 | Technology Investor | ✓\nDana White | 2024 | President and Chief Executive Officer, Ultimate Fighting Championship | ✓\nTony Xu | 2022 | Co-founder and Chief Executive Officer, DoorDash | ✓\nMark Zuckerberg | 2004 | Founder, Chairman, and Chief Executive Officer, Meta",
+    "chunkId": "META:p26:1",
+    "status": "verified",
+    "proposals": [
+      {
+        "model": "anthropic/claude-fable-5.1",
+        "value": 11,
+        "chunkId": "META:p27:4",
+        "quote": "independent, with the exception of our | CEO."
+      },
+      {
+        "model": "openai/gpt-6-astra",
+        "value": 11,
+        "chunkId": "META:p26:1",
+        "quote": "Name | Director Since | Primary Employment | Independent\nPeggy Alford | 2019 | Chief Financial Officer, eBay | ✓\nMarc L. Andreessen | 2008 | Co-founder and General Partner, Andreessen Horowitz | ✓\nJohn Arnold | 2024 | Co-founder and Co-chair, Arnold Ventures | ✓\nPatrick Collison | 2025 | Co-founder and Chief Executive Officer, Stripe | ✓\nJohn Elkann | 2024 | Chief Executive Officer, Exor | ✓\nAndrew W. Houston | 2020 | Co-founder and Chief Executive Officer, Dropbox | ✓\nNancy Killefer | 2020 | Senior Partner Emeritus, McKinsey & Company | ✓\nRobert M. Kimmitt | 2020 | Senior International Counsel, WilmerHale | ✓\nCharles Songhurst | 2024 | Technology Investor | ✓\nDana White | 2024 | President and Chief Executive Officer, Ultimate Fighting Championship | ✓\nTony Xu | 2022 | Co-founder and Chief Executive Officer, DoorDash | ✓\nMark Zuckerberg | 2004 | Founder, Chairman, and Chief Executive Officer, Meta"
+      }
+    ],
+    "updatedAt": "2026-09-26T18:56:42.896Z",
+    "evidenceBy": "draft"
+  },
+  {
+    "_id": "META:board.nominee_count",
+    "ticker": "META",
+    "factId": "board.nominee_count",
+    "value": 12,
+    "page": 26,
+    "quote": "The following twelve individuals are nominated\nfor election to the board of directors at the Annual Meeting, all of whom are currently serving on our board of directors:",
+    "chunkId": "META:p26:1",
+    "status": "verified",
+    "proposals": [
+      {
+        "model": "anthropic/claude-fable-5.1",
+        "value": 12,
+        "chunkId": "META:p26:1",
+        "quote": "The following twelve individuals are nominated"
+      },
+      {
+        "model": "openai/gpt-6-astra",
+        "value": 12,
+        "chunkId": "META:p26:1",
+        "quote": "The following twelve individuals are nominated\nfor election to the board of directors at the Annual Meeting, all of whom are currently serving on our board of directors:"
+      }
+    ],
+    "updatedAt": "2026-09-26T18:55:09.531Z",
+    "evidenceBy": "draft"
+  },
+  {
+    "_id": "META:governance.unequal_voting_rights",
+    "ticker": "META",
+    "factId": "governance.unequal_voting_rights",
+    "value": true,
+    "page": 76,
+    "quote": "we disclose that our Class B common stock has ten votes per share and our Class A common stock has one vote per share.",
+    "chunkId": "META:p76:2",
+    "status": "verified",
+    "proposals": [
+      {
+        "model": "anthropic/claude-fable-5.1",
+        "value": true,
+        "chunkId": "META:p76:2",
+        "quote": "we disclose that our Class B common stock has ten votes per share and our Class A common stock has one vote per share."
+      },
+      {
+        "model": "openai/gpt-6-astra",
+        "value": true,
+        "chunkId": "META:p75:1",
+        "quote": "Its Class B common stock has ten votes per share while its Class A common stock has one vote per share."
+      }
+    ],
+    "updatedAt": "2026-09-26T18:57:17.320Z",
+    "evidenceBy": "draft"
+  },
+  {
+    "_id": "META:governance.unequal_voting_sunset",
+    "ticker": "META",
+    "factId": "governance.unequal_voting_sunset",
+    "value": false,
+    "page": 76,
+    "quote": "we disclose that our Class B common stock has ten votes per share and our Class A common stock has one vote per share.",
+    "chunkId": "META:p76:2",
+    "status": "verified",
+    "proposals": [
+      {
+        "model": "human/curated-evidence",
+        "value": false,
+        "chunkId": "META:p76:2",
+        "quote": "we disclose that our Class B common stock has ten votes per share and our Class A common stock has one vote per share."
+      },
+      {
+        "model": "anthropic/claude-fable-5.1",
+        "value": false,
+        "chunkId": "META:p11:8",
+        "quote": "Our capital structure allows our board of directors and management team to focus on"
+      },
+      {
+        "model": "openai/gpt-6-astra",
+        "value": null,
+        "chunkId": null,
+        "quote": null
+      }
+    ],
+    "updatedAt": "2026-09-26T18:01:32.115Z"
+  },
+  {
+    "_id": "META:pay.ceo_total_comp_current",
+    "ticker": "META",
+    "factId": "pay.ceo_total_comp_current",
+    "value": 25125904,
+    "page": 51,
+    "quote": "Mark Zuckerberg | 2025 | 1 | — | — | 25,125,903(4) | 25,125,904",
+    "chunkId": "META:p51:1",
+    "status": "verified",
+    "proposals": [
+      {
+        "model": "anthropic/claude-fable-5.1",
+        "value": 25125904,
+        "chunkId": "META:p51:1",
+        "quote": "Mark Zuckerberg | 2025 | 1 | — | — | 25,125,903(4) | 25,125,904"
+      },
+      {
+        "model": "openai/gpt-6-astra",
+        "value": 25125904,
+        "chunkId": "META:p51:1",
+        "quote": "Mark Zuckerberg | 2025 | 1 | — | — | 25,125,903(4) | 25,125,904"
+      }
+    ],
+    "updatedAt": "2026-09-26T18:57:20.908Z"
+  },
+  {
+    "_id": "META:pay.ceo_total_comp_prior",
+    "ticker": "META",
+    "factId": "pay.ceo_total_comp_prior",
+    "value": 27219874,
+    "page": 51,
+    "quote": "Chief Executive Officer | 2024 | 1 | — | — | 27,219,873(4) | 27,219,874",
+    "chunkId": "META:p51:1",
+    "status": "verified",
+    "proposals": [
+      {
+        "model": "anthropic/claude-fable-5.1",
+        "value": 27219874,
+        "chunkId": "META:p51:1",
+        "quote": "Chief Executive Officer | 2024 | 1 | — | — | 27,219,873(4) | 27,219,874"
+      },
+      {
+        "model": "openai/gpt-6-astra",
+        "value": 27219874,
+        "chunkId": "META:p51:1",
+        "quote": "Chief Executive Officer | 2024 | 1 | — | — | 27,219,873(4) | 27,219,874"
+      }
+    ],
+    "updatedAt": "2026-09-26T18:57:22.642Z"
+  },
+  {
+    "_id": "META:pay.company_tsr_current",
+    "ticker": "META",
+    "factId": "pay.company_tsr_current",
+    "value": 243.32,
+    "page": 56,
+    "quote": "2025 | 25,125,904 | 25,125,904 | 22,057,420 | 38,529,346 | 243.32 | 445.33 | 60,458 | 200,966",
+    "chunkId": "META:p56:2",
+    "status": "verified",
+    "proposals": [
+      {
+        "model": "anthropic/claude-fable-5.1",
+        "value": 243.32,
+        "chunkId": "META:p56:2",
+        "quote": "2025 | 25,125,904 | 25,125,904 | 22,057,420 | 38,529,346 | 243.32 | 445.33 | 60,458 | 200,966"
+      },
+      {
+        "model": "openai/gpt-6-astra",
+        "value": 243.32,
+        "chunkId": "META:p56:2",
+        "quote": "2025 | 25,125,904 | 25,125,904 | 22,057,420 | 38,529,346 | 243.32 | 445.33 | 60,458 | 200,966"
+      }
+    ],
+    "updatedAt": "2026-09-26T18:57:27.989Z"
+  },
+  {
+    "_id": "META:pay.peer_tsr_current",
+    "ticker": "META",
+    "factId": "pay.peer_tsr_current",
+    "value": 445.33,
+    "page": 56,
+    "quote": "2025 | 25,125,904 | 25,125,904 | 22,057,420 | 38,529,346 | 243.32 | 445.33 | 60,458 | 200,966",
+    "chunkId": "META:p56:2",
+    "status": "verified",
+    "proposals": [
+      {
+        "model": "anthropic/claude-fable-5.1",
+        "value": 445.33,
+        "chunkId": "META:p56:2",
+        "quote": "2025 | 25,125,904 | 25,125,904 | 22,057,420 | 38,529,346 | 243.32 | 445.33 | 60,458 | 200,966"
+      },
+      {
+        "model": "openai/gpt-6-astra",
+        "value": 445.33,
+        "chunkId": "META:p56:2",
+        "quote": "2025 | 25,125,904 | 25,125,904 | 22,057,420 | 38,529,346 | 243.32 | 445.33 | 60,458 | 200,966"
+      }
+    ],
+    "updatedAt": "2026-09-26T18:57:31.126Z"
+  },
+  {
+    "_id": "MSFT:audit.all_other_fees_current",
+    "ticker": "MSFT",
+    "factId": "audit.all_other_fees_current",
+    "value": 10000,
+    "page": 70,
+    "quote": "All Other Fees | 10,000 | 10,000",
+    "chunkId": "MSFT:p70:2",
+    "status": "verified",
+    "proposals": [
+      {
+        "model": "anthropic/claude-fable-5.1",
+        "value": 10000,
+        "chunkId": "MSFT:p70:2",
+        "quote": "All Other Fees | 10,000 | 10,000"
+      },
+      {
+        "model": "openai/gpt-6-astra",
+        "value": 10000,
+        "chunkId": "MSFT:p70:2",
+        "quote": "All Other Fees | 10,000 | 10,000"
+      }
+    ],
+    "updatedAt": "2026-09-26T18:48:05.584Z"
+  },
+  {
+    "_id": "MSFT:audit.audit_fees_current",
+    "ticker": "MSFT",
+    "factId": "audit.audit_fees_current",
+    "value": 53880000,
+    "page": 70,
+    "quote": "Audit Fees | $53,880,000 | $56,280,000",
+    "chunkId": "MSFT:p70:2",
+    "status": "verified",
+    "proposals": [
+      {
+        "model": "anthropic/claude-fable-5.1",
+        "value": 53880000,
+        "chunkId": "MSFT:p70:2",
+        "quote": "Audit Fees | $53,880,000 | $56,280,000"
+      },
+      {
+        "model": "openai/gpt-6-astra",
+        "value": 53880000,
+        "chunkId": "MSFT:p70:2",
+        "quote": "Audit Fees | $53,880,000 | $56,280,000"
+      }
+    ],
+    "updatedAt": "2026-09-26T18:47:53.391Z"
+  },
+  {
+    "_id": "MSFT:audit.audit_related_fees_current",
+    "ticker": "MSFT",
+    "factId": "audit.audit_related_fees_current",
+    "value": 19470000,
+    "page": 70,
+    "quote": "Audit-Related Fees | 19,470,000 | 18,643,000",
+    "chunkId": "MSFT:p70:2",
+    "status": "verified",
+    "proposals": [
+      {
+        "model": "anthropic/claude-fable-5.1",
+        "value": 19470000,
+        "chunkId": "MSFT:p70:2",
+        "quote": "Audit-Related Fees | 19,470,000 | 18,643,000"
+      },
+      {
+        "model": "openai/gpt-6-astra",
+        "value": 19470000,
+        "chunkId": "MSFT:p70:2",
+        "quote": "Audit-Related Fees | 19,470,000 | 18,643,000"
+      }
+    ],
+    "updatedAt": "2026-09-26T18:47:55.952Z"
+  },
+  {
+    "_id": "MSFT:audit.tax_fees_current",
+    "ticker": "MSFT",
+    "factId": "audit.tax_fees_current",
+    "value": 5105000,
+    "page": 70,
+    "quote": "Tax Fees | 5,105,000 | 6,334,000",
+    "chunkId": "MSFT:p70:2",
+    "status": "verified",
+    "proposals": [
+      {
+        "model": "anthropic/claude-fable-5.1",
+        "value": 5105000,
+        "chunkId": "MSFT:p70:2",
+        "quote": "Tax Fees | 5,105,000 | 6,334,000"
+      },
+      {
+        "model": "openai/gpt-6-astra",
+        "value": 5105000,
+        "chunkId": "MSFT:p70:2",
+        "quote": "Tax Fees | 5,105,000 | 6,334,000"
+      }
+    ],
+    "updatedAt": "2026-09-26T18:47:59.326Z"
+  },
+  {
+    "_id": "MSFT:board.ceo_is_chair",
+    "ticker": "MSFT",
+    "factId": "board.ceo_is_chair",
+    "value": true,
+    "page": 17,
+    "quote": "The Board’s independent directors elected Satya Nadella to the role of Chairman and CEO, and Sandra Peterson as Lead\nIndependent Director.",
+    "chunkId": "MSFT:p17:1",
+    "status": "verified",
+    "proposals": [
+      {
+        "model": "anthropic/claude-fable-5.1",
+        "value": true,
+        "chunkId": "MSFT:p17:1",
+        "quote": "The Board’s independent directors elected Satya Nadella to the role of Chairman and CEO, and Sandra Peterson as Lead\nIndependent Director."
+      },
+      {
+        "model": "openai/gpt-6-astra",
+        "value": true,
+        "chunkId": "MSFT:p4:2",
+        "quote": "Satya Nadella\nChairman and Chief Executive Officer"
+      }
+    ],
+    "updatedAt": "2026-09-26T18:44:01.018Z",
+    "evidenceBy": "draft"
+  },
+  {
+    "_id": "MSFT:board.has_lead_independent_director",
+    "ticker": "MSFT",
+    "factId": "board.has_lead_independent_director",
+    "value": true,
+    "page": 17,
+    "quote": "The Board’s independent directors elected Satya Nadella to the role of Chairman and CEO, and Sandra Peterson as Lead\nIndependent Director.",
+    "chunkId": "MSFT:p17:1",
+    "status": "verified",
+    "proposals": [
+      {
+        "model": "anthropic/claude-fable-5.1",
+        "value": true,
+        "chunkId": "MSFT:p17:1",
+        "quote": "The Board’s independent directors elected Satya Nadella to the role of Chairman and CEO, and Sandra Peterson as Lead\nIndependent Director."
+      },
+      {
+        "model": "openai/gpt-6-astra",
+        "value": true,
+        "chunkId": "MSFT:p17:1",
+        "quote": "The Board’s independent directors elected Satya Nadella to the role of Chairman and CEO, and Sandra Peterson as Lead\nIndependent Director."
+      }
+    ],
+    "updatedAt": "2026-09-26T18:44:12.487Z",
+    "evidenceBy": "draft"
+  },
+  {
+    "_id": "MSFT:board.independent_nominee_count",
+    "ticker": "MSFT",
+    "factId": "board.independent_nominee_count",
+    "value": 11,
+    "page": 19,
+    "quote": "• 11 of 12 director nominees are independent. We are committed to maintaining a substantial majority of directors who are independent of the Company and management. Except for our Chairman and CEO, Satya Nadella, all director nominees are",
+    "chunkId": "MSFT:p19:2",
+    "status": "verified",
+    "proposals": [
+      {
+        "model": "anthropic/claude-fable-5.1",
+        "value": 11,
+        "chunkId": "MSFT:p19:2",
+        "quote": "• 11 of 12 director nominees are independent."
+      },
+      {
+        "model": "openai/gpt-6-astra",
+        "value": 11,
+        "chunkId": "MSFT:p19:2",
+        "quote": "11 of 12 director nominees are independent."
+      }
+    ],
+    "updatedAt": "2026-09-26T18:42:21.754Z",
+    "evidenceBy": "reviewer"
+  },
+  {
+    "_id": "MSFT:board.nominee_count",
+    "ticker": "MSFT",
+    "factId": "board.nominee_count",
+    "value": 12,
+    "page": 72,
+    "quote": "The Board of Directors has nominated 12 directors for election during the 2025 annual shareholders meeting (“Annual Meeting”) to\nhold office until the 2026 annual shareholders meeting.",
+    "chunkId": "MSFT:p72:1",
+    "status": "verified",
+    "proposals": [
+      {
+        "model": "anthropic/claude-fable-5.1",
+        "value": 12,
+        "chunkId": "MSFT:p72:1",
+        "quote": "The Board of Directors has nominated 12 directors for election during the 2025 annual shareholders meeting (“Annual Meeting”) to\nhold office until the 2026 annual shareholders meeting."
+      },
+      {
+        "model": "openai/gpt-6-astra",
+        "value": 12,
+        "chunkId": "MSFT:p25:0",
+        "quote": "Following are biographies for the 12 directors nominated by the Board for election during the 2025 Annual Meeting."
+      }
+    ],
+    "updatedAt": "2026-09-26T18:41:51.488Z"
+  },
+  {
+    "_id": "MSFT:governance.unequal_voting_rights",
+    "ticker": "MSFT",
+    "factId": "governance.unequal_voting_rights",
+    "value": false,
+    "page": 12,
+    "quote": "• Single class of stock with equal voting rights",
+    "chunkId": "MSFT:p12:5",
+    "status": "verified",
+    "proposals": [
+      {
+        "model": "anthropic/claude-fable-5.1",
+        "value": false,
+        "chunkId": "MSFT:p12:5",
+        "quote": "• Single class of stock with equal voting rights"
+      },
+      {
+        "model": "openai/gpt-6-astra",
+        "value": false,
+        "chunkId": "MSFT:p12:5",
+        "quote": "Single class of stock with equal voting rights"
+      }
+    ],
+    "updatedAt": "2026-09-26T18:44:27.389Z",
+    "evidenceBy": "draft"
+  },
+  {
+    "_id": "MSFT:governance.unequal_voting_sunset",
+    "ticker": "MSFT",
+    "factId": "governance.unequal_voting_sunset",
+    "value": false,
+    "page": 12,
+    "quote": "• Single class of stock with equal voting rights",
+    "chunkId": "MSFT:p12:5",
+    "status": "verified",
+    "proposals": [
+      {
+        "model": "anthropic/claude-fable-5.1",
+        "value": false,
+        "chunkId": "MSFT:p12:5",
+        "quote": "• Single class of stock with equal voting rights"
+      },
+      {
+        "model": "openai/gpt-6-astra",
+        "value": false,
+        "chunkId": "MSFT:p12:5",
+        "quote": "Single class of stock with equal voting rights"
+      }
+    ],
+    "updatedAt": "2026-09-26T18:44:45.409Z",
+    "evidenceBy": "draft"
+  },
+  {
+    "_id": "MSFT:pay.ceo_total_comp_current",
+    "ticker": "MSFT",
+    "factId": "pay.ceo_total_comp_current",
+    "value": 96496790,
+    "page": 57,
+    "quote": "Satya Nadella | 2025 2,500,000 | 0 84,245,496 | 9,555,000 | 196,294 | 96,496,790",
+    "chunkId": "MSFT:p57:1",
+    "status": "verified",
+    "proposals": [
+      {
+        "model": "anthropic/claude-fable-5.1",
+        "value": 96496790,
+        "chunkId": "MSFT:p57:1",
+        "quote": "Satya Nadella | 2025 2,500,000 | 0 84,245,496 | 9,555,000 | 196,294 | 96,496,790"
+      },
+      {
+        "model": "openai/gpt-6-astra",
+        "value": 96496790,
+        "chunkId": "MSFT:p57:1",
+        "quote": "Satya Nadella | 2025 2,500,000 | 0 84,245,496 | 9,555,000 | 196,294 | 96,496,790"
+      }
+    ],
+    "updatedAt": "2026-09-26T18:46:17.998Z"
+  },
+  {
+    "_id": "MSFT:pay.ceo_total_comp_prior",
+    "ticker": "MSFT",
+    "factId": "pay.ceo_total_comp_prior",
+    "value": 79106183,
+    "page": 57,
+    "quote": "Chairman and Chief | 2024 2,500,000 | 0 71,236,392 | 5,200,000 | 169,791 | 79,106,183",
+    "chunkId": "MSFT:p57:1",
+    "status": "verified",
+    "proposals": [
+      {
+        "model": "anthropic/claude-fable-5.1",
+        "value": 79106183,
+        "chunkId": "MSFT:p57:1",
+        "quote": "Chairman and Chief | 2024 2,500,000 | 0 71,236,392 | 5,200,000 | 169,791 | 79,106,183"
+      },
+      {
+        "model": "openai/gpt-6-astra",
+        "value": 79106183,
+        "chunkId": "MSFT:p57:1",
+        "quote": "Chairman and Chief | 2024 2,500,000 | 0 71,236,392 | 5,200,000 | 169,791 | 79,106,183"
+      }
+    ],
+    "updatedAt": "2026-09-26T18:47:05.784Z"
+  },
+  {
+    "_id": "MSFT:pay.company_tsr_current",
+    "ticker": "MSFT",
+    "factId": "pay.company_tsr_current",
+    "value": 255,
+    "page": 63,
+    "quote": "2025 | 96,496,790 | 131,138,799 | 24,456,053 | 31,268,315 | 255 | 276 | 101,832 | 289.18",
+    "chunkId": "MSFT:p63:1",
+    "status": "verified",
+    "proposals": [
+      {
+        "model": "anthropic/claude-fable-5.1",
+        "value": 255,
+        "chunkId": "MSFT:p63:1",
+        "quote": "2025 | 96,496,790 | 131,138,799 | 24,456,053 | 31,268,315 | 255 | 276 | 101,832 | 289.18"
+      },
+      {
+        "model": "openai/gpt-6-astra",
+        "value": 255,
+        "chunkId": "MSFT:p63:1",
+        "quote": "2025 | 96,496,790 | 131,138,799 | 24,456,053 | 31,268,315 | 255 | 276 | 101,832 | 289.18"
+      }
+    ],
+    "updatedAt": "2026-09-26T18:47:19.363Z"
+  },
+  {
+    "_id": "MSFT:pay.peer_tsr_current",
+    "ticker": "MSFT",
+    "factId": "pay.peer_tsr_current",
+    "value": 276,
+    "page": 63,
+    "quote": "2025 | 96,496,790 | 131,138,799 | 24,456,053 | 31,268,315 | 255 | 276 | 101,832 | 289.18",
+    "chunkId": "MSFT:p63:1",
+    "status": "verified",
+    "proposals": [
+      {
+        "model": "anthropic/claude-fable-5.1",
+        "value": 276,
+        "chunkId": "MSFT:p63:1",
+        "quote": "2025 | 96,496,790 | 131,138,799 | 24,456,053 | 31,268,315 | 255 | 276 | 101,832 | 289.18"
+      },
+      {
+        "model": "openai/gpt-6-astra",
+        "value": 276,
+        "chunkId": "MSFT:p63:1",
+        "quote": "2025 | 96,496,790 | 131,138,799 | 24,456,053 | 31,268,315 | 255 | 276 | 101,832 | 289.18"
+      }
+    ],
+    "updatedAt": "2026-09-26T18:47:42.618Z"
+  }
+]
