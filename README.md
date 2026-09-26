@@ -6,6 +6,8 @@ Built at the MongoDB "Harness Engineering & Model Wrangling" hackathon (NYC, Sep
 
 ## Demo
 
+**Live (read-only): https://proxy-harness.vercel.app**. Browse every run, vote explanation, answer and approved change. Writes and model runs are disabled.
+
 [![Watch the 1-minute demo on YouTube](https://img.youtube.com/vi/4ckXIIlr7Rw/hqdefault.jpg)](https://youtu.be/4ckXIIlr7Rw)
 
 **▶ [Watch the 1-minute demo on YouTube](https://youtu.be/4ckXIIlr7Rw)**
@@ -142,6 +144,8 @@ pnpm casebook               # rebuild the regression casebook; `pnpm casebook --
 pnpm learn:retrieval        # automated retrieval lessons, evaluated leave-one-company-out
 pnpm regrade --all          # re-grade stored answers against the current answer key (no model calls)
 ```
+
+**Read-only hosting.** Set `NEXT_PUBLIC_READ_ONLY=true` and connect with a MongoDB user that has only the *read* role; leave out `OPENROUTER_API_KEY`. Every write endpoint returns 403 and the UI disables its controls. The live demo is deployed this way on Vercel.
 
 Model line-ups live in `src/lib/config.ts` (`dev` = 2 cheap models, `demo` = 6 across Anthropic, OpenAI, Google and DeepSeek). Runs always pin exact model IDs, with no routers or "latest" aliases, so every result is attributable to one model.
 
